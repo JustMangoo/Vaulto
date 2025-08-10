@@ -52,7 +52,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const removed = await Collections.findByIdAndDelete(id);
     if (!removed)
-      throw Error("Something went wrong while revoming the Collection");
+      throw Error("Something went wrong while removing the Collection");
     res.status(200).json(removed);
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -4,7 +4,7 @@ const CollectionItemSchema = new mongoose.Schema(
   {
     collectionId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "CollectionList",
+      ref: "Collections",
       required: true,
     },
     title: { type: String, required: true },
