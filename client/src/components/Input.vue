@@ -13,48 +13,48 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, defineProps, withDefaults, defineEmits } from 'vue'
+import { ref, watch, defineProps, withDefaults, defineEmits } from "vue";
 
 export type InputType =
-  | 'text'
-  | 'password'
-  | 'email'
-  | 'number'
-  | 'search'
-  | 'tel'
-  | 'url'
-  | 'date'
-  | 'time'
+  | "text"
+  | "password"
+  | "email"
+  | "number"
+  | "search"
+  | "tel"
+  | "url"
+  | "date"
+  | "time";
 
 const props = withDefaults(
   defineProps<{
-    modelValue: string | number
-    type?: InputType
-    placeholder?: string
-    label?: string
-    id?: string
+    modelValue: string | number;
+    type?: InputType;
+    placeholder?: string;
+    label?: string;
+    id?: string;
   }>(),
   {
-    type: 'text'
+    type: "text",
   }
-)
+);
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string | number): void
-}>()
+  (e: "update:modelValue", value: string | number): void;
+}>();
 
-const innerValue = ref(props.modelValue)
+const innerValue = ref(props.modelValue);
 
 watch(
   () => props.modelValue,
-  val => {
-    innerValue.value = val
+  (val) => {
+    innerValue.value = val;
   }
-)
+);
 
-watch(innerValue, val => {
-  emit('update:modelValue', val)
-})
+watch(innerValue, (val) => {
+  emit("update:modelValue", val);
+});
 </script>
 
 <style scoped>
