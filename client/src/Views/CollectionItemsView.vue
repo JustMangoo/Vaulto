@@ -6,17 +6,31 @@
     <!-- Add New Item Form -->
     <form @submit.prevent="addItem">
       <div v-for="field in collection?.fields" :key="field.name">
-        <label>{{ field.name }}</label>
-        <input v-if="field.type === 'text'" v-model="newItem[field.name]" />
+        <label>{{ formatLabel(field.name) }}</label>
+        <input
+          v-if="field.type === 'short-text'"
+          v-model="newItem[field.name]"
+          type="text"
+        />
+        <textarea
+          v-else-if="field.type === 'long-text'"
+          v-model="newItem[field.name]"
+        />
         <input
           v-else-if="field.type === 'link'"
           v-model="newItem[field.name]"
           type="url"
         />
-        <!-- Add more input types as needed -->
+        <textarea
+          v-else-if="field.type === 'code'"
+          v-model="newItem[field.name]"
+        />
+        <input
+          v-else-if="field.type === 'image'"
+          type="file"
+          @change="(e) => onFileUpload(field.name, e)"
+        />
       </div>
-      <label>Cover Image</label>
-      <input type="file" @change="onCoverUpload" />
       <BaseButton iconName="Plus" showIcon showText>Add Item</BaseButton>
     </form>
 
@@ -70,7 +84,7 @@ interface Item {
 const collection = ref<Collection | null>(null);
 const items = ref<Item[]>([]);
 const newItem = ref<Record<string, any>>({});
-const coverFile = ref<File | null>(null);
+const fileFields = ref<Record<string, File | null>>({});
 
 const fetchCollection = async () => {
   const res = await axios.get<Collection>(
@@ -86,24 +100,30 @@ const fetchItems = async () => {
   items.value = res.data;
 };
 
-const onCoverUpload = (e: Event) => {
+const onFileUpload = (name: string, e: Event) => {
   const target = e.target as HTMLInputElement;
   if (target.files?.length) {
-    coverFile.value = target.files[0];
+    fileFields.value[name] = target.files[0];
   }
 };
+
+const formatLabel = (name: string) =>
+  name.charAt(0).toUpperCase() + name.slice(1);
 
 const addItem = async () => {
   const formData = new FormData();
   for (const key in newItem.value) {
     formData.append(key, newItem.value[key]);
   }
-  if (coverFile.value) formData.append("cover", coverFile.value);
+  for (const key in fileFields.value) {
+    const file = fileFields.value[key];
+    if (file) formData.append(key, file);
+  }
 
   await axios.post(`/api/CollectionItems/${route.params.id}`, formData);
   await fetchItems();
   newItem.value = {};
-  coverFile.value = null;
+  fileFields.value = {};
 };
 
 onMounted(async () => {

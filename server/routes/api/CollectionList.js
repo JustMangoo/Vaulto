@@ -30,12 +30,23 @@ router.get("/", async (req, res) => {
 
 router.post("/", upload.single("cover"), async (req, res) => {
   try {
-    const fields = JSON.parse(req.body.fields); // Parse fields JSON
+    const fields = JSON.parse(req.body.fields || "[]"); // Parse fields JSON
+    const defaultFields = [
+      { name: "title", type: "short-text" },
+      { name: "cover", type: "image" },
+    ];
+    const mergedFields = [
+      ...defaultFields,
+      ...fields.filter(
+        (f) => !defaultFields.some((df) => df.name === f.name)
+      ),
+    ];
+
     const newCollection = new Collections({
       title: req.body.title,
       type: req.body.type,
       description: req.body.description,
-      fields,
+      fields: mergedFields,
       cover: req.file ? `uploads/${path.basename(req.file.path)}` : null,
     });
 
