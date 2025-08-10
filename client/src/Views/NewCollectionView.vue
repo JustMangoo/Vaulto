@@ -17,7 +17,7 @@
     <div v-else-if="stage === 2">
       <!-- Stage 2 UI -->
       <h2>Choose Fields</h2>
-      <div v-for="(field, index) in fields" :key="index">
+      <div v-for="(field, index) in fields" :key="index" class="field-row">
         <Input
           v-model="field.name"
           placeholder="Field name"
@@ -158,4 +158,30 @@ export default defineComponent({
 });
 </script>
 
-<style></style>
+<style scoped>
+.new-collection-view {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 40px;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+  }
+
+  input,
+  textarea,
+  select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .field-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+</style>

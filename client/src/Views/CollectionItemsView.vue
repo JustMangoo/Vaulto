@@ -1,17 +1,31 @@
 <template>
   <div class="collection-items-view">
-    <h1>{{ collection?.title }}</h1>
-    <p>{{ collection?.description }}</p>
+    <header>
+      <h1>{{ collection?.title }}</h1>
+      <input v-model="search" type="text" placeholder="Search" />
+    </header>
+    <p class="description">{{ collection?.description }}</p>
 
-    <!-- Add New Item -->
-    <BaseButton
-      iconName="Plus"
-      showIcon
-      showText
-      @click="showAddPopup = true"
-    >
-      Add Item
-    </BaseButton>
+    <div class="action-bar">
+      <div class="action-group">
+        <select>
+          <option value="none">Sort by</option>
+        </select>
+        <select>
+          <option value="none">Type</option>
+        </select>
+      </div>
+      <div class="action-group">
+        <BaseButton
+          iconName="Plus"
+          showIcon
+          showText
+          @click="showAddPopup = true"
+        >
+          Add Item
+        </BaseButton>
+      </div>
+    </div>
 
     <Popup
       v-model="showAddPopup"
@@ -51,7 +65,7 @@
     <div class="items-grid">
       <div
         class="item-card"
-        v-for="item in items"
+        v-for="item in filteredItems"
         :key="item._id"
         @click="$router.push({ name: 'ItemDetails', params: { id: item._id } })"
       >
@@ -67,7 +81,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
+import { ref, computed, onMounted } from "vue";
 import axios from "axios";
 import { useRoute } from "vue-router";
 import BaseButton from "@/components/BaseButton.vue";
@@ -98,6 +112,12 @@ interface Item {
 
 const collection = ref<Collection | null>(null);
 const items = ref<Item[]>([]);
+const search = ref<string>("");
+const filteredItems = computed(() =>
+  items.value.filter((i) =>
+    i.title.toLowerCase().includes(search.value.toLowerCase())
+  )
+);
 const newItem = ref<Record<string, any>>({});
 const fileFields = ref<Record<string, File | null>>({});
 const showAddPopup = ref(false);
@@ -166,3 +186,66 @@ onMounted(async () => {
   }
 });
 </script>
+
+<style scoped>
+.collection-items-view {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 40px;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      font-size: 2rem;
+    }
+  }
+
+  .description {
+    margin-top: -16px;
+  }
+
+  .action-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    .action-group {
+      display: flex;
+      gap: 8px;
+
+      select {
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
+    }
+  }
+
+  .items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 20px;
+
+    .item-card {
+      position: relative;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background-color: #d9d9d9;
+
+      .item-cover {
+        aspect-ratio: 4/3;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+</style>
