@@ -3,20 +3,34 @@
     <h1>{{ collection?.title }}</h1>
     <p>{{ collection?.description }}</p>
 
-    <!-- Add New Item Form -->
-    <form @submit.prevent="addItem">
+    <!-- Add New Item -->
+    <BaseButton
+      iconName="Plus"
+      showIcon
+      showText
+      @click="showAddPopup = true"
+    >
+      Add Item
+    </BaseButton>
+
+    <Popup
+      v-model="showAddPopup"
+      title="Add New Item"
+      primaryText="Add"
+      secondaryText="Cancel"
+      @primary="handleAddItem"
+    >
       <div v-for="field in collection?.fields" :key="field.name">
         <label>{{ formatLabel(field.name) }}</label>
-        <input
+        <Input
           v-if="field.type === 'short-text'"
           v-model="newItem[field.name]"
-          type="text"
         />
         <textarea
           v-else-if="field.type === 'long-text'"
           v-model="newItem[field.name]"
         />
-        <input
+        <Input
           v-else-if="field.type === 'link'"
           v-model="newItem[field.name]"
           type="url"
@@ -31,8 +45,7 @@
           @change="(e) => onFileUpload(field.name, e)"
         />
       </div>
-      <BaseButton iconName="Plus" showIcon showText>Add Item</BaseButton>
-    </form>
+    </Popup>
 
     <!-- Items List -->
     <div class="items-grid">
@@ -58,6 +71,8 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRoute } from "vue-router";
 import BaseButton from "@/components/BaseButton.vue";
+import Popup from "@/components/Popup.vue";
+import Input from "@/components/Input.vue";
 
 const apiBase = import.meta.env.VITE_API_BASE as string;
 const route = useRoute();
@@ -85,6 +100,7 @@ const collection = ref<Collection | null>(null);
 const items = ref<Item[]>([]);
 const newItem = ref<Record<string, any>>({});
 const fileFields = ref<Record<string, File | null>>({});
+const showAddPopup = ref(false);
 
 const fetchCollection = async () => {
   try {
@@ -134,6 +150,11 @@ const addItem = async () => {
   await fetchItems();
   newItem.value = {};
   fileFields.value = {};
+};
+
+const handleAddItem = async () => {
+  await addItem();
+  showAddPopup.value = false;
 };
 
 onMounted(async () => {
