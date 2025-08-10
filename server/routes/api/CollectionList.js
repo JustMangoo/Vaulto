@@ -49,9 +49,7 @@ router.post("/", upload.single("cover"), async (req, res) => {
     ];
     const mergedFields = [
       ...defaultFields,
-      ...fields.filter(
-        (f) => !defaultFields.some((df) => df.name === f.name)
-      ),
+      ...fields.filter((f) => !defaultFields.some((df) => df.name === f.name)),
     ];
 
     const newCollection = new Collections({
