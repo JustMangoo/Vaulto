@@ -28,6 +28,18 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const collection = await Collections.findById(req.params.id);
+    if (!collection) {
+      return res.status(404).json({ message: "Collection not found" });
+    }
+    res.status(200).json(collection);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 router.post("/", upload.single("cover"), async (req, res) => {
   try {
     const fields = JSON.parse(req.body.fields || "[]"); // Parse fields JSON
