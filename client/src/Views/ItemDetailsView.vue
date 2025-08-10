@@ -1,8 +1,10 @@
 <template>
-  <div v-if="item">
+  <div v-if="item" class="item-details-view">
     <h1>{{ item.title }}</h1>
-    <img v-if="item.cover" :src="`${apiBase}/${item.cover}`" />
-    <div v-for="(value, key) in item" :key="key">{{ key }}: {{ value }}</div>
+    <img v-if="item.cover" :src="`${apiBase}/${item.cover}`" class="item-cover" />
+    <div v-for="(value, key) in item" :key="key" class="item-field">
+      {{ key }}: {{ value }}
+    </div>
   </div>
 </template>
 
@@ -21,3 +23,28 @@ onMounted(async () => {
   item.value = res.data;
 });
 </script>
+
+<style scoped>
+.item-details-view {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 40px;
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .item-cover {
+    max-width: 400px;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+  }
+
+  .item-field {
+    background-color: #f0f0f0;
+    padding: 8px;
+    border-radius: 4px;
+  }
+}
+</style>
