@@ -1,7 +1,7 @@
 // src/router/index.ts
 import { createRouter, createWebHistory } from "vue-router";
-import AppLayout from "@/layouts/AppLayout.vue";
-import LandingLayout from "@/layouts/LandingLayout.vue";
+import AppLayout from "@/Layouts/AppLayout.vue";
+import LandingLayout from "@/Layouts/LandingLayout.vue";
 
 const routes = [
   {
@@ -11,12 +11,12 @@ const routes = [
       {
         path: "",
         name: "Home",
-        component: () => import("@/views/LandingView.vue"),
+        component: () => import("@/Views/LandingView.vue"),
       },
       {
         path: "login",
         name: "Login",
-        component: () => import("@/views/LoginView.vue"),
+        component: () => import("@/Views/LoginVIew.vue"),
       },
     ],
   },
@@ -28,37 +28,37 @@ const routes = [
       {
         path: "home",
         name: "Dashboard",
-        component: () => import("@/views/DashboardView.vue"),
+        component: () => import("@/Views/DashboardView.vue"),
       },
       {
         path: "collections",
         name: "Collections",
-        component: () => import("@/views/CollectionView.vue"),
+        component: () => import("@/Views/CollectionView.vue"),
       },
       {
         path: "collections/new",
         name: "NewCollections",
-        component: () => import("@/views/NewCollectionView.vue"),
+        component: () => import("@/Views/NewCollectionView.vue"),
       },
       {
         path: "/collections/:id",
         name: "CollectionItems",
-        component: () => import("@/views/CollectionItemsView.vue"),
+        component: () => import("@/Views/CollectionItemsView.vue"),
       },
       {
         path: "/item/:id",
         name: "ItemDetails",
-        component: () => import("@/views/ItemDetailsView.vue"),
+        component: () => import("@/Views/ItemDetailsView.vue"),
       },
       {
         path: "settings",
         name: "Settings",
-        component: () => import("@/views/SettingsView.vue"),
+        component: () => import("@/Views/SettingsView.vue"),
       },
       {
         path: "profile",
         name: "Profile",
-        component: () => import("@/views/ProfileView.vue"),
+        component: () => import("@/Views/ProfileView.vue"),
       },
     ],
   },

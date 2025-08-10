@@ -4,34 +4,40 @@
       <!-- Stage 1 UI -->
       <h2>Create Collection</h2>
       <input type="file" @change="onCoverUpload" />
-      <input v-model="title" placeholder="Title" />
-      <input v-model="type" placeholder="Type (custom or select)" />
+      <Input v-model="title" placeholder="Title" />
+      <BaseSelect
+        v-model="type"
+        :options="collectionTypeOptions"
+        placeholder="Type"
+      />
       <textarea v-model="description" placeholder="Description"></textarea>
-      <button @click="nextStage">Continue</button>
+      <BaseButton @click="nextStage">Continue</BaseButton>
     </div>
 
     <div v-else-if="stage === 2">
       <!-- Stage 2 UI -->
       <h2>Choose Fields</h2>
       <div v-for="(field, index) in fields" :key="index">
-        <input
+        <Input
           v-model="field.name"
           placeholder="Field name"
           :disabled="field.isDefault"
         />
-        <select v-model="field.type" :disabled="field.isDefault">
-          <option value="short-text">Short Text</option>
-          <option value="long-text">Long Text</option>
-          <option value="link">Link</option>
-          <option value="code">Code</option>
-        </select>
-        <button v-if="!field.isDefault" @click="removeField(index)">
+        <BaseSelect
+          v-model="field.type"
+          :options="fieldTypeOptions"
+          :disabled="field.isDefault"
+        />
+        <BaseButton
+          v-if="!field.isDefault"
+          @click="removeField(index)"
+          >
           Remove
-        </button>
+        </BaseButton>
       </div>
-      <button @click="addField">+ Add Field</button>
+      <BaseButton @click="addField">+ Add Field</BaseButton>
 
-      <button @click="submitCollection">Complete</button>
+      <BaseButton @click="submitCollection">Complete</BaseButton>
     </div>
   </div>
 </template>
@@ -41,6 +47,9 @@ import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import SideNav from "../components/SideNav.vue";
+import Input from "@/components/Input.vue";
+import BaseSelect from "@/components/BaseSelect.vue";
+import BaseButton from "@/components/BaseButton.vue";
 
 interface CollectionField {
   name: string;
@@ -48,9 +57,14 @@ interface CollectionField {
   isDefault?: boolean;
 }
 
+interface SelectOption {
+  label: string;
+  value: string | number;
+}
+
 export default defineComponent({
   name: "NewCollectionView",
-  components: { SideNav },
+  components: { SideNav, Input, BaseSelect, BaseButton },
   setup() {
     const router = useRouter();
 
@@ -63,6 +77,18 @@ export default defineComponent({
       { name: "title", type: "short-text", isDefault: true },
       { name: "cover", type: "image", isDefault: true },
     ]);
+
+    const collectionTypeOptions: SelectOption[] = [
+      { label: "Custom", value: "custom" },
+      { label: "Select", value: "select" },
+    ];
+
+    const fieldTypeOptions: SelectOption[] = [
+      { label: "Short Text", value: "short-text" },
+      { label: "Long Text", value: "long-text" },
+      { label: "Link", value: "link" },
+      { label: "Code", value: "code" },
+    ];
 
     const nextStage = () => {
       if (!title.value || !type.value || !description.value) {
@@ -120,6 +146,8 @@ export default defineComponent({
       description,
       cover,
       fields,
+      collectionTypeOptions,
+      fieldTypeOptions,
       nextStage,
       addField,
       removeField,
