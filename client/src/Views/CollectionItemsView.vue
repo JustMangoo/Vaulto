@@ -87,17 +87,27 @@ const newItem = ref<Record<string, any>>({});
 const fileFields = ref<Record<string, File | null>>({});
 
 const fetchCollection = async () => {
-  const res = await axios.get<Collection>(
-    `/api/CollectionList/${route.params.id}`
-  );
-  collection.value = res.data;
+  try {
+    const res = await axios.get<Collection>(
+      `/api/CollectionList/${route.params.id}`
+    );
+    collection.value = res.data;
+  } catch (err) {
+    console.error("Error fetching collection:", err);
+    alert("Failed to load collection.");
+  }
 };
 
 const fetchItems = async () => {
-  const res = await axios.get<Item[]>(
-    `/api/CollectionItems/${route.params.id}`
-  );
-  items.value = res.data;
+  try {
+    const res = await axios.get<Item[]>(
+      `/api/CollectionItems/${route.params.id}`
+    );
+    items.value = res.data;
+  } catch (err) {
+    console.error("Error fetching items:", err);
+    alert("Failed to load items.");
+  }
 };
 
 const onFileUpload = (name: string, e: Event) => {
@@ -127,7 +137,11 @@ const addItem = async () => {
 };
 
 onMounted(async () => {
-  await fetchCollection();
-  await fetchItems();
+  try {
+    await fetchCollection();
+    await fetchItems();
+  } catch (err) {
+    console.error("Initialization error:", err);
+  }
 });
 </script>
