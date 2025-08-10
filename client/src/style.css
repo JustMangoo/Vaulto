@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  padding: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+main {
+  height: 100vh;
+}
