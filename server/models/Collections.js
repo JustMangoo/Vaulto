@@ -10,7 +10,13 @@ const CollectionSchema = new mongoose.Schema({
   type: { type: String, required: true },
   description: { type: String, required: true },
   cover: { type: String }, // file path
-  fields: [fieldSchema],
+  fields: {
+    type: [fieldSchema],
+    default: [
+      { name: "title", type: "short-text" },
+      { name: "cover", type: "image" },
+    ],
+  },
 });
 
 module.exports = mongoose.model("Collections", CollectionSchema);
