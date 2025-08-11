@@ -16,6 +16,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import axios from "axios";
 import Input from "@/components/Input.vue";
 import BaseButton from "@/components/BaseButton.vue";
 
@@ -23,9 +24,14 @@ const router = useRouter();
 const email = ref("");
 const password = ref("");
 
-const login = () => {
-  // Placeholder for login logic
-  console.log("Login", { email: email.value });
+const login = async () => {
+  const res = await axios.post("/api/auth/login", {
+    email: email.value,
+    password: password.value,
+  });
+  const userId = res.data.userId;
+  localStorage.setItem("userId", userId);
+  axios.defaults.headers.common["x-user-id"] = userId;
   router.push({ name: "Dashboard" });
 };
 </script>

@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const CollectionListRoutes = require("./routes/api/CollectionList");
 const CollectionItemsRoutes = require("./routes/api/CollectionItems");
+const AuthRoutes = require("./routes/api/Auth");
 const auth = require("./middleware/auth");
 require("dotenv").config();
 
@@ -15,8 +16,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// Apply simple auth middleware to all API routes
-app.use("/api", auth);
+app.use("/api/auth", AuthRoutes);
+app.use("/api/CollectionList", auth, CollectionListRoutes);
+app.use("/api/CollectionItems", auth, CollectionItemsRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI, {})
@@ -27,8 +29,6 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.use("/api/CollectionList", CollectionListRoutes);
-app.use("/api/CollectionItems", CollectionItemsRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
