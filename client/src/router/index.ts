@@ -74,4 +74,14 @@ const router = createRouter({
   routes,
 });
 
+router.beforeEach((to, _from, next) => {
+  if (to.meta.requiresAuth) {
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      return next({ name: "Login" });
+    }
+  }
+  next();
+});
+
 export default router;

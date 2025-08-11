@@ -9,6 +9,19 @@ router.post("/register", async (req, res) => {
   if (!name || !email || !password) {
     return res.status(400).json({ message: "Missing required fields" });
   }
+
+  // Basic input validation
+  if (!email.includes("@")) {
+    return res.status(400).json({ message: "Invalid email" });
+  }
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{12,}$/;
+  if (!passwordRegex.test(password)) {
+    return res.status(400).json({
+      message:
+        "Password must be at least 12 characters long and include an uppercase letter and a number",
+    });
+  }
+
   try {
     const existing = await User.findOne({ email });
     if (existing) {
@@ -31,6 +44,15 @@ router.post("/login", async (req, res) => {
   if (!email || !password) {
     return res.status(400).json({ message: "Missing email or password" });
   }
+
+  if (!email.includes("@")) {
+    return res.status(400).json({ message: "Invalid email" });
+  }
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{12,}$/;
+  if (!passwordRegex.test(password)) {
+    return res.status(400).json({ message: "Invalid password" });
+  }
+
   try {
     const user = await User.findOne({ email });
     if (!user) {
