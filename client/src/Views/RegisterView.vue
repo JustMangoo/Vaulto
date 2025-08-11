@@ -29,6 +29,7 @@
         placeholder="Confirm Password"
         label="Confirm Password"
       />
+      <p v-if="error" class="error">{{ error }}</p>
       <BaseButton showText @click="register">Register</BaseButton>
     </div>
     <p class="auth-switch">
@@ -50,17 +51,33 @@ const name = ref("");
 const email = ref("");
 const password = ref("");
 const confirmPassword = ref("");
+const error = ref("");
 
 const register = async () => {
-  if (password.value !== confirmPassword.value) {
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{12,}$/;
+  if (!email.value.includes("@")) {
+    error.value = "Email must contain @";
     return;
   }
-  await axios.post("/api/auth/register", {
-    name: name.value,
-    email: email.value,
-    password: password.value,
-  });
-  router.push({ name: "Login" });
+  if (!passwordRegex.test(password.value)) {
+    error.value =
+      "Password must be at least 12 characters, include an uppercase letter and a number";
+    return;
+  }
+  if (password.value !== confirmPassword.value) {
+    error.value = "Passwords do not match";
+    return;
+  }
+  try {
+    await axios.post("/api/auth/register", {
+      name: name.value,
+      email: email.value,
+      password: password.value,
+    });
+    router.push({ name: "Login" });
+  } catch (err: any) {
+    error.value = err.response?.data?.message || "Registration failed";
+  }
 };
 </script>
 
@@ -82,5 +99,10 @@ const register = async () => {
 
 .auth-switch {
   text-align: center;
+}
+
+.error {
+  color: red;
+  font-size: 0.9rem;
 }
 </style>
