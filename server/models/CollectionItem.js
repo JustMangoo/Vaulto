@@ -7,6 +7,7 @@ const CollectionItemSchema = new mongoose.Schema(
       ref: "Collections",
       required: true,
     },
+    userId: { type: String, required: true },
     title: { type: String, required: true },
     cover: { type: String },
     fields: { type: Map, of: String }, // dynamic field values

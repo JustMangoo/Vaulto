@@ -20,7 +20,7 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   try {
-    const CollectionList = await Collections.find();
+    const CollectionList = await Collections.find({ userId: req.userId });
     if (!CollectionList) throw new Error("No Collection List found");
     res.status(200).json(CollectionList);
   } catch (error) {
@@ -30,7 +30,10 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const collection = await Collections.findById(req.params.id);
+    const collection = await Collections.findOne({
+      _id: req.params.id,
+      userId: req.userId,
+    });
     if (!collection) {
       return res.status(404).json({ message: "Collection not found" });
     }
@@ -58,6 +61,7 @@ router.post("/", upload.single("cover"), async (req, res) => {
       description: req.body.description,
       fields: mergedFields,
       cover: req.file ? `uploads/${path.basename(req.file.path)}` : null,
+      userId: req.userId,
     });
 
     const collection = await newCollection.save();
@@ -71,7 +75,10 @@ router.post("/", upload.single("cover"), async (req, res) => {
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const removed = await Collections.findByIdAndDelete(id);
+    const removed = await Collections.findOneAndDelete({
+      _id: id,
+      userId: req.userId,
+    });
     if (!removed)
       throw Error("Something went wrong while removing the Collection");
     res.status(200).json(removed);

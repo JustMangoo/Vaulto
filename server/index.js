@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const CollectionListRoutes = require("./routes/api/CollectionList");
 const CollectionItemsRoutes = require("./routes/api/CollectionItems");
+const auth = require("./middleware/auth");
 require("dotenv").config();
 
 const app = express();
@@ -13,6 +14,9 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// Apply simple auth middleware to all API routes
+app.use("/api", auth);
 
 mongoose
   .connect(process.env.MONGO_URI, {})
