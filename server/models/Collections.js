@@ -17,6 +17,7 @@ const CollectionSchema = new mongoose.Schema({
       { name: "cover", type: "image" },
     ],
   },
+  userId: { type: String, required: true },
 });
 
 module.exports = mongoose.model("Collections", CollectionSchema);
