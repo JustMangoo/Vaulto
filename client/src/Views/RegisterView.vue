@@ -18,6 +18,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import axios from "axios";
 import Input from "@/components/Input.vue";
 import BaseButton from "@/components/BaseButton.vue";
 
@@ -27,9 +28,15 @@ const email = ref("");
 const password = ref("");
 const confirmPassword = ref("");
 
-const register = () => {
-  // Placeholder for registration logic
-  console.log("Register", { name: name.value, email: email.value });
+const register = async () => {
+  if (password.value !== confirmPassword.value) {
+    return;
+  }
+  await axios.post("/api/auth/register", {
+    name: name.value,
+    email: email.value,
+    password: password.value,
+  });
   router.push({ name: "Login" });
 };
 </script>

@@ -7,9 +7,9 @@ import "./style.css";
 
 // Persist a user id locally and send with every request
 const storedId = localStorage.getItem("userId");
-const userId = storedId || crypto.randomUUID();
-localStorage.setItem("userId", userId);
-axios.defaults.headers.common["x-user-id"] = userId;
+if (storedId) {
+  axios.defaults.headers.common["x-user-id"] = storedId;
+}
 
 const app = createApp(App);
 app.use(router);
