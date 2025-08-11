@@ -11,7 +11,7 @@
         placeholder="Type"
       />
       <textarea v-model="description" placeholder="Description"></textarea>
-      <BaseButton @click="nextStage">Continue</BaseButton>
+      <BaseButton showText @click="nextStage">Continue</BaseButton>
     </div>
 
     <div v-else-if="stage === 2">
@@ -30,14 +30,17 @@
         />
         <BaseButton
           v-if="!field.isDefault"
+          showText
           @click="removeField(index)"
-          >
+        >
           Remove
         </BaseButton>
       </div>
-      <BaseButton @click="addField">+ Add Field</BaseButton>
+      <BaseButton iconName="Plus" showText showIcon @click="addField">
+        Add Field
+      </BaseButton>
 
-      <BaseButton @click="submitCollection">Complete</BaseButton>
+      <BaseButton showText @click="submitCollection">Complete</BaseButton>
     </div>
   </div>
 </template>
@@ -126,9 +129,7 @@ export default defineComponent({
       formData.append("cover", cover.value);
       formData.append(
         "fields",
-        JSON.stringify(
-          fields.value.map(({ name, type }) => ({ name, type }))
-        )
+        JSON.stringify(fields.value.map(({ name, type }) => ({ name, type })))
       );
 
       try {

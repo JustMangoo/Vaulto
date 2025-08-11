@@ -3,8 +3,13 @@
     <h2>Login</h2>
     <div class="auth-form">
       <Input v-model="email" type="email" placeholder="Email" label="Email" />
-      <Input v-model="password" type="password" placeholder="Password" label="Password" />
-      <BaseButton :showIcon="false" @click="login">Login</BaseButton>
+      <Input
+        v-model="password"
+        type="password"
+        placeholder="Password"
+        label="Password"
+      />
+      <BaseButton showText @click="login">Login</BaseButton>
     </div>
     <p class="auth-switch">
       Don't have an account?
@@ -56,4 +61,3 @@ const login = async () => {
   text-align: center;
 }
 </style>
-

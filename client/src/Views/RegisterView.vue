@@ -2,11 +2,34 @@
   <div class="auth-view">
     <h2>Register</h2>
     <div class="auth-form">
-      <Input v-model="name" placeholder="Name" label="Name" />
-      <Input v-model="email" type="email" placeholder="Email" label="Email" />
-      <Input v-model="password" type="password" placeholder="Password" label="Password" />
-      <Input v-model="confirmPassword" type="password" placeholder="Confirm Password" label="Confirm Password" />
-      <BaseButton :showIcon="false" @click="register">Register</BaseButton>
+      <Input
+        v-model="name"
+        autocomplete="username"
+        placeholder="Name"
+        label="Name"
+      />
+      <Input
+        v-model="email"
+        type="email"
+        autocomplete="email"
+        placeholder="Email"
+        label="Email"
+      />
+      <Input
+        v-model="password"
+        type="password"
+        autocomplete="new-password"
+        placeholder="Password"
+        label="Password"
+      />
+      <Input
+        v-model="confirmPassword"
+        type="password"
+        autocomplete="new-password"
+        placeholder="Confirm Password"
+        label="Confirm Password"
+      />
+      <BaseButton showText @click="register">Register</BaseButton>
     </div>
     <p class="auth-switch">
       Already have an account?
@@ -61,4 +84,3 @@ const register = async () => {
   text-align: center;
 }
 </style>
-

@@ -40,8 +40,9 @@ const iconComponent = computed<Component | null>(() => {
 
 <style scoped>
 .base-btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   padding: 6px 12px;
   background: #eee;
@@ -62,5 +63,6 @@ const iconComponent = computed<Component | null>(() => {
 
 .btn-text {
   white-space: nowrap;
+  text-align: center;
 }
 </style>
