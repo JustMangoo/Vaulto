@@ -8,9 +8,11 @@
 
     <div class="action-bar">
       <div class="action-group">
-        <select>
-          <option value="none">Sort by</option>
-        </select>
+        <BaseSelect
+          v-model="sortBy"
+          :options="sortOptions"
+          placeholder="Sort by"
+        />
       </div>
       <div class="action-group">
         <BaseButton
@@ -84,6 +86,7 @@ import { useRoute } from "vue-router";
 import BaseButton from "@/components/BaseButton.vue";
 import Popup from "@/components/Popup.vue";
 import Input from "@/components/Input.vue";
+import BaseSelect from "@/components/BaseSelect.vue";
 
 const apiBase = import.meta.env.VITE_API_BASE as string;
 const route = useRoute();
@@ -110,11 +113,31 @@ interface Item {
 const collection = ref<Collection | null>(null);
 const items = ref<Item[]>([]);
 const search = ref<string>("");
-const filteredItems = computed(() =>
-  items.value.filter((i) =>
+const sortBy = ref<string>("");
+
+interface SelectOption {
+  label: string;
+  value: string | number;
+}
+
+const sortOptions: SelectOption[] = [
+  { label: "A-Z", value: "asc" },
+  { label: "Z-A", value: "desc" },
+];
+
+const filteredItems = computed(() => {
+  let result = items.value.filter((i) =>
     i.title.toLowerCase().includes(search.value.toLowerCase())
-  )
-);
+  );
+
+  if (sortBy.value === "asc") {
+    result = [...result].sort((a, b) => a.title.localeCompare(b.title));
+  } else if (sortBy.value === "desc") {
+    result = [...result].sort((a, b) => b.title.localeCompare(a.title));
+  }
+
+  return result;
+});
 const newItem = ref<Record<string, any>>({});
 const fileFields = ref<Record<string, File | null>>({});
 const showAddPopup = ref(false);
