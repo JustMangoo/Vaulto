@@ -65,14 +65,15 @@ function close() {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: var(--color-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .popup-container {
-  background: #fff;
+  background: var(--color-surface);
+  color: var(--color-text);
   padding: 16px;
   border-radius: 8px;
   min-width: 300px;
@@ -97,6 +98,7 @@ function close() {
   border: none;
   font-size: 1.2rem;
   cursor: pointer;
+  color: var(--color-text);
 }
 
 .popup-body {
@@ -114,14 +116,16 @@ function close() {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  background: var(--color-surface-alt);
+  color: var(--color-text);
 }
 
 .popup-btn.primary {
-  background-color: #4caf50;
+  background-color: var(--color-primary);
   color: #fff;
 }
 
 .popup-btn.secondary {
-  background-color: #ccc;
+  background-color: var(--color-secondary);
 }
 </style>

@@ -221,7 +221,9 @@ onMounted(async () => {
       select {
         padding: 8px;
         border-radius: 4px;
-        border: 1px solid #ccc;
+        border: 1px solid var(--color-border);
+        background: var(--color-bg);
+        color: var(--color-text);
       }
     }
   }
@@ -237,7 +239,8 @@ onMounted(async () => {
       display: flex;
       flex-direction: column;
       gap: 8px;
-      background-color: #d9d9d9;
+      background-color: var(--color-surface-alt);
+      color: var(--color-text);
 
       .item-cover {
         aspect-ratio: 4/3;

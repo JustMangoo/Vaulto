@@ -45,7 +45,8 @@ const iconComponent = computed<Component | null>(() => {
   justify-content: center;
   gap: 6px;
   padding: 6px 12px;
-  background: #eee;
+  background: var(--color-surface-alt);
+  color: var(--color-text);
   border: none;
   border-radius: 6px;
   cursor: pointer;

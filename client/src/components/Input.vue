@@ -66,12 +66,15 @@ watch(innerValue, (val) => {
 
 .base-input {
   padding: 6px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
 .input-label {
   font-size: 0.9rem;
   font-weight: 500;
+  color: var(--color-text);
 }
 </style>
