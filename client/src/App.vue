@@ -11,6 +11,6 @@ export default {
 <style>
 /* Optional: global styles */
 body {
-  background: #2b2b2b;
+  background: var(--color-bg);
 }
 </style>

@@ -42,9 +42,10 @@ onMounted(async () => {
   }
 
   .item-field {
-    background-color: #f0f0f0;
+    background-color: var(--color-surface-alt);
     padding: 8px;
     border-radius: 4px;
+    color: var(--color-text);
   }
 }
 </style>

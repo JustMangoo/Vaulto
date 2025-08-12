@@ -51,16 +51,17 @@ function logout() {
 <style scoped>
 .sidenav {
   width: 257px;
-  background-color: #f5f5f5;
+  background-color: var(--color-surface);
   padding: 24px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   gap: 24px;
+  color: var(--color-text);
 }
 .logo {
   display: flex;
-  background-color: #ccc;
+  background-color: var(--color-secondary);
 }
 .profile {
   position: relative;
@@ -68,13 +69,14 @@ function logout() {
   padding: 12px 12px;
   align-items: center;
   gap: 12px;
-  background: #9c9c9c;
+  background: var(--color-surface-alt);
   cursor: pointer;
+  color: var(--color-text);
 }
 .avatar {
   width: 52px;
   height: 52px;
-  background-color: #ccc;
+  background-color: var(--color-secondary);
   border-radius: 50%;
 }
 .user-info {
@@ -91,22 +93,22 @@ function logout() {
   flex-direction: column;
 }
 .nav-links li {
-  background-color: rgb(222, 222, 222);
+  background-color: var(--color-surface-alt);
   padding: 12px 12px;
   display: flex;
   gap: 8px;
 }
 .nav-links a {
   text-decoration: none;
-  color: #d0d0d0;
+  color: var(--color-text);
 }
 
 .profile-menu {
   position: absolute;
   top: 0;
   left: calc(100% + 8px);
-  background: #ffffff;
-  border: 1px solid #ccc;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   padding: 8px;
   display: flex;
   flex-direction: column;
@@ -119,7 +121,11 @@ function logout() {
   text-align: left;
   padding: 4px 8px;
   text-decoration: none;
+<<<<<<< HEAD
   color: #d0d0d0;
+=======
+  color: var(--color-text);
+>>>>>>> 2036f679bc0c7f74c801fd6987ebf24dcf649837
   background: none;
   border: none;
   cursor: pointer;
@@ -127,6 +133,6 @@ function logout() {
 
 .profile-menu a:hover,
 .profile-menu button:hover {
-  background-color: #f0f0f0;
+  background-color: var(--color-surface-alt);
 }
 </style>
