@@ -65,10 +65,9 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, computed, onMounted } from "vue";
+<script setup lang="ts">
+import { ref, computed, onMounted } from "vue";
 import axios from "axios";
-import SideNav from "@/components/SideNav.vue";
 import BaseButton from "../components/BaseButton.vue";
 import BaseSelect from "../components/BaseSelect.vue";
 import Popup from "@/components/Popup.vue";
@@ -95,120 +94,92 @@ interface SelectOption {
   value: string | number;
 }
 
-export default defineComponent({
-  name: "CollectionView",
-  components: { SideNav, BaseSelect, BaseButton, Popup, Input },
-  setup() {
-    const collections = ref<Collection[]>([]);
-    const search = ref<string>("");
-    const sortBy = ref<string>("");
-    const typeFilter = ref<string>("");
+defineOptions({ name: "CollectionView" });
 
-    const apiBase = API_BASE;
+const collections = ref<Collection[]>([]);
+const search = ref<string>("");
+const sortBy = ref<string>("");
+const typeFilter = ref<string>("");
 
-    const sortOptions: SelectOption[] = [
-      { label: "A-Z", value: "asc" },
-      { label: "Z-A", value: "desc" },
-    ];
+const apiBase = API_BASE;
 
-    const typeOptions = computed<SelectOption[]>(() => {
-      const types = Array.from(new Set(collections.value.map((c) => c.type)));
-      return [
-        { label: "All", value: "" },
-        ...types.map((t) => ({ label: t, value: t })),
-      ];
-    });
+const sortOptions: SelectOption[] = [
+  { label: "A-Z", value: "asc" },
+  { label: "Z-A", value: "desc" },
+];
 
-    const filteredCollections = computed(() => {
-      let result = collections.value.filter((c) =>
-        c.title.toLowerCase().includes(search.value.toLowerCase())
-      );
-
-      if (typeFilter.value) {
-        result = result.filter((c) => c.type === typeFilter.value);
-      }
-
-      if (sortBy.value === "asc") {
-        result = [...result].sort((a, b) =>
-          a.title.localeCompare(b.title)
-        );
-      } else if (sortBy.value === "desc") {
-        result = [...result].sort((a, b) =>
-          b.title.localeCompare(a.title)
-        );
-      }
-
-      return result;
-    });
-
-    const showDeletePopup = ref(false);
-    const collectionToDelete = ref<Collection | null>(null);
-    const deleteIndex = ref<number | null>(null);
-    const confirmationName = ref("");
-    const deleteError = ref("");
-
-    const fetchCollections = async () => {
-      try {
-        const response = await axios.get<Collection[]>("/api/CollectionList/");
-        collections.value = response.data;
-      } catch (error) {
-        console.error("Error fetching collections:", error);
-      }
-    };
-
-    const openDeletePopup = (collection: Collection, index: number) => {
-      collectionToDelete.value = collection;
-      deleteIndex.value = index;
-      confirmationName.value = "";
-      deleteError.value = "";
-      showDeletePopup.value = true;
-    };
-
-    const confirmDelete = async () => {
-      if (!collectionToDelete.value) return;
-      if (confirmationName.value !== collectionToDelete.value.title) {
-        deleteError.value = "Collection name did not match.";
-        return;
-      }
-      try {
-        await axios.delete(
-          `/api/CollectionList/${collectionToDelete.value._id}`
-        );
-        if (deleteIndex.value !== null) {
-          collections.value.splice(deleteIndex.value, 1);
-        }
-        showDeletePopup.value = false;
-      } catch (error) {
-        console.error("Error deleting collection:", error);
-        deleteError.value = "Failed to delete collection. Please try again.";
-      }
-    };
-
-    const cancelDelete = () => {
-      showDeletePopup.value = false;
-    };
-
-    onMounted(fetchCollections);
-
-    return {
-      collections,
-      search,
-      sortBy,
-      typeFilter,
-      sortOptions,
-      typeOptions,
-      apiBase,
-      filteredCollections,
-      showDeletePopup,
-      collectionToDelete,
-      confirmationName,
-      deleteError,
-      openDeletePopup,
-      confirmDelete,
-      cancelDelete,
-    };
-  },
+const typeOptions = computed<SelectOption[]>(() => {
+  const types = Array.from(new Set(collections.value.map((c) => c.type)));
+  return [
+    { label: "All", value: "" },
+    ...types.map((t) => ({ label: t, value: t })),
+  ];
 });
+
+const filteredCollections = computed(() => {
+  let result = collections.value.filter((c) =>
+    c.title.toLowerCase().includes(search.value.toLowerCase())
+  );
+
+  if (typeFilter.value) {
+    result = result.filter((c) => c.type === typeFilter.value);
+  }
+
+  if (sortBy.value === "asc") {
+    result = [...result].sort((a, b) => a.title.localeCompare(b.title));
+  } else if (sortBy.value === "desc") {
+    result = [...result].sort((a, b) => b.title.localeCompare(a.title));
+  }
+
+  return result;
+});
+
+const showDeletePopup = ref(false);
+const collectionToDelete = ref<Collection | null>(null);
+const deleteIndex = ref<number | null>(null);
+const confirmationName = ref("");
+const deleteError = ref("");
+
+const fetchCollections = async () => {
+  try {
+    const response = await axios.get<Collection[]>("/api/CollectionList/");
+    collections.value = response.data;
+  } catch (error) {
+    console.error("Error fetching collections:", error);
+  }
+};
+
+const openDeletePopup = (collection: Collection, index: number) => {
+  collectionToDelete.value = collection;
+  deleteIndex.value = index;
+  confirmationName.value = "";
+  deleteError.value = "";
+  showDeletePopup.value = true;
+};
+
+const confirmDelete = async () => {
+  if (!collectionToDelete.value) return;
+  if (confirmationName.value !== collectionToDelete.value.title) {
+    deleteError.value = "Collection name did not match.";
+    return;
+  }
+  try {
+    await axios.delete(`/api/CollectionList/${collectionToDelete.value._id}`);
+    if (deleteIndex.value !== null) {
+      collections.value.splice(deleteIndex.value, 1);
+    }
+    showDeletePopup.value = false;
+  } catch (error) {
+    console.error("Error deleting collection:", error);
+    deleteError.value = "Failed to delete collection. Please try again.";
+  }
+};
+
+const cancelDelete = () => {
+  showDeletePopup.value = false;
+};
+
+onMounted(fetchCollections);
 </script>
 
 <style scoped>
