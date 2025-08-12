@@ -121,11 +121,7 @@ function logout() {
   text-align: left;
   padding: 4px 8px;
   text-decoration: none;
-<<<<<<< HEAD
-  color: #d0d0d0;
-=======
   color: var(--color-text);
->>>>>>> 2036f679bc0c7f74c801fd6987ebf24dcf649837
   background: none;
   border: none;
   cursor: pointer;
