@@ -130,7 +130,9 @@ export default defineComponent({
         return;
       }
       try {
-        await axios.delete(`/api/CollectionList/${collectionToDelete.value._id}`);
+        await axios.delete(
+          `/api/CollectionList/${collectionToDelete.value._id}`
+        );
         if (deleteIndex.value !== null) {
           collections.value.splice(deleteIndex.value, 1);
         }
@@ -179,7 +181,7 @@ export default defineComponent({
 
     h1 {
       font-size: 2rem;
-      color: white;
+      color: var(--color-text);
     }
   }
 
