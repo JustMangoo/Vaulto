@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, defineProps, withDefaults, defineEmits } from "vue";
+import { ref, watch } from "vue";
 
 export type InputType =
   | "text"

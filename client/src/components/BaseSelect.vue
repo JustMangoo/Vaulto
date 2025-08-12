@@ -1,12 +1,7 @@
 <template>
   <div class="select-wrapper">
     <label v-if="label" :for="id" class="select-label">{{ label }}</label>
-    <select
-      :id="id"
-      v-model="innerValue"
-      class="base-select"
-      v-bind="$attrs"
-    >
+    <select :id="id" v-model="innerValue" class="base-select" v-bind="$attrs">
       <option v-if="placeholder" disabled value="">{{ placeholder }}</option>
       <option
         v-for="option in options"
@@ -20,37 +15,37 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, defineProps, defineEmits } from 'vue'
+import { ref, watch } from "vue";
 
 export interface SelectOption {
-  label: string
-  value: string | number
+  label: string;
+  value: string | number;
 }
 
 const props = defineProps<{
-  modelValue: string | number | null
-  options: SelectOption[]
-  placeholder?: string
-  label?: string
-  id?: string
-}>()
+  modelValue: string | number | null;
+  options: SelectOption[];
+  placeholder?: string;
+  label?: string;
+  id?: string;
+}>();
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string | number | null): void
-}>()
+  (e: "update:modelValue", value: string | number | null): void;
+}>();
 
-const innerValue = ref(props.modelValue)
+const innerValue = ref(props.modelValue);
 
 watch(
   () => props.modelValue,
-  val => {
-    innerValue.value = val
+  (val) => {
+    innerValue.value = val;
   }
-)
+);
 
-watch(innerValue, val => {
-  emit('update:modelValue', val)
-})
+watch(innerValue, (val) => {
+  emit("update:modelValue", val);
+});
 </script>
 
 <style scoped>

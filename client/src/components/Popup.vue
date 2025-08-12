@@ -29,32 +29,30 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps, withDefaults, defineEmits } from 'vue'
+import { computed } from "vue";
 
 const props = withDefaults(
   defineProps<{
-    modelValue: boolean
-    title: string
-    primaryText?: string
-    secondaryText?: string
+    modelValue: boolean;
+    title: string;
+    primaryText?: string;
+    secondaryText?: string;
   }>(),
   {
-    modelValue: false
+    modelValue: false,
   }
-)
+);
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: boolean): void
-  (e: 'primary'): void
-  (e: 'secondary'): void
-}>()
+  (e: "update:modelValue", value: boolean): void;
+  (e: "primary"): void;
+  (e: "secondary"): void;
+}>();
 
-const showFooter = computed(
-  () => !!props.primaryText || !!props.secondaryText
-)
+const showFooter = computed(() => !!props.primaryText || !!props.secondaryText);
 
 function close() {
-  emit('update:modelValue', false)
+  emit("update:modelValue", false);
 }
 </script>
 
