@@ -1,12 +1,6 @@
 <template>
-  <div class="profile-menu" :style="menuStyle">
-    <router-link :to="{ name: 'Profile' }" @click="$emit('close')">
-      Profile
-    </router-link>
-    <router-link :to="{ name: 'Support' }" @click="$emit('close')">
-      Support
-    </router-link>
-    <button @click="$emit('logout')">Logout</button>
+  <div class="menu" :style="menuStyle">
+    <slot />
   </div>
 </template>
 
@@ -22,11 +16,6 @@ const props = withDefaults(defineProps<Props>(), {
   position: "right",
   align: "left",
 });
-
-defineEmits<{
-  (e: "close"): void;
-  (e: "logout"): void;
-}>();
 
 const menuStyle = computed(() => {
   const offset = "8px";
@@ -73,7 +62,7 @@ const menuStyle = computed(() => {
 </script>
 
 <style scoped>
-.profile-menu {
+.menu {
   position: absolute;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -84,8 +73,8 @@ const menuStyle = computed(() => {
   z-index: 10;
 }
 
-.profile-menu a,
-.profile-menu button {
+.menu a,
+.menu button {
   text-align: left;
   padding: 4px 8px;
   text-decoration: none;
@@ -95,8 +84,8 @@ const menuStyle = computed(() => {
   cursor: pointer;
 }
 
-.profile-menu a:hover,
-.profile-menu button:hover {
+.menu a:hover,
+.menu button:hover {
   background-color: var(--color-surface-alt);
 }
 </style>

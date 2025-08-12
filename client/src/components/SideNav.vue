@@ -8,13 +8,20 @@
         <p class="name">John Doe</p>
         <p class="email">john@example.com</p>
       </div>
-      <ProfileMenu
+      <ActionMenu
         v-if="showMenu"
-        @close="showMenu = false"
-        @logout="logout"
         position="right"
         align="left"
-      />
+        @click.stop
+      >
+        <router-link :to="{ name: 'Profile' }" @click="showMenu = false">
+          Profile
+        </router-link>
+        <router-link :to="{ name: 'Support' }" @click="showMenu = false">
+          Support
+        </router-link>
+        <button @click="logout">Logout</button>
+      </ActionMenu>
     </div>
     <ul class="nav-links">
       <li><router-link :to="{ name: 'Dashboard' }">Dashboard</router-link></li>
@@ -30,7 +37,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
-import ProfileMenu from "./ProfileMenu.vue";
+import ActionMenu from "./ActionMenu.vue";
 
 const showMenu = ref(false);
 const router = useRouter();

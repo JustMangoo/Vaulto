@@ -39,13 +39,25 @@
         />
         <div v-else class="cover-image">No cover available</div>
         <div class="collection-name">{{ collection.title }}</div>
-        <BaseButton
-          iconName="EllipsisVertical"
-          showIcon
-          class="action-menu"
-          @click.stop.prevent="openDeletePopup(collection, i)"
-        >
-        </BaseButton>
+        <div class="action-menu">
+          <BaseButton
+            iconName="EllipsisVertical"
+            showIcon
+            @click.stop="toggleActionMenu(i)"
+          />
+          <ActionMenu
+            v-if="activeMenuIndex === i"
+            position="top"
+            align="right"
+            @click.stop
+          >
+            <button @click="copyLink(collection._id)">Copy Link</button>
+            <button @click="editCollection(collection._id)">Edit</button>
+            <button @click="openDeletePopup(collection, i); activeMenuIndex = null">
+              Delete
+            </button>
+          </ActionMenu>
+        </div>
       </router-link>
     </div>
     <Popup
@@ -67,12 +79,13 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import axios from "axios";
-import SideNav from "@/components/SideNav.vue";
 import BaseButton from "../components/BaseButton.vue";
 import BaseSelect from "../components/BaseSelect.vue";
 import Popup from "@/components/Popup.vue";
 import Input from "@/components/Input.vue";
+import ActionMenu from "@/components/ActionMenu.vue";
 
 const API_BASE = import.meta.env.VITE_API_BASE as string;
 
@@ -97,7 +110,7 @@ interface SelectOption {
 
 export default defineComponent({
   name: "CollectionView",
-  components: { SideNav, BaseSelect, BaseButton, Popup, Input },
+  components: { BaseSelect, BaseButton, Popup, Input, ActionMenu },
   setup() {
     const collections = ref<Collection[]>([]);
     const search = ref<string>("");
@@ -146,6 +159,26 @@ export default defineComponent({
     const deleteIndex = ref<number | null>(null);
     const confirmationName = ref("");
     const deleteError = ref("");
+
+    const router = useRouter();
+
+    const activeMenuIndex = ref<number | null>(null);
+
+    const toggleActionMenu = (index: number) => {
+      activeMenuIndex.value =
+        activeMenuIndex.value === index ? null : index;
+    };
+
+    const copyLink = (id: string) => {
+      const url = `${window.location.origin}/collections/${id}`;
+      navigator.clipboard.writeText(url);
+      activeMenuIndex.value = null;
+    };
+
+    const editCollection = (id: string) => {
+      router.push({ name: "EditCollection", params: { id } });
+      activeMenuIndex.value = null;
+    };
 
     const fetchCollections = async () => {
       try {
@@ -203,6 +236,10 @@ export default defineComponent({
       collectionToDelete,
       confirmationName,
       deleteError,
+      activeMenuIndex,
+      toggleActionMenu,
+      copyLink,
+      editCollection,
       openDeletePopup,
       confirmDelete,
       cancelDelete,
