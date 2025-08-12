@@ -2,7 +2,7 @@
   <div class="collection-items-view">
     <header>
       <h1>{{ collection?.title }}</h1>
-      <input v-model="search" type="text" placeholder="Search" />
+      <Input v-model="search" type="text" placeholder="Search" />
     </header>
     <p class="description">{{ collection?.description }}</p>
 

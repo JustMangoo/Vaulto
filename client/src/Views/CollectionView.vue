@@ -2,7 +2,7 @@
   <div class="collection-view">
     <header>
       <h1>Collections</h1>
-      <input v-model="search" type="text" placeholder="Search" />
+      <Input v-model="search" type="text" placeholder="Search" />
     </header>
     <div class="action-bar">
       <div class="action-group">
@@ -66,6 +66,7 @@ import { defineComponent, ref, computed, onMounted } from "vue";
 import axios from "axios";
 import SideNav from "@/components/SideNav.vue";
 import BaseButton from "../components/BaseButton.vue";
+import BaseSelect from "../components/BaseSelect.vue";
 import Popup from "@/components/Popup.vue";
 import Input from "@/components/Input.vue";
 
@@ -87,7 +88,7 @@ interface Collection {
 
 export default defineComponent({
   name: "CollectionView",
-  components: { SideNav, BaseButton, Popup, Input },
+  components: { SideNav, BaseSelect, BaseButton, Popup, Input },
   setup() {
     const collections = ref<Collection[]>([]);
     const search = ref<string>("");
