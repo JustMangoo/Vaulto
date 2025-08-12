@@ -8,15 +8,13 @@
         <p class="name">John Doe</p>
         <p class="email">john@example.com</p>
       </div>
-      <div v-if="showMenu" class="profile-menu">
-        <router-link :to="{ name: 'Profile' }" @click.stop="showMenu = false"
-          >Profile</router-link
-        >
-        <router-link :to="{ name: 'Support' }" @click.stop="showMenu = false"
-          >Support</router-link
-        >
-        <button @click.stop="logout">Logout</button>
-      </div>
+      <ProfileMenu
+        v-if="showMenu"
+        @close="showMenu = false"
+        @logout="logout"
+        position="right"
+        align="left"
+      />
     </div>
     <ul class="nav-links">
       <li><router-link :to="{ name: 'Dashboard' }">Dashboard</router-link></li>
@@ -32,6 +30,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
+import ProfileMenu from "./ProfileMenu.vue";
 
 const showMenu = ref(false);
 const router = useRouter();
@@ -103,32 +102,4 @@ function logout() {
   color: var(--color-text);
 }
 
-.profile-menu {
-  position: absolute;
-  top: 0;
-  left: calc(100% + 8px);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  z-index: 10;
-}
-
-.profile-menu a,
-.profile-menu button {
-  text-align: left;
-  padding: 4px 8px;
-  text-decoration: none;
-  color: var(--color-text);
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.profile-menu a:hover,
-.profile-menu button:hover {
-  background-color: var(--color-surface-alt);
-}
 </style>
