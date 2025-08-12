@@ -1,5 +1,5 @@
 <template>
-  <button class="base-btn" @click="$emit('click')">
+  <button class="base-btn" @click="$emit('click', $event)">
     <!-- Icon from prop or slot -->
     <span v-if="showIcon" class="btn-icon">
       <component v-if="iconName" :is="iconComponent" class="icon" />
@@ -25,7 +25,7 @@ const props = defineProps<{
 }>();
 
 defineEmits<{
-  (e: "click"): void;
+  (e: "click", event: MouseEvent): void;
 }>();
 
 const showIcon = props.showIcon ?? true;
