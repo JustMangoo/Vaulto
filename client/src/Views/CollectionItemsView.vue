@@ -11,9 +11,6 @@
         <select>
           <option value="none">Sort by</option>
         </select>
-        <select>
-          <option value="none">Type</option>
-        </select>
       </div>
       <div class="action-group">
         <BaseButton
