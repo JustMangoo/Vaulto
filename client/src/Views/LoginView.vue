@@ -25,11 +25,13 @@ import { useRouter } from "vue-router";
 import axios from "axios";
 import Input from "@/components/Input.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import { useTheme } from "../composables/useTheme";
 
 const router = useRouter();
 const email = ref("");
 const password = ref("");
 const error = ref("");
+const { loadTheme } = useTheme();
 
 const login = async () => {
   const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{12,}$/;
@@ -50,6 +52,7 @@ const login = async () => {
     const userId = res.data.userId;
     localStorage.setItem("userId", userId);
     axios.defaults.headers.common["x-user-id"] = userId;
+    await loadTheme();
     router.push({ name: "Dashboard" });
   } catch (err: any) {
     error.value = err.response?.data?.message || "Login failed";

@@ -175,8 +175,10 @@ export default defineComponent({
   textarea,
   select {
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-border);
     border-radius: 4px;
+    background: var(--color-bg);
+    color: var(--color-text);
   }
 
   .field-row {
