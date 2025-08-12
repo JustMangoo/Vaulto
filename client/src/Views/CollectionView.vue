@@ -39,11 +39,25 @@
           iconName="EllipsisVertical"
           showIcon
           class="action-menu"
-          @click="removeCollection(collection, i)"
+          @click.stop.prevent="openDeletePopup(collection, i)"
         >
         </BaseButton>
       </router-link>
     </div>
+    <Popup
+      v-model="showDeletePopup"
+      title="Delete Collection"
+      primaryText="Delete"
+      secondaryText="Cancel"
+      @primary="confirmDelete"
+      @secondary="cancelDelete"
+    >
+      <p v-if="collectionToDelete">
+        Type "{{ collectionToDelete.title }}" to confirm deletion
+      </p>
+      <Input v-model="confirmationName" />
+      <p v-if="deleteError" class="error">{{ deleteError }}</p>
+    </Popup>
   </div>
 </template>
 
@@ -52,6 +66,8 @@ import { defineComponent, ref, computed, onMounted } from "vue";
 import axios from "axios";
 import SideNav from "@/components/SideNav.vue";
 import BaseButton from "../components/BaseButton.vue";
+import Popup from "@/components/Popup.vue";
+import Input from "@/components/Input.vue";
 
 const API_BASE = import.meta.env.VITE_API_BASE as string;
 
@@ -71,7 +87,7 @@ interface Collection {
 
 export default defineComponent({
   name: "CollectionView",
-  components: { SideNav, BaseButton },
+  components: { SideNav, BaseButton, Popup, Input },
   setup() {
     const collections = ref<Collection[]>([]);
     const search = ref<string>("");
@@ -84,6 +100,12 @@ export default defineComponent({
       )
     );
 
+    const showDeletePopup = ref(false);
+    const collectionToDelete = ref<Collection | null>(null);
+    const deleteIndex = ref<number | null>(null);
+    const confirmationName = ref("");
+    const deleteError = ref("");
+
     const fetchCollections = async () => {
       try {
         const response = await axios.get<Collection[]>("/api/CollectionList/");
@@ -93,24 +115,34 @@ export default defineComponent({
       }
     };
 
-    const removeCollection = async (collection: Collection, index: number) => {
-      const confirmation = prompt(
-        `To confirm deletion, type the name of the collection: "${collection.title}"`
-      );
+    const openDeletePopup = (collection: Collection, index: number) => {
+      collectionToDelete.value = collection;
+      deleteIndex.value = index;
+      confirmationName.value = "";
+      deleteError.value = "";
+      showDeletePopup.value = true;
+    };
 
-      if (confirmation !== collection.title) {
-        alert("Collection name did not match. Deletion cancelled.");
+    const confirmDelete = async () => {
+      if (!collectionToDelete.value) return;
+      if (confirmationName.value !== collectionToDelete.value.title) {
+        deleteError.value = "Collection name did not match.";
         return;
       }
-
       try {
-        await axios.delete(`/api/CollectionList/${collection._id}`);
-        collections.value.splice(index, 1);
-        alert(`Collection "${collection.title}" deleted.`);
+        await axios.delete(`/api/CollectionList/${collectionToDelete.value._id}`);
+        if (deleteIndex.value !== null) {
+          collections.value.splice(deleteIndex.value, 1);
+        }
+        showDeletePopup.value = false;
       } catch (error) {
         console.error("Error deleting collection:", error);
-        alert("Failed to delete collection. Please try again.");
+        deleteError.value = "Failed to delete collection. Please try again.";
       }
+    };
+
+    const cancelDelete = () => {
+      showDeletePopup.value = false;
     };
 
     onMounted(fetchCollections);
@@ -120,7 +152,13 @@ export default defineComponent({
       search,
       apiBase,
       filteredCollections,
-      removeCollection,
+      showDeletePopup,
+      collectionToDelete,
+      confirmationName,
+      deleteError,
+      openDeletePopup,
+      confirmDelete,
+      cancelDelete,
     };
   },
 });
@@ -202,6 +240,11 @@ export default defineComponent({
         object-fit: cover;
       }
     }
+  }
+
+  .error {
+    color: red;
+    margin-top: 8px;
   }
 }
 </style>

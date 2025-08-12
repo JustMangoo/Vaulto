@@ -10,6 +10,10 @@
         :options="collectionTypeOptions"
         placeholder="Type"
       />
+      <div class="add-type">
+        <Input v-model="newCategory" placeholder="New type" />
+        <BaseButton showText @click="addNewCategory">Add Type</BaseButton>
+      </div>
       <textarea v-model="description" placeholder="Description"></textarea>
       <BaseButton showText @click="nextStage">Continue</BaseButton>
     </div>
@@ -46,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import SideNav from "../components/SideNav.vue";
@@ -81,10 +85,42 @@ export default defineComponent({
       { name: "cover", type: "image", isDefault: true },
     ]);
 
-    const collectionTypeOptions: SelectOption[] = [
-      { label: "Custom", value: "custom" },
-      { label: "Select", value: "select" },
+    const defaultTypeOptions: SelectOption[] = [
+      { label: "Websites", value: "websites" },
+      { label: "Art", value: "art" },
+      { label: "3D", value: "3d" },
     ];
+
+    const userTypeOptions = ref<SelectOption[]>([]);
+    const collectionTypeOptions = computed(() => [
+      ...defaultTypeOptions,
+      ...userTypeOptions.value,
+    ]);
+
+    const newCategory = ref<string>("");
+
+    const addNewCategory = async () => {
+      if (!newCategory.value.trim()) return;
+      try {
+        const { data } = await axios.post<string[]>("/api/user/categories", {
+          category: newCategory.value.trim(),
+        });
+        userTypeOptions.value = data.map((c) => ({ label: c, value: c }));
+        type.value = newCategory.value.trim();
+        newCategory.value = "";
+      } catch (error) {
+        console.error("Error adding category:", error);
+      }
+    };
+
+    onMounted(async () => {
+      try {
+        const { data } = await axios.get<string[]>("/api/user/categories");
+        userTypeOptions.value = data.map((c) => ({ label: c, value: c }));
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    });
 
     const fieldTypeOptions: SelectOption[] = [
       { label: "Short Text", value: "short-text" },
@@ -154,6 +190,8 @@ export default defineComponent({
       removeField,
       onCoverUpload,
       submitCollection,
+      newCategory,
+      addNewCategory,
     };
   },
 });
@@ -182,6 +220,12 @@ export default defineComponent({
   }
 
   .field-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .add-type {
     display: flex;
     align-items: center;
     gap: 8px;
