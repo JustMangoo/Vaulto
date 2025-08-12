@@ -6,12 +6,16 @@
     </header>
     <div class="action-bar">
       <div class="action-group">
-        <select>
-          <option value="none">Sort by</option>
-        </select>
-        <select>
-          <option value="none">Type</option>
-        </select>
+        <BaseSelect
+          v-model="sortBy"
+          :options="sortOptions"
+          placeholder="Sort by"
+        />
+        <BaseSelect
+          v-model="typeFilter"
+          :options="typeOptions"
+          placeholder="Type"
+        />
       </div>
       <div class="action-group">
         <router-link :to="{ name: 'NewCollections' }">
@@ -86,20 +90,56 @@ interface Collection {
   fields: CollectionField[];
 }
 
+interface SelectOption {
+  label: string;
+  value: string | number;
+}
+
 export default defineComponent({
   name: "CollectionView",
   components: { SideNav, BaseSelect, BaseButton, Popup, Input },
   setup() {
     const collections = ref<Collection[]>([]);
     const search = ref<string>("");
+    const sortBy = ref<string>("");
+    const typeFilter = ref<string>("");
 
     const apiBase = API_BASE;
 
-    const filteredCollections = computed(() =>
-      collections.value.filter((c) =>
+    const sortOptions: SelectOption[] = [
+      { label: "A-Z", value: "asc" },
+      { label: "Z-A", value: "desc" },
+    ];
+
+    const typeOptions = computed<SelectOption[]>(() => {
+      const types = Array.from(new Set(collections.value.map((c) => c.type)));
+      return [
+        { label: "All", value: "" },
+        ...types.map((t) => ({ label: t, value: t })),
+      ];
+    });
+
+    const filteredCollections = computed(() => {
+      let result = collections.value.filter((c) =>
         c.title.toLowerCase().includes(search.value.toLowerCase())
-      )
-    );
+      );
+
+      if (typeFilter.value) {
+        result = result.filter((c) => c.type === typeFilter.value);
+      }
+
+      if (sortBy.value === "asc") {
+        result = [...result].sort((a, b) =>
+          a.title.localeCompare(b.title)
+        );
+      } else if (sortBy.value === "desc") {
+        result = [...result].sort((a, b) =>
+          b.title.localeCompare(a.title)
+        );
+      }
+
+      return result;
+    });
 
     const showDeletePopup = ref(false);
     const collectionToDelete = ref<Collection | null>(null);
@@ -153,6 +193,10 @@ export default defineComponent({
     return {
       collections,
       search,
+      sortBy,
+      typeFilter,
+      sortOptions,
+      typeOptions,
       apiBase,
       filteredCollections,
       showDeletePopup,
