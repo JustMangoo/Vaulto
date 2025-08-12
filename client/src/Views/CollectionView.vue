@@ -141,6 +141,7 @@ export default defineComponent({
 
     h1 {
       font-size: 2rem;
+      color: white;
     }
   }
 

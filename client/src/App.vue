@@ -11,6 +11,6 @@ export default {
 <style>
 /* Optional: global styles */
 body {
-  background: #f9f9f9;
+  background: #2b2b2b;
 }
 </style>

@@ -29,22 +29,22 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import axios from 'axios'
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import axios from "axios";
 
-const showMenu = ref(false)
-const router = useRouter()
+const showMenu = ref(false);
+const router = useRouter();
 
 function toggleMenu() {
-  showMenu.value = !showMenu.value
+  showMenu.value = !showMenu.value;
 }
 
 function logout() {
-  localStorage.removeItem('userId')
-  delete axios.defaults.headers.common['x-user-id']
-  showMenu.value = false
-  router.push({ name: 'Login' })
+  localStorage.removeItem("userId");
+  delete axios.defaults.headers.common["x-user-id"];
+  showMenu.value = false;
+  router.push({ name: "Login" });
 }
 </script>
 
@@ -98,7 +98,7 @@ function logout() {
 }
 .nav-links a {
   text-decoration: none;
-  color: #333;
+  color: #d0d0d0;
 }
 
 .profile-menu {
@@ -119,7 +119,7 @@ function logout() {
   text-align: left;
   padding: 4px 8px;
   text-decoration: none;
-  color: #333;
+  color: #d0d0d0;
   background: none;
   border: none;
   cursor: pointer;
