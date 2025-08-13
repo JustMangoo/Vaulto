@@ -25,6 +25,7 @@
       </li>
       <li><router-link :to="{ name: 'Settings' }">Settings</router-link></li>
     </ul>
+    <div class="test"></div>
   </nav>
 </template>
 
@@ -49,6 +50,24 @@ function logout() {
 </script>
 
 <style scoped>
+.test {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  background: #55f5f5; /* base color */
+  overflow: hidden;
+}
+
+/* pseudo-element with a noise texture */
+.test::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PvU5lAAAAABJRU5ErkJggg==");
+  opacity: 0.55; /* adjust noise intensity */
+  pointer-events: none;
+}
+
 .sidenav {
   width: 257px;
   background-color: var(--color-surface);

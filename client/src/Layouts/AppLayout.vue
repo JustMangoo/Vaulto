@@ -1,14 +1,12 @@
 <template>
   <div class="app-layout">
     <SideNav />
-    <TextureBox />
     <main><router-view /></main>
   </div>
 </template>
 
 <script setup lang="ts">
 import SideNav from "@/components/SideNav.vue";
-import TextureBox from "@/components/TextureBox.vue";
 </script>
 
 <style scoped>

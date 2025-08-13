@@ -57,7 +57,7 @@
       @secondary="cancelDelete"
     >
       <p v-if="collectionToDelete">
-        Type "{{ collectionToDelete.title }}" to confirm deletion
+        Type "{{ collectionToDelete.title }}" to bid farewell
       </p>
       <Input v-model="confirmationName" />
       <p v-if="deleteError" class="error">{{ deleteError }}</p>
