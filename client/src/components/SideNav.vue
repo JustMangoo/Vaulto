@@ -1,31 +1,49 @@
 <template>
   <nav class="sidenav">
-    <div class="logo"><img src="#" alt="Vaulto Logo" /></div>
+    <div class="nav-content">
+      <div class="logo"><img src="#" alt="Vaulto Logo" /></div>
 
-    <div class="profile" @click="toggleMenu">
-      <div class="avatar"></div>
-      <div class="user-info">
-        <p class="name">John Doe</p>
-        <p class="email">john@example.com</p>
+      <div class="profile" @click="toggleMenu">
+        <div class="avatar"></div>
+        <div class="user-info">
+          <p class="name">John Doe</p>
+          <p class="email">john@example.com</p>
+        </div>
+
+        <div v-if="showMenu" class="profile-menu">
+          <router-link :to="{ name: 'Profile' }" @click.stop="showMenu = false"
+            >Profile</router-link
+          >
+          <router-link :to="{ name: 'Support' }" @click.stop="showMenu = false"
+            >Support</router-link
+          >
+          <button @click.stop="logout">Logout</button>
+        </div>
       </div>
-      <div v-if="showMenu" class="profile-menu">
-        <router-link :to="{ name: 'Profile' }" @click.stop="showMenu = false"
-          >Profile</router-link
-        >
-        <router-link :to="{ name: 'Support' }" @click.stop="showMenu = false"
-          >Support</router-link
-        >
-        <button @click.stop="logout">Logout</button>
-      </div>
+      <DecorationLine
+        :fadeStart="true"
+        :fadeEnd="false"
+        thickness="2px"
+        length="100%"
+      />
+      <ul class="nav-links">
+        <li>
+          <router-link :to="{ name: 'Dashboard' }">Dashboard</router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'Collections' }">Collections</router-link>
+        </li>
+        <li><router-link :to="{ name: 'Settings' }">Settings</router-link></li>
+      </ul>
     </div>
-    <ul class="nav-links">
-      <li><router-link :to="{ name: 'Dashboard' }">Dashboard</router-link></li>
-      <li>
-        <router-link :to="{ name: 'Collections' }">Collections</router-link>
-      </li>
-      <li><router-link :to="{ name: 'Settings' }">Settings</router-link></li>
-    </ul>
-    <div class="test"></div>
+    <DecorationLine
+      orientation="vertical"
+      :fadeStart="true"
+      :fadeEnd="true"
+      cap="60px"
+      thickness="2px"
+      length="100%"
+    />
   </nav>
 </template>
 
@@ -33,6 +51,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
+import DecorationLine from "./DecorationLine.vue";
 
 const showMenu = ref(false);
 const router = useRouter();
@@ -50,29 +69,22 @@ function logout() {
 </script>
 
 <style scoped>
-.test {
-  position: relative;
-  width: 300px;
-  height: 200px;
-  background: #55f5f5; /* base color */
-  overflow: hidden;
-}
-
-/* pseudo-element with a noise texture */
-.test::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PvU5lAAAAABJRU5ErkJggg==");
-  opacity: 0.55; /* adjust noise intensity */
-  pointer-events: none;
-}
-
-.sidenav {
+nav {
+  padding: 20px 0;
   width: 257px;
-  background-color: var(--color-surface);
-  padding: 24px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+  height: 100vh;
+  display: flex;
+  position: sticky;
+  flex-direction: row;
+  align-items: center;
+  left: 0;
+  top: 0;
+}
+
+.nav-content {
+  width: 257px;
+  padding: 20px 20px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 24px;
