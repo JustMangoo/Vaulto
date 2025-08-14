@@ -29,7 +29,7 @@ const props = withDefaults(
     cap: "60px",
     fadeStart: true,
     fadeEnd: true,
-    color: "var(--color-text)",
+    color: "var(--color-border)",
   }
 );
 

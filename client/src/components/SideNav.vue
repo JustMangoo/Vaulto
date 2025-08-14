@@ -25,15 +25,21 @@
         :fadeEnd="false"
         thickness="2px"
         length="100%"
+        class=""
       />
       <ul class="nav-links">
         <li>
+          <LayoutDashboard class="link-icon" />
           <router-link :to="{ name: 'Dashboard' }">Dashboard</router-link>
         </li>
         <li>
+          <LibraryBig class="link-icon" />
           <router-link :to="{ name: 'Collections' }">Collections</router-link>
         </li>
-        <li><router-link :to="{ name: 'Settings' }">Settings</router-link></li>
+        <li>
+          <Settings class="link-icon" />
+          <router-link :to="{ name: 'Settings' }">Settings</router-link>
+        </li>
       </ul>
     </div>
     <DecorationLine
@@ -52,6 +58,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import DecorationLine from "./DecorationLine.vue";
+import { Settings, LayoutDashboard, LibraryBig } from "lucide-vue-next";
 
 const showMenu = ref(false);
 const router = useRouter();
@@ -83,17 +90,20 @@ nav {
 
 .nav-content {
   width: 257px;
-  padding: 20px 20px;
+  padding: 20px 0 20px 20px;
   height: 100%;
   display: flex;
   flex-direction: column;
   gap: 24px;
   color: var(--color-text);
 }
+
 .logo {
   display: flex;
-  background-color: var(--color-secondary);
+
+  margin-right: 20px;
 }
+
 .profile {
   position: relative;
   display: flex;
@@ -103,35 +113,49 @@ nav {
   background: var(--color-surface-alt);
   cursor: pointer;
   color: var(--color-text);
+  margin-right: 20px;
+
+  .avatar {
+    width: 52px;
+    height: 52px;
+    background-color: var(--color-secondary);
+    border-radius: 50%;
+  }
+  .user-info {
+    margin: 0;
+  }
+  .user-info p {
+    font-size: 0.8rem;
+  }
 }
-.avatar {
-  width: 52px;
-  height: 52px;
-  background-color: var(--color-secondary);
-  border-radius: 50%;
-}
-.user-info {
-  margin: 0;
-}
-.user-info p {
-  font-size: 0.8rem;
-}
+
 .nav-links {
   list-style: none;
   padding: 0;
   display: flex;
   gap: 4px;
   flex-direction: column;
-}
-.nav-links li {
-  background-color: var(--color-surface-alt);
-  padding: 12px 12px;
-  display: flex;
-  gap: 8px;
-}
-.nav-links a {
-  text-decoration: none;
-  color: var(--color-text);
+  margin-right: 20px;
+
+  li {
+    background-color: none;
+    padding: 12px 12px;
+    display: flex;
+    gap: 8px;
+    border-radius: 500px;
+    align-items: center;
+    cursor: pointer;
+
+    link-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--color-text);
+    }
+  }
+
+  li:hover {
+    background-color: var(--color-surface-alt);
+  }
 }
 
 .profile-menu {
