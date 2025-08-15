@@ -30,6 +30,13 @@
   color: inherit;
 }
 
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
 body {
   background: var(--color-bg);
   color: var(--color-text);

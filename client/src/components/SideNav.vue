@@ -13,12 +13,7 @@
           <p class="email">john@example.com</p>
         </div>
 
-        <DropdownMenu
-          v-if="showMenu"
-          position="right"
-          align="left"
-          @click.stop
-        >
+        <DropdownMenu v-if="showMenu" position="right" align="left" @click.stop>
           <router-link :to="{ name: 'Profile' }" @click.stop="showMenu = false"
             >Profile</router-link
           >
@@ -92,7 +87,7 @@ function logout() {
 
 <style scoped>
 nav {
-  padding: 20px 0;
+  padding: 1em 0;
   width: 257px;
   height: 100vh;
   display: flex;
@@ -101,11 +96,12 @@ nav {
   align-items: center;
   left: 0;
   top: 0;
+  z-index: 10;
 }
 
 .nav-content {
   width: 257px;
-  padding: 20px 0 20px 20px;
+  padding: 1em 0 1em 1em;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -116,7 +112,7 @@ nav {
 .logo {
   display: flex;
 
-  margin-right: 20px;
+  margin-right: 1em;
 }
 
 .profile {
@@ -128,7 +124,7 @@ nav {
   background: var(--color-surface-alt);
   cursor: pointer;
   color: var(--color-text);
-  margin-right: 20px;
+  margin-right: 1em;
   border-radius: 8px;
 
   .avatar {
@@ -151,7 +147,7 @@ nav {
   display: flex;
   gap: 4px;
   flex-direction: column;
-  margin-right: 20px;
+  margin-right: 1em;
 
   li {
     background-color: none;
@@ -173,5 +169,4 @@ nav {
     background-color: var(--color-surface-alt);
   }
 }
-
 </style>

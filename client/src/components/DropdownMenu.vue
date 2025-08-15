@@ -69,22 +69,23 @@ const menuStyle = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  z-index: 10;
-}
+  z-index: 11;
+  border-radius: 4px;
 
-.dropdown-menu a,
-.dropdown-menu button {
-  text-align: left;
-  padding: 4px 8px;
-  text-decoration: none;
-  color: var(--color-text);
-  background: none;
-  border: none;
-  cursor: pointer;
-}
+  a,
+  button {
+    text-align: left;
+    padding: 4px 8px;
+    text-decoration: none;
+    color: var(--color-text);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
 
-.dropdown-menu a:hover,
-.dropdown-menu button:hover {
-  background-color: var(--color-surface-alt);
+  a:hover,
+  button:hover {
+    background-color: var(--color-surface-alt);
+  }
 }
 </style>

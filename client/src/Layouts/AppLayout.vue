@@ -18,6 +18,7 @@ import SideNav from "@/components/SideNav.vue";
 }
 
 main {
+  padding-top: 1em;
   flex: 1;
   overflow-y: auto;
 }

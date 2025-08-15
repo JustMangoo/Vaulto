@@ -111,5 +111,6 @@ const style = computed(() => {
 /* Optional: prevent the line from collapsing if placed in flex containers */
 .decoration-line {
   flex: 0 0 auto;
+  z-index: 0;
 }
 </style>

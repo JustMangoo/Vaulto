@@ -27,7 +27,7 @@
       </div>
       <div class="action-group">
         <router-link :to="{ name: 'NewCollections' }">
-          <BaseButton iconName="Plus" showIcon showText> Create </BaseButton>
+          <BaseButton showText> Create </BaseButton>
         </router-link>
       </div>
     </div>
@@ -38,7 +38,7 @@
         v-for="(collection, i) in filteredCollections"
         :key="collection._id"
       >
-        <div class="pin">📌</div>
+        <BaseButton class="pin" showText><Pin class="pin-icon" /></BaseButton>
         <img
           v-if="collection.cover"
           :src="`${apiBase}/${collection.cover.replace(/\\/g, '/')}`"
@@ -53,11 +53,7 @@
             showIcon
             @click.prevent="toggleMenu(i)"
           />
-          <DropdownMenu
-            v-if="openMenuIndex === i"
-            position="top"
-            align="right"
-          >
+          <DropdownMenu v-if="openMenuIndex === i" position="top" align="right">
             <button @click.stop="copyLink(collection)">Copy link</button>
             <button @click.stop="editCollection(collection)">Edit</button>
             <button @click.stop="openDelete(collection, i)">Delete</button>
@@ -85,6 +81,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { Pin } from "lucide-vue-next";
 import axios from "axios";
 import BaseButton from "../components/BaseButton.vue";
 import BaseSelect from "../components/BaseSelect.vue";
@@ -230,15 +227,15 @@ onMounted(fetchCollections);
 .collection-view {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 40px;
+  gap: 1em;
+  padding: 1em;
   padding-left: 0;
 
   header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-left: 20px;
+    margin-left: 1em;
 
     h1 {
       font-size: 2rem;
@@ -251,7 +248,7 @@ onMounted(fetchCollections);
     justify-content: space-between;
     align-items: center;
     gap: 16px;
-    margin-left: 20px;
+    margin-left: 1em;
 
     .action-group {
       display: flex;
@@ -275,35 +272,50 @@ onMounted(fetchCollections);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     gap: 20px;
-    margin-left: 20px;
+    margin-left: 1em;
 
     .card {
       position: relative;
-
+      padding: 0.5em;
+      gap: 0.5em;
       display: flex;
       flex-direction: column;
-      background-color: var(--color-surface-alt);
+      background-color: var(--color-surface);
       color: var(--color-text);
       border-radius: 8px;
       overflow: hidden;
 
       .pin {
         position: absolute;
-        top: 8px;
-        right: 8px;
+        top: 16px;
+        right: 16px;
+
+        .pin-icon {
+          width: 18px;
+          height: 18px;
+          margin-bottom: -2px;
+          rotate: 45deg;
+        }
       }
 
       .action-menu {
         position: absolute;
         bottom: 8px;
         right: 8px;
+        border-radius: 4px;
+
+        background-color: var(--color-surface);
+
+        :hover {
+          background-color: var(--color-surface-alt);
+        }
       }
 
       .collection-name {
         font-weight: bold;
-        font-size: 1.2rem;
+        font-size: 0.875em;
         color: var(--color-text);
-        padding: 20px;
+        padding: 0.75em;
       }
 
       .cover-image {
@@ -311,6 +323,7 @@ onMounted(fetchCollections);
         width: 100%;
         height: 100%;
         object-fit: cover;
+        border-radius: 4px;
       }
     }
   }
