@@ -19,6 +19,10 @@ const props = withDefaults(
     fadeEnd?: boolean;
     /** Color of the line; use CSS vars like "var(--color-text)" */
     color?: string;
+    /** Corners to display */
+    corners?: Array<"top-left" | "top-right" | "bottom-left" | "bottom-right">;
+    /** Size of each corner */
+    cornerSize?: string;
     /** Extra classes for the root element */
     class?: string;
   }>(),
@@ -30,6 +34,8 @@ const props = withDefaults(
     fadeStart: true,
     fadeEnd: true,
     color: "var(--color-border)",
+    corners: () => [],
+    cornerSize: "40px",
   }
 );
 
@@ -88,6 +94,7 @@ const style = computed(() => {
     ...sizeStyles,
     display: "block",
     overflow: "hidden",
+    position: "relative",
     // Set the element color so gradients can use currentColor reliably
     color: props.color,
     // Helpful for high-DPI crispness on thin lines
@@ -104,7 +111,14 @@ const style = computed(() => {
     :style="style"
     role="presentation"
     aria-hidden="true"
-  />
+  >
+    <span
+      v-for="corner in props.corners"
+      :key="corner"
+      :class="['corner', corner]"
+      :style="{ '--corner-size': props.cornerSize }"
+    />
+  </div>
 </template>
 
 <style scoped>
@@ -112,5 +126,55 @@ const style = computed(() => {
 .decoration-line {
   flex: 0 0 auto;
   z-index: 0;
+}
+
+.corner {
+  width: var(--corner-size);
+  height: var(--corner-size);
+  position: absolute;
+  overflow: hidden;
+}
+.corner::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  border-radius: 50%;
+}
+.corner.top-left {
+  top: 0;
+  left: 0;
+}
+.corner.top-left::before {
+  top: 0;
+  left: 0;
+  box-shadow: calc(-1 * var(--corner-size) / 2) calc(-1 * var(--corner-size) / 2) 0 0 currentColor;
+}
+.corner.top-right {
+  top: 0;
+  right: 0;
+}
+.corner.top-right::before {
+  top: 0;
+  right: 0;
+  box-shadow: calc(var(--corner-size) / 2) calc(-1 * var(--corner-size) / 2) 0 0 currentColor;
+}
+.corner.bottom-left {
+  bottom: 0;
+  left: 0;
+}
+.corner.bottom-left::before {
+  bottom: 0;
+  left: 0;
+  box-shadow: calc(-1 * var(--corner-size) / 2) calc(var(--corner-size) / 2) 0 0 currentColor;
+}
+.corner.bottom-right {
+  bottom: 0;
+  right: 0;
+}
+.corner.bottom-right::before {
+  bottom: 0;
+  right: 0;
+  box-shadow: calc(var(--corner-size) / 2) calc(var(--corner-size) / 2) 0 0 currentColor;
 }
 </style>
