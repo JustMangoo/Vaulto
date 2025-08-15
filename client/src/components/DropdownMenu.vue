@@ -66,8 +66,10 @@ const menuStyle = computed(() => {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   padding: 8px;
+  width: max-content;
   display: flex;
   flex-direction: column;
+  justify-content: left;
   gap: 4px;
   z-index: 11;
   border-radius: 4px;
@@ -75,7 +77,7 @@ const menuStyle = computed(() => {
   a,
   button {
     text-align: left;
-    padding: 4px 8px;
+    padding: 4px 80px;
     text-decoration: none;
     color: var(--color-text);
     background: none;

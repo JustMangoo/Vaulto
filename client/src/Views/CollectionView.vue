@@ -53,7 +53,12 @@
             showIcon
             @click.prevent="toggleMenu(i)"
           />
-          <DropdownMenu v-if="openMenuIndex === i" position="top" align="right">
+          <DropdownMenu
+            v-if="openMenuIndex === i"
+            position="top"
+            align="left"
+            class="collection-actions"
+          >
             <button @click.stop="copyLink(collection)">Copy link</button>
             <button @click.stop="editCollection(collection)">Edit</button>
             <button @click.stop="openDelete(collection, i)">Delete</button>
@@ -283,7 +288,6 @@ onMounted(fetchCollections);
       background-color: var(--color-surface);
       color: var(--color-text);
       border-radius: 8px;
-      overflow: hidden;
 
       .pin {
         position: absolute;
@@ -304,9 +308,20 @@ onMounted(fetchCollections);
         right: 8px;
         border-radius: 4px;
 
-        background-color: var(--color-surface);
+        a,
+        button {
+          text-align: left;
+          padding: 4px 8px;
+          text-decoration: none;
+          color: var(--color-text);
+          background: none;
+          border: none;
+          cursor: pointer;
+          border-radius: 4px;
+        }
 
-        :hover {
+        a:hover,
+        button:hover {
           background-color: var(--color-surface-alt);
         }
       }
