@@ -47,13 +47,22 @@
         />
         <div v-else class="cover-image">No cover available</div>
         <div class="collection-name">{{ collection.title }}</div>
-        <BaseButton
-          iconName="EllipsisVertical"
-          showIcon
-          class="action-menu"
-          @click.stop.prevent="openDeletePopup(collection, i)"
-        >
-        </BaseButton>
+        <div class="action-menu" @click.stop>
+          <BaseButton
+            iconName="EllipsisVertical"
+            showIcon
+            @click.prevent="toggleMenu(i)"
+          />
+          <DropdownMenu
+            v-if="openMenuIndex === i"
+            position="top"
+            align="right"
+          >
+            <button @click.stop="copyLink(collection)">Copy link</button>
+            <button @click.stop="editCollection(collection)">Edit</button>
+            <button @click.stop="openDelete(collection, i)">Delete</button>
+          </DropdownMenu>
+        </div>
       </router-link>
     </div>
     <Popup
@@ -75,9 +84,11 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import axios from "axios";
 import BaseButton from "../components/BaseButton.vue";
 import BaseSelect from "../components/BaseSelect.vue";
+import DropdownMenu from "@/components/DropdownMenu.vue";
 import Popup from "@/components/Popup.vue";
 import Input from "@/components/Input.vue";
 import DecorationLine from "../components/DecorationLine.vue";
@@ -109,6 +120,9 @@ const collections = ref<Collection[]>([]);
 const search = ref<string>("");
 const sortBy = ref<string>("");
 const typeFilter = ref<string>("");
+const openMenuIndex = ref<number | null>(null);
+
+const router = useRouter();
 
 const apiBase = API_BASE;
 
@@ -156,6 +170,26 @@ const fetchCollections = async () => {
   } catch (error) {
     console.error("Error fetching collections:", error);
   }
+};
+
+const toggleMenu = (index: number) => {
+  openMenuIndex.value = openMenuIndex.value === index ? null : index;
+};
+
+const copyLink = async (collection: Collection) => {
+  const url = `${window.location.origin}/collections/${collection._id}`;
+  await navigator.clipboard.writeText(url);
+  openMenuIndex.value = null;
+};
+
+const editCollection = (collection: Collection) => {
+  router.push({ name: "NewCollections", query: { edit: collection._id } });
+  openMenuIndex.value = null;
+};
+
+const openDelete = (collection: Collection, index: number) => {
+  openMenuIndex.value = null;
+  openDeletePopup(collection, index);
 };
 
 const openDeletePopup = (collection: Collection, index: number) => {
