@@ -10,7 +10,12 @@
           <p class="email">john@example.com</p>
         </div>
 
-        <div v-if="showMenu" class="profile-menu">
+        <DropdownMenu
+          v-if="showMenu"
+          position="right"
+          align="left"
+          @click.stop
+        >
           <router-link :to="{ name: 'Profile' }" @click.stop="showMenu = false"
             >Profile</router-link
           >
@@ -18,7 +23,7 @@
             >Support</router-link
           >
           <button @click.stop="logout">Logout</button>
-        </div>
+        </DropdownMenu>
       </div>
       <DecorationLine
         :fadeStart="true"
@@ -58,6 +63,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import DecorationLine from "./DecorationLine.vue";
+import DropdownMenu from "./DropdownMenu.vue";
 import { Settings, LayoutDashboard, LibraryBig } from "lucide-vue-next";
 
 const showMenu = ref(false);
@@ -158,32 +164,4 @@ nav {
   }
 }
 
-.profile-menu {
-  position: absolute;
-  top: 0;
-  left: calc(100% + 8px);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  z-index: 10;
-}
-
-.profile-menu a,
-.profile-menu button {
-  text-align: left;
-  padding: 4px 8px;
-  text-decoration: none;
-  color: var(--color-text);
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.profile-menu a:hover,
-.profile-menu button:hover {
-  background-color: var(--color-surface-alt);
-}
 </style>
