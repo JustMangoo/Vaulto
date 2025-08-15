@@ -4,6 +4,14 @@
       <h1>Collections</h1>
       <Input v-model="search" type="text" placeholder="Search" />
     </header>
+    <DecorationLine
+      orientation="horizontal"
+      :fadeStart="false"
+      :fadeEnd="true"
+      thickness="2px"
+      length="100%"
+      class="divider-line"
+    />
     <div class="action-bar">
       <div class="action-group">
         <BaseSelect
@@ -72,6 +80,7 @@ import BaseButton from "../components/BaseButton.vue";
 import BaseSelect from "../components/BaseSelect.vue";
 import Popup from "@/components/Popup.vue";
 import Input from "@/components/Input.vue";
+import DecorationLine from "../components/DecorationLine.vue";
 
 const API_BASE = import.meta.env.VITE_API_BASE as string;
 
@@ -189,11 +198,13 @@ onMounted(fetchCollections);
   flex-direction: column;
   gap: 24px;
   padding: 40px;
+  padding-left: 0;
 
   header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-left: 20px;
 
     h1 {
       font-size: 2rem;
@@ -206,6 +217,7 @@ onMounted(fetchCollections);
     justify-content: space-between;
     align-items: center;
     gap: 16px;
+    margin-left: 20px;
 
     .action-group {
       display: flex;
@@ -229,15 +241,17 @@ onMounted(fetchCollections);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     gap: 20px;
+    margin-left: 20px;
 
     .card {
       position: relative;
-      padding: 12px;
+
       display: flex;
       flex-direction: column;
-      gap: 8px;
       background-color: var(--color-surface-alt);
       color: var(--color-text);
+      border-radius: 8px;
+      overflow: hidden;
 
       .pin {
         position: absolute;
@@ -249,6 +263,13 @@ onMounted(fetchCollections);
         position: absolute;
         bottom: 8px;
         right: 8px;
+      }
+
+      .collection-name {
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: var(--color-text);
+        padding: 20px;
       }
 
       .cover-image {

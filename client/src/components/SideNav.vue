@@ -1,7 +1,10 @@
 <template>
   <nav class="sidenav">
     <div class="nav-content">
-      <div class="logo"><img src="#" alt="Vaulto Logo" /></div>
+      <div class="logo">
+        <h2 style="font-size: 20px">VAULTO</h2>
+        <!-- <img src="#" alt="Vaulto Logo" /> -->
+      </div>
 
       <div class="profile" @click="toggleMenu">
         <div class="avatar"></div>
@@ -28,18 +31,24 @@
         class=""
       />
       <ul class="nav-links">
-        <li>
-          <LayoutDashboard class="link-icon" />
-          <router-link :to="{ name: 'Dashboard' }">Dashboard</router-link>
-        </li>
-        <li>
-          <LibraryBig class="link-icon" />
-          <router-link :to="{ name: 'Collections' }">Collections</router-link>
-        </li>
-        <li>
-          <Settings class="link-icon" />
-          <router-link :to="{ name: 'Settings' }">Settings</router-link>
-        </li>
+        <router-link :to="{ name: 'Dashboard' }"
+          ><li>
+            <LayoutDashboard class="link-icon" />
+            Dashboard
+          </li>
+        </router-link>
+        <router-link :to="{ name: 'Collections' }">
+          <li>
+            <LibraryBig class="link-icon" />
+            Collections
+          </li>
+        </router-link>
+        <router-link :to="{ name: 'Settings' }">
+          <li>
+            <Settings class="link-icon" />
+            Settings
+          </li>
+        </router-link>
       </ul>
     </div>
     <DecorationLine
@@ -114,6 +123,7 @@ nav {
   cursor: pointer;
   color: var(--color-text);
   margin-right: 20px;
+  border-radius: 8px;
 
   .avatar {
     width: 52px;
@@ -142,7 +152,7 @@ nav {
     padding: 12px 12px;
     display: flex;
     gap: 8px;
-    border-radius: 500px;
+    border-radius: 8px;
     align-items: center;
     cursor: pointer;
 
