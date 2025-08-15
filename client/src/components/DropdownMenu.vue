@@ -73,21 +73,5 @@ const menuStyle = computed(() => {
   gap: 4px;
   z-index: 11;
   border-radius: 4px;
-
-  a,
-  button {
-    text-align: left;
-    padding: 4px 80px;
-    text-decoration: none;
-    color: var(--color-text);
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-
-  a:hover,
-  button:hover {
-    background-color: var(--color-surface-alt);
-  }
 }
 </style>

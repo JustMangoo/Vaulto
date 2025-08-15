@@ -57,7 +57,7 @@
             v-if="openMenuIndex === i"
             position="top"
             align="left"
-            class="collection-actions"
+            class="action-dropdown"
           >
             <button @click.stop="copyLink(collection)">Copy link</button>
             <button @click.stop="editCollection(collection)">Edit</button>
@@ -308,21 +308,23 @@ onMounted(fetchCollections);
         right: 8px;
         border-radius: 4px;
 
-        a,
-        button {
-          text-align: left;
-          padding: 4px 8px;
-          text-decoration: none;
-          color: var(--color-text);
-          background: none;
-          border: none;
-          cursor: pointer;
-          border-radius: 4px;
-        }
+        .action-dropdown {
+          a,
+          button {
+            text-align: left;
+            padding: 4px 8px;
+            text-decoration: none;
+            color: var(--color-text);
+            background: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+          }
 
-        a:hover,
-        button:hover {
-          background-color: var(--color-surface-alt);
+          a:hover,
+          button:hover {
+            background-color: var(--color-surface-alt);
+          }
         }
       }
 
