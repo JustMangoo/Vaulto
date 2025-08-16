@@ -35,7 +35,7 @@ const props = withDefaults(
     fadeEnd: true,
     color: "var(--color-border)",
     corners: () => [],
-    cornerSize: "40px",
+    cornerSize: "12px",
   }
 );
 
@@ -93,7 +93,6 @@ const style = computed(() => {
   return {
     ...sizeStyles,
     display: "block",
-    overflow: "hidden",
     position: "relative",
     // Set the element color so gradients can use currentColor reliably
     color: props.color,
@@ -142,39 +141,43 @@ const style = computed(() => {
   border-radius: 50%;
 }
 .corner.top-left {
-  top: 0;
+  top: 2px;
   left: 0;
 }
 .corner.top-left::before {
   top: 0;
   left: 0;
-  box-shadow: calc(-1 * var(--corner-size) / 2) calc(-1 * var(--corner-size) / 2) 0 0 currentColor;
+  box-shadow: calc(-1 * var(--corner-size) / 2)
+    calc(-1 * var(--corner-size) / 2) 0 0 currentColor;
 }
 .corner.top-right {
-  top: 0;
+  top: 2px;
   right: 0;
 }
 .corner.top-right::before {
   top: 0;
   right: 0;
-  box-shadow: calc(var(--corner-size) / 2) calc(-1 * var(--corner-size) / 2) 0 0 currentColor;
+  box-shadow: calc(var(--corner-size) / 2) calc(-1 * var(--corner-size) / 2) 0 0
+    currentColor;
 }
 .corner.bottom-left {
-  bottom: 0;
+  bottom: 2px;
   left: 0;
 }
 .corner.bottom-left::before {
   bottom: 0;
   left: 0;
-  box-shadow: calc(-1 * var(--corner-size) / 2) calc(var(--corner-size) / 2) 0 0 currentColor;
+  box-shadow: calc(-1 * var(--corner-size) / 2) calc(var(--corner-size) / 2) 0 0
+    currentColor;
 }
 .corner.bottom-right {
-  bottom: 0;
+  bottom: 2px;
   right: 0;
 }
 .corner.bottom-right::before {
   bottom: 0;
   right: 0;
-  box-shadow: calc(var(--corner-size) / 2) calc(var(--corner-size) / 2) 0 0 currentColor;
+  box-shadow: calc(var(--corner-size) / 2) calc(var(--corner-size) / 2) 0 0
+    currentColor;
 }
 </style>

@@ -11,4 +11,8 @@ defineOptions({ name: "App" });
 body {
   background: var(--color-bg);
 }
+
+html {
+  font-size: 14px;
+}
 </style>

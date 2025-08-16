@@ -4,82 +4,77 @@
       <h1>Collections</h1>
       <Input v-model="search" type="text" placeholder="Search" />
     </header>
-    <DecorationLine
-      orientation="horizontal"
-      :fadeStart="false"
-      :fadeEnd="true"
-      thickness="2px"
-      length="100%"
-      class="divider-line"
-    />
-    <div class="action-bar">
-      <div class="action-group">
-        <BaseSelect
-          v-model="sortBy"
-          :options="sortOptions"
-          placeholder="Sort by"
-        />
-        <BaseSelect
-          v-model="typeFilter"
-          :options="typeOptions"
-          placeholder="Type"
-        />
+
+    <div class="actionbar-grid">
+      <div class="action-bar">
+        <div class="action-group">
+          <BaseSelect
+            v-model="sortBy"
+            :options="sortOptions"
+            placeholder="Sort by"
+          />
+          <BaseSelect
+            v-model="typeFilter"
+            :options="typeOptions"
+            placeholder="Type"
+          />
+        </div>
+        <div class="action-group">
+          <router-link :to="{ name: 'NewCollections' }">
+            <BaseButton showText> Create </BaseButton>
+          </router-link>
+        </div>
       </div>
-      <div class="action-group">
-        <router-link :to="{ name: 'NewCollections' }">
-          <BaseButton showText> Create </BaseButton>
+      <div class="collection-grid">
+        <router-link
+          :to="{ name: 'CollectionItems', params: { id: collection._id } }"
+          class="card"
+          v-for="(collection, i) in filteredCollections"
+          :key="collection._id"
+        >
+          <BaseButton class="pin" showText><Pin class="pin-icon" /></BaseButton>
+          <img
+            v-if="collection.cover"
+            :src="`${apiBase}/${collection.cover.replace(/\\/g, '/')}`"
+            alt="Cover"
+            class="cover-image"
+          />
+          <div v-else class="cover-image">No cover available</div>
+          <div class="collection-name">{{ collection.title }}</div>
+          <div class="action-menu" @click.stop>
+            <BaseButton
+              iconName="EllipsisVertical"
+              showIcon
+              @click.prevent="toggleMenu(i)"
+            />
+            <DropdownMenu
+              v-if="openMenuIndex === i"
+              position="top"
+              align="left"
+              class="action-dropdown"
+            >
+              <button @click.stop="copyLink(collection)">Copy link</button>
+              <button @click.stop="editCollection(collection)">Edit</button>
+              <button @click.stop="openDelete(collection, i)">Delete</button>
+            </DropdownMenu>
+          </div>
         </router-link>
       </div>
-    </div>
-    <div class="collection-grid">
-      <router-link
-        :to="{ name: 'CollectionItems', params: { id: collection._id } }"
-        class="card"
-        v-for="(collection, i) in filteredCollections"
-        :key="collection._id"
+      <Popup
+        v-model="showDeletePopup"
+        title="Delete Collection"
+        primaryText="Delete"
+        secondaryText="Cancel"
+        @primary="confirmDelete"
+        @secondary="cancelDelete"
       >
-        <BaseButton class="pin" showText><Pin class="pin-icon" /></BaseButton>
-        <img
-          v-if="collection.cover"
-          :src="`${apiBase}/${collection.cover.replace(/\\/g, '/')}`"
-          alt="Cover"
-          class="cover-image"
-        />
-        <div v-else class="cover-image">No cover available</div>
-        <div class="collection-name">{{ collection.title }}</div>
-        <div class="action-menu" @click.stop>
-          <BaseButton
-            iconName="EllipsisVertical"
-            showIcon
-            @click.prevent="toggleMenu(i)"
-          />
-          <DropdownMenu
-            v-if="openMenuIndex === i"
-            position="top"
-            align="left"
-            class="action-dropdown"
-          >
-            <button @click.stop="copyLink(collection)">Copy link</button>
-            <button @click.stop="editCollection(collection)">Edit</button>
-            <button @click.stop="openDelete(collection, i)">Delete</button>
-          </DropdownMenu>
-        </div>
-      </router-link>
+        <p v-if="collectionToDelete">
+          Type "{{ collectionToDelete.title }}" to bid farewell
+        </p>
+        <Input v-model="confirmationName" />
+        <p v-if="deleteError" class="error">{{ deleteError }}</p>
+      </Popup>
     </div>
-    <Popup
-      v-model="showDeletePopup"
-      title="Delete Collection"
-      primaryText="Delete"
-      secondaryText="Cancel"
-      @primary="confirmDelete"
-      @secondary="cancelDelete"
-    >
-      <p v-if="collectionToDelete">
-        Type "{{ collectionToDelete.title }}" to bid farewell
-      </p>
-      <Input v-model="confirmationName" />
-      <p v-if="deleteError" class="error">{{ deleteError }}</p>
-    </Popup>
   </div>
 </template>
 
@@ -93,7 +88,6 @@ import BaseSelect from "../components/BaseSelect.vue";
 import DropdownMenu from "@/components/DropdownMenu.vue";
 import Popup from "@/components/Popup.vue";
 import Input from "@/components/Input.vue";
-import DecorationLine from "../components/DecorationLine.vue";
 
 const API_BASE = import.meta.env.VITE_API_BASE as string;
 
@@ -232,20 +226,32 @@ onMounted(fetchCollections);
 .collection-view {
   display: flex;
   flex-direction: column;
-  gap: 1em;
-  padding: 1em;
   padding-left: 0;
+  height: 100%;
+  margin-left: var(--border-deco-width);
 
   header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-left: 1em;
-
+    background-color: var(--color-bg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--border-deco-width);
+    border-radius: var(--radius-md);
     h1 {
       font-size: 2rem;
       color: var(--color-text);
     }
+  }
+
+  .actionbar-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+    background-color: var(--color-bg);
+    height: 100%;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
   }
 
   .action-bar {
@@ -253,7 +259,6 @@ onMounted(fetchCollections);
     justify-content: space-between;
     align-items: center;
     gap: 16px;
-    margin-left: 1em;
 
     .action-group {
       display: flex;
@@ -277,7 +282,6 @@ onMounted(fetchCollections);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     gap: 20px;
-    margin-left: 1em;
 
     .card {
       position: relative;
@@ -330,9 +334,9 @@ onMounted(fetchCollections);
 
       .collection-name {
         font-weight: bold;
-        font-size: 0.875em;
+        font-size: 1rem;
         color: var(--color-text);
-        padding: 0.75em;
+        padding: 1rem;
       }
 
       .cover-image {
