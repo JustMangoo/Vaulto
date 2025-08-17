@@ -237,7 +237,7 @@ onMounted(fetchCollections);
     background-color: var(--color-bg);
     padding: var(--spacing-xl);
     margin-bottom: var(--border-deco-width);
-    border-radius: var(--radius-md);
+    border-radius: 0 0 0 var(--radius-md);
     h1 {
       font-size: 2rem;
       color: var(--color-text);
@@ -251,7 +251,7 @@ onMounted(fetchCollections);
     background-color: var(--color-bg);
     height: 100%;
     padding: var(--spacing-xl);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-md) 0 0 0;
   }
 
   .action-bar {

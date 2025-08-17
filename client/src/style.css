@@ -4,7 +4,7 @@
   --color-surface: #f5f5f5;
   --color-surface-alt: #e0e0e0;
   --color-border: #cccccc;
-  --color-primary: #4caf50;
+  --color-primary: #6b4caf;
   --color-secondary: #cccccc;
   --color-overlay: rgba(0, 0, 0, 0.3);
 
@@ -44,7 +44,7 @@
   --color-surface: #1e1e1e;
   --color-surface-alt: #333333;
   --color-border: #545454;
-  --color-primary: #4caf50;
+  --color-primary: #6b4caf;
   --color-secondary: #444444;
   --color-overlay: rgba(0, 0, 0, 0.6);
 }

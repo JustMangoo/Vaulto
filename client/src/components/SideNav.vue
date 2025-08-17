@@ -88,7 +88,6 @@ function logout() {
 
 <style scoped>
 nav {
-  padding: 1em 0;
   width: 257px;
   height: 100vh;
   display: flex;
@@ -113,7 +112,7 @@ nav {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    padding: 1em 0 1em 1em;
+    padding: var(--spacing-lg);
     background-color: var(--color-bg);
     border-radius: 0 0 var(--radius-md) 0;
   }
@@ -121,7 +120,7 @@ nav {
   .link-container {
     display: flex;
     flex-direction: column;
-    padding: 1em 0 1em 1em;
+    padding: var(--spacing-lg);
     background-color: var(--color-bg);
     border-radius: 0 var(--radius-md) 0 0;
     height: 100%;
@@ -143,8 +142,7 @@ nav {
   background: var(--color-surface-alt);
   cursor: pointer;
   color: var(--color-text);
-  margin-right: 1em;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
 
   .avatar {
     width: 52px;
@@ -185,14 +183,13 @@ nav {
   display: flex;
   gap: 4px;
   flex-direction: column;
-  margin-right: 1em;
 
   li {
     background-color: none;
     padding: 12px 12px;
     display: flex;
     gap: 8px;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     align-items: center;
     cursor: pointer;
 
