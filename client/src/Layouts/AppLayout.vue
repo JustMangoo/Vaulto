@@ -55,7 +55,7 @@ onBeforeUnmount(() => {
 .app-layout {
   display: flex;
   height: 100vh;
-  font-family: sans-serif;
+  font-family: var(--font-family-base);
   flex-direction: row;
 }
 
@@ -76,13 +76,13 @@ main {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 5rem;
+  padding: calc(var(--spacing-xl) * 2 + var(--spacing-md));
 
   .app-background-inner {
     width: 100%;
     height: 100%;
     background: var(--color-border);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     filter: blur(1.5rem);
     position: relative;
   }

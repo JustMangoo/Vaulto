@@ -72,8 +72,8 @@ function close() {
 .popup-container {
   background: var(--color-surface);
   color: var(--color-text);
-  padding: 16px;
-  border-radius: 8px;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
   min-width: 300px;
   max-width: 90%;
 }
@@ -82,37 +82,37 @@ function close() {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: calc(var(--spacing-sm) + var(--spacing-xs));
 }
 
 .popup-title {
   margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
 }
 
 .popup-close {
   background: none;
   border: none;
-  font-size: 1.2rem;
+  font-size: var(--font-size-lg);
   cursor: pointer;
   color: var(--color-text);
 }
 
 .popup-body {
-  margin-bottom: 12px;
+  margin-bottom: calc(var(--spacing-sm) + var(--spacing-xs));
 }
 
 .popup-footer {
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
+  gap: var(--spacing-sm);
 }
 
 .popup-btn {
-  padding: 6px 12px;
+  padding: var(--spacing-sm) var(--spacing-md);
   border: none;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   background: var(--color-surface-alt);
   color: var(--color-text);
@@ -120,7 +120,7 @@ function close() {
 
 .popup-btn.primary {
   background-color: var(--color-primary);
-  color: #fff;
+  color: var(--color-bg);
 }
 
 .popup-btn.secondary {

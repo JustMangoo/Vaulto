@@ -20,7 +20,7 @@ const props = withDefaults(
 
 const menuStyle = computed(() => {
   const style: Record<string, string> = {};
-  const offset = "8px";
+  const offset = "var(--spacing-sm)";
   switch (props.position) {
     case "top":
       style.bottom = `calc(100% + ${offset})`;
@@ -65,13 +65,13 @@ const menuStyle = computed(() => {
   position: absolute;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  padding: 8px;
+  padding: var(--spacing-sm);
   width: max-content;
   display: flex;
   flex-direction: column;
   justify-content: left;
-  gap: 4px;
+  gap: var(--spacing-xs);
   z-index: 11;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
 }
 </style>

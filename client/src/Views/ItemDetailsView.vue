@@ -28,8 +28,8 @@ onMounted(async () => {
 .item-details-view {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 40px;
+  gap: var(--spacing-md);
+  padding: calc(var(--spacing-xl) + var(--spacing-sm));
 
   h1 {
     font-size: 2rem;
@@ -43,8 +43,8 @@ onMounted(async () => {
 
   .item-field {
     background-color: var(--color-surface-alt);
-    padding: 8px;
-    border-radius: 4px;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
     color: var(--color-text);
   }
 }

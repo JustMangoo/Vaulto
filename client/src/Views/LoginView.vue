@@ -64,16 +64,16 @@ const login = async () => {
 .auth-view {
   max-width: 400px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: var(--spacing-md);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--spacing-md);
 }
 
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--spacing-sm);
 }
 
 .auth-switch {
@@ -81,7 +81,7 @@ const login = async () => {
 }
 
 .error {
-  color: red;
-  font-size: 0.9rem;
+  color: var(--color-primary);
+  font-size: var(--font-size-base);
 }
 </style>
