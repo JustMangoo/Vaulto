@@ -13,6 +13,7 @@
             <p class="name">John Doe</p>
             <p class="email">john@example.com</p>
           </div>
+          <ChevronRight class="chevron-icon" />
 
           <DropdownMenu
             v-if="showMenu"
@@ -69,7 +70,12 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import DropdownMenu from "./DropdownMenu.vue";
-import { Settings, LayoutDashboard, LibraryBig } from "lucide-vue-next";
+import {
+  Settings,
+  LayoutDashboard,
+  LibraryBig,
+  ChevronRight,
+} from "lucide-vue-next";
 
 const showMenu = ref(false);
 const router = useRouter();
@@ -139,22 +145,30 @@ nav {
   padding: 12px 12px;
   align-items: center;
   gap: 12px;
-  background: var(--color-surface-alt);
   cursor: pointer;
   color: var(--color-text);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
 
   .avatar {
-    width: 52px;
-    height: 52px;
+    width: 32px;
+    aspect-ratio: 1/1;
     background-color: var(--color-secondary);
     border-radius: 50%;
   }
   .user-info {
     margin: 0;
+    width: 100%;
   }
   .user-info p {
     font-size: 0.8rem;
+  }
+
+  .chevron-icon {
+    width: var();
+    height: var(--font-size-md);
+    color: var(--color-text);
+    transition: transform 0.2s ease-in-out;
   }
 
   .profile-menu {
