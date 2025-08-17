@@ -258,15 +258,15 @@ onMounted(fetchCollections);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
+    gap: var(--spacing-md);
 
     .action-group {
       display: flex;
-      gap: 8px;
+      gap: var(--spacing-sm);
 
       select {
-        padding: 8px;
-        border-radius: 4px;
+        padding: var(--spacing-sm);
+        border-radius: var(--radius-sm);
         border: 1px solid var(--color-border);
         background: var(--color-bg);
         color: var(--color-text);
@@ -281,22 +281,22 @@ onMounted(fetchCollections);
   .collection-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 20px;
+    gap: calc(var(--spacing-md) + var(--spacing-xs));
 
     .card {
       position: relative;
-      padding: 0.5em;
-      gap: 0.5em;
+      padding: var(--spacing-sm);
+      gap: var(--spacing-sm);
       display: flex;
       flex-direction: column;
       background-color: var(--color-surface);
       color: var(--color-text);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
 
       .pin {
         position: absolute;
-        top: 16px;
-        right: 16px;
+        top: var(--spacing-md);
+        right: var(--spacing-md);
 
         .pin-icon {
           width: 18px;
@@ -308,21 +308,21 @@ onMounted(fetchCollections);
 
       .action-menu {
         position: absolute;
-        bottom: 8px;
-        right: 8px;
-        border-radius: 4px;
+        bottom: var(--spacing-sm);
+        right: var(--spacing-sm);
+        border-radius: var(--radius-sm);
 
         .action-dropdown {
           a,
           button {
             text-align: left;
-            padding: 4px 8px;
+            padding: var(--spacing-xs) var(--spacing-sm);
             text-decoration: none;
             color: var(--color-text);
             background: none;
             border: none;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: var(--radius-sm);
           }
 
           a:hover,
@@ -333,10 +333,10 @@ onMounted(fetchCollections);
       }
 
       .collection-name {
-        font-weight: bold;
-        font-size: 1rem;
+        font-weight: var(--font-weight-bold);
+        font-size: var(--font-size-lg);
         color: var(--color-text);
-        padding: 1rem;
+        padding: var(--spacing-md);
       }
 
       .cover-image {
@@ -344,14 +344,14 @@ onMounted(fetchCollections);
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 4px;
+        border-radius: var(--radius-sm);
       }
     }
   }
 
   .error {
-    color: red;
-    margin-top: 8px;
+    color: var(--color-primary);
+    margin-top: var(--spacing-sm);
   }
 }
 </style>

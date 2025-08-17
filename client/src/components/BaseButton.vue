@@ -39,16 +39,17 @@ const iconComponent = computed<Component | null>(() => {
 </script>
 
 <style scoped>
+
 .base-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 8px;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
   background: var(--color-surface-alt);
   color: var(--color-text);
   border: none;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
 }
 
@@ -58,8 +59,8 @@ const iconComponent = computed<Component | null>(() => {
 }
 
 .icon {
-  width: 16px;
-  height: 16px;
+  width: var(--font-size-lg);
+  height: var(--font-size-lg);
 }
 
 .btn-text {
