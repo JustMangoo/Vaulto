@@ -178,20 +178,20 @@ const submitCollection = async () => {
 .new-collection-view {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 40px;
+  gap: var(--spacing-lg);
+  padding: calc(var(--spacing-xl) + var(--spacing-sm));
 
   h2 {
     font-size: 1.5rem;
-    margin-bottom: 16px;
+    margin-bottom: var(--spacing-md);
   }
 
   input,
   textarea,
   select {
-    padding: 8px;
+    padding: var(--spacing-sm);
     border: 1px solid var(--color-border);
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     background: var(--color-bg);
     color: var(--color-text);
   }
@@ -199,13 +199,13 @@ const submitCollection = async () => {
   .field-row {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--spacing-sm);
   }
 
   .add-type {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--spacing-sm);
   }
 }
 </style>

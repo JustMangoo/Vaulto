@@ -117,7 +117,7 @@ nav {
   .logo-profile-container {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: var(--spacing-lg);
     padding: var(--spacing-lg);
     background-color: var(--color-bg);
     border-radius: 0 0 var(--radius-md) 0;
@@ -142,9 +142,10 @@ nav {
 .profile {
   position: relative;
   display: flex;
-  padding: 12px 12px;
+  padding: calc(var(--spacing-sm) + var(--spacing-xs));
   align-items: center;
-  gap: 12px;
+  gap: calc(var(--spacing-sm) + var(--spacing-xs));
+  background: var(--color-surface-alt);
   cursor: pointer;
   color: var(--color-text);
   border: 1px solid var(--color-border);
@@ -161,7 +162,7 @@ nav {
     width: 100%;
   }
   .user-info p {
-    font-size: 0.8rem;
+    font-size: var(--font-size-sm);
   }
 
   .chevron-icon {
@@ -175,13 +176,13 @@ nav {
     a,
     button {
       text-align: left;
-      padding: 4px 8px;
+      padding: var(--spacing-xs) var(--spacing-sm);
       text-decoration: none;
       color: var(--color-text);
       background: none;
       border: none;
       cursor: pointer;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
     }
 
     a:hover,
@@ -195,14 +196,14 @@ nav {
   list-style: none;
   padding: 0;
   display: flex;
-  gap: 4px;
+  gap: var(--spacing-xs);
   flex-direction: column;
 
   li {
     background-color: none;
-    padding: 12px 12px;
+    padding: calc(var(--spacing-sm) + var(--spacing-xs));
     display: flex;
-    gap: 8px;
+    gap: var(--spacing-sm);
     border-radius: var(--radius-sm);
     align-items: center;
     cursor: pointer;

@@ -211,8 +211,8 @@ onMounted(async () => {
 .collection-items-view {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 40px;
+  gap: var(--spacing-lg);
+  padding: calc(var(--spacing-xl) + var(--spacing-sm));
 
   header {
     display: flex;
@@ -221,27 +221,27 @@ onMounted(async () => {
 
     h1 {
       font-size: 2rem;
-      color: white;
+      color: var(--color-text);
     }
   }
 
   .description {
-    margin-top: -16px;
+    margin-top: calc(var(--spacing-md) * -1);
   }
 
   .action-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
+    gap: var(--spacing-md);
 
     .action-group {
       display: flex;
-      gap: 8px;
+      gap: var(--spacing-sm);
 
       select {
-        padding: 8px;
-        border-radius: 4px;
+        padding: var(--spacing-sm);
+        border-radius: var(--radius-sm);
         border: 1px solid var(--color-border);
         background: var(--color-bg);
         color: var(--color-text);
@@ -252,14 +252,14 @@ onMounted(async () => {
   .items-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 20px;
+    gap: calc(var(--spacing-md) + var(--spacing-xs));
 
     .item-card {
       position: relative;
-      padding: 12px;
+      padding: calc(var(--spacing-sm) + var(--spacing-xs));
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: var(--spacing-sm);
       background-color: var(--color-surface-alt);
       color: var(--color-text);
 

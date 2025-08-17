@@ -16,9 +16,9 @@ const { theme, toggleTheme } = useTheme();
 
 <style scoped>
 .settings {
-  padding: 1rem;
+  padding: var(--spacing-md);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--spacing-md);
 }
 </style>

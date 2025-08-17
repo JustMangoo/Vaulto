@@ -9,6 +9,6 @@
 
 <style scoped>
 .support-view {
-  padding: 1rem;
+  padding: var(--spacing-md);
 }
 </style>
