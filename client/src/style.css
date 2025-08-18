@@ -10,9 +10,9 @@
 
   /* Typography */
   --font-family-base: Arial, sans-serif;
-  --font-size-base: 0.875rem;
   --font-size-sm: 0.75rem;
-  --font-size-sm: 1rem;
+  --font-size-base: 0.875rem;
+  --font-size-md: 1rem;
   --font-size-lg: 2rem;
   --font-weight-normal: 400;
   --font-weight-bold: 600;

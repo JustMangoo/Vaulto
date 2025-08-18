@@ -334,9 +334,9 @@ onMounted(fetchCollections);
 
       .collection-name {
         font-weight: var(--font-weight-bold);
-        font-size: var(--font-size-lg);
+        font-size: var(--font-size-base);
         color: var(--color-text);
-        padding: var(--spacing-md);
+        padding: var(--spacing-sm);
       }
 
       .cover-image {

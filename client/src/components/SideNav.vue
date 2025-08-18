@@ -152,7 +152,7 @@ nav {
   border-radius: var(--radius-sm);
 
   .avatar {
-    width: 32px;
+    width: 40px;
     aspect-ratio: 1/1;
     background-color: var(--color-secondary);
     border-radius: 50%;
