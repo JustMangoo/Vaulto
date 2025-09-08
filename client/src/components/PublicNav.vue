@@ -36,6 +36,8 @@ nav {
   gap: var(--border-deco-width);
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   background: var(--color-bg);
+  position: sticky;
+  top: 0;
 }
 
 .logo-container {
