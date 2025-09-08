@@ -1,3 +1,4 @@
+/* Landing page palette */
 :root {
   --color-bg: #ffffff;
   --color-text: #222222;
@@ -39,18 +40,27 @@
   --transition-base: 0.2s ease-in-out;
 }
 
-.landing-layout {
+/* Application palette */
+.app-layout {
+  --color-bg: #f9fafb;
+  --color-text: #1f2937;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f3f4f6;
+  --color-border: #e5e7eb;
+  --color-primary: #3b82f6;
+  --color-secondary: #6b7280;
+  --color-overlay: rgba(0, 0, 0, 0.3);
 }
 
-.app-layout,
-[data-theme="dark"] {
-  --color-bg: #121212;
-  --color-text: #e0e0e0;
-  --color-surface: #1e1e1e;
-  --color-surface-alt: #333333;
-  --color-border: #424242;
-  --color-primary: #f5b073;
-  --color-secondary: #444444;
+/* Dark mode overrides for the application */
+[data-theme="dark"] .app-layout {
+  --color-bg: #111827;
+  --color-text: #f9fafb;
+  --color-surface: #1f2937;
+  --color-surface-alt: #374151;
+  --color-border: #4b5563;
+  --color-primary: #60a5fa;
+  --color-secondary: #9ca3af;
   --color-overlay: rgba(0, 0, 0, 0.6);
 }
 
