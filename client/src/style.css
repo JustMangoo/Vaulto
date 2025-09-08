@@ -39,6 +39,10 @@
   --transition-base: 0.2s ease-in-out;
 }
 
+.landing-layout {
+}
+
+.app-layout,
 [data-theme="dark"] {
   --color-bg: #121212;
   --color-text: #e0e0e0;

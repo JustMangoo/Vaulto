@@ -1,5 +1,5 @@
 <template>
-  <div class="app-layout">
+  <div class="app-layout" data-theme="light">
     <AppNav />
     <main><router-view /></main>
     <div class="app-background"><div class="app-background-inner"></div></div>
