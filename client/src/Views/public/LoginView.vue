@@ -25,7 +25,7 @@ import { useRouter } from "vue-router";
 import axios from "axios";
 import Input from "@/components/Input.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import { useTheme } from "../composables/useTheme";
+import { useTheme } from "../../composables/useTheme";
 
 const router = useRouter();
 const email = ref("");
