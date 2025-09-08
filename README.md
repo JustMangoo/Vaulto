@@ -1,2 +1,3 @@
 # Vaulto
-### All your creative sparks, in one place.
+
+### All your creative gems, in one place.

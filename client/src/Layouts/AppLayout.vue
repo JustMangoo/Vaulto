@@ -1,6 +1,6 @@
 <template>
   <div class="app-layout">
-    <SideNav />
+    <AppNav />
     <main><router-view /></main>
     <div class="app-background"><div class="app-background-inner"></div></div>
     <div ref="follower" class="follower"></div>
@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import SideNav from "@/components/SideNav.vue";
+import AppNav from "@/components/AppNav.vue";
 import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const follower = ref<HTMLDivElement | null>(null);

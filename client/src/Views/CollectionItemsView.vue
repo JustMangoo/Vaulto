@@ -1,79 +1,85 @@
 <template>
   <div class="collection-items-view">
-    <header>
-      <h1>{{ collection?.title }}</h1>
-      <Input v-model="search" type="text" placeholder="Search" />
-    </header>
-    <p class="description">{{ collection?.description }}</p>
-
-    <div class="action-bar">
-      <div class="action-group">
-        <BaseSelect
-          v-model="sortBy"
-          :options="sortOptions"
-          placeholder="Sort by"
-        />
-      </div>
-      <div class="action-group">
-        <BaseButton
-          iconName="Plus"
-          showIcon
-          showText
-          @click="showAddPopup = true"
-        >
-          Add Item
-        </BaseButton>
-      </div>
+    <div class="need-name-here">
+      <header>
+        <h1>{{ collection?.title }}</h1>
+        <Input v-model="search" type="text" placeholder="Search" />
+      </header>
+      <p class="description">{{ collection?.description }}</p>
     </div>
 
-    <Popup
-      v-model="showAddPopup"
-      title="Add New Item"
-      primaryText="Add"
-      secondaryText="Cancel"
-      @primary="handleAddItem"
-    >
-      <div v-for="field in collection?.fields" :key="field.name">
-        <label>{{ formatLabel(field.name) }}</label>
-        <Input
-          v-if="field.type === 'short-text'"
-          v-model="newItem[field.name]"
-        />
-        <textarea
-          v-else-if="field.type === 'long-text'"
-          v-model="newItem[field.name]"
-        />
-        <Input
-          v-else-if="field.type === 'link'"
-          v-model="newItem[field.name]"
-          type="url"
-        />
-        <textarea
-          v-else-if="field.type === 'code'"
-          v-model="newItem[field.name]"
-        />
-        <input
-          v-else-if="field.type === 'image'"
-          type="file"
-          @change="(e) => onFileUpload(field.name, e)"
-        />
+    <div class="need-name-here">
+      <div class="action-bar">
+        <div class="action-group">
+          <BaseSelect
+            v-model="sortBy"
+            :options="sortOptions"
+            placeholder="Sort by"
+          />
+        </div>
+        <div class="action-group">
+          <BaseButton
+            iconName="Plus"
+            showIcon
+            showText
+            @click="showAddPopup = true"
+          >
+            Add Item
+          </BaseButton>
+        </div>
       </div>
-    </Popup>
 
-    <!-- Items List -->
-    <div class="items-grid">
-      <div
-        class="item-card"
-        v-for="item in filteredItems"
-        :key="item._id"
-        @click="$router.push({ name: 'ItemDetails', params: { id: item._id } })"
+      <Popup
+        v-model="showAddPopup"
+        title="Add New Item"
+        primaryText="Add"
+        secondaryText="Cancel"
+        @primary="handleAddItem"
       >
-        <img
-          v-if="item.cover"
-          :src="`${apiBase}/${item.cover}`"
-          class="item-cover"
-        />
-        <div class="item-title">{{ item.title }}</div>
+        <div v-for="field in collection?.fields" :key="field.name">
+          <label>{{ formatLabel(field.name) }}</label>
+          <Input
+            v-if="field.type === 'short-text'"
+            v-model="newItem[field.name]"
+          />
+          <textarea
+            v-else-if="field.type === 'long-text'"
+            v-model="newItem[field.name]"
+          />
+          <Input
+            v-else-if="field.type === 'link'"
+            v-model="newItem[field.name]"
+            type="url"
+          />
+          <textarea
+            v-else-if="field.type === 'code'"
+            v-model="newItem[field.name]"
+          />
+          <input
+            v-else-if="field.type === 'image'"
+            type="file"
+            @change="(e) => onFileUpload(field.name, e)"
+          />
+        </div>
+      </Popup>
+
+      <!-- Items List -->
+      <div class="items-grid">
+        <div
+          class="item-card"
+          v-for="item in filteredItems"
+          :key="item._id"
+          @click="
+            $router.push({ name: 'ItemDetails', params: { id: item._id } })
+          "
+        >
+          <img
+            v-if="item.cover"
+            :src="`${apiBase}/${item.cover}`"
+            class="item-cover"
+          />
+          <div class="item-title">{{ item.title }}</div>
+        </div>
       </div>
     </div>
   </div>

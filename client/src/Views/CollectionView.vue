@@ -21,7 +21,7 @@
         </div>
         <div class="action-group">
           <router-link :to="{ name: 'NewCollections' }">
-            <BaseButton showText> Create </BaseButton>
+            <BaseButton showText showIcon iconName="Plus"> Create </BaseButton>
           </router-link>
         </div>
       </div>
@@ -228,7 +228,6 @@ onMounted(fetchCollections);
   flex-direction: column;
   padding-left: 0;
   height: 100%;
-  margin-left: var(--border-deco-width);
 
   header {
     display: flex;

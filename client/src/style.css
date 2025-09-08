@@ -4,7 +4,7 @@
   --color-surface: #f5f5f5;
   --color-surface-alt: #e0e0e0;
   --color-border: #cccccc;
-  --color-primary: #9f81e0;
+  --color-primary: #ffcb9e;
   --color-secondary: #cccccc;
   --color-overlay: rgba(0, 0, 0, 0.3);
 
@@ -26,7 +26,7 @@
   --spacing-xl: 2rem;
 
   /* Border */
-  --border-deco-width: 2px;
+  --border-deco-width: 1px;
 
   /* Border radius */
   --radius-sm: 0.25rem;
@@ -44,8 +44,8 @@
   --color-text: #e0e0e0;
   --color-surface: #1e1e1e;
   --color-surface-alt: #333333;
-  --color-border: #545454;
-  --color-primary: #583c94;
+  --color-border: #424242;
+  --color-primary: #f5b073;
   --color-secondary: #444444;
   --color-overlay: rgba(0, 0, 0, 0.6);
 }

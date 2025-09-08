@@ -1,5 +1,5 @@
 <template>
-  <nav class="sidenav">
+  <nav class="appnav">
     <div class="nav-content">
       <div class="logo-profile-container">
         <div class="logo">
@@ -103,6 +103,7 @@ nav {
   left: 0;
   top: 0;
   z-index: 10;
+  margin-right: var(--border-deco-width);
 }
 
 .nav-content {
@@ -145,7 +146,7 @@ nav {
   padding: calc(var(--spacing-sm) + var(--spacing-xs));
   align-items: center;
   gap: calc(var(--spacing-sm) + var(--spacing-xs));
-  background: var(--color-surface-alt);
+
   cursor: pointer;
   color: var(--color-text);
   border: 1px solid var(--color-border);
@@ -216,7 +217,7 @@ nav {
   }
 
   li:hover {
-    background-color: var(--color-surface-alt);
+    background-color: var(--color-primary);
   }
 }
 </style>
