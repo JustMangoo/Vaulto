@@ -1,5 +1,5 @@
 <template>
-  <div class="select-wrapper">
+  <div class="select-container">
     <label v-if="label" :for="id" class="select-label">{{ label }}</label>
     <select :id="id" v-model="innerValue" class="base-select" v-bind="$attrs">
       <option v-if="placeholder" disabled value="">{{ placeholder }}</option>
@@ -49,7 +49,7 @@ watch(innerValue, (val) => {
 </script>
 
 <style scoped>
-.select-wrapper {
+.select-container {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);

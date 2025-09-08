@@ -1,5 +1,5 @@
 <template>
-  <div class="input-wrapper">
+  <div class="input-container">
     <label v-if="label" :for="id" class="input-label">{{ label }}</label>
     <input
       :id="id"
@@ -58,7 +58,7 @@ watch(innerValue, (val) => {
 </script>
 
 <style scoped>
-.input-wrapper {
+.input-container {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);

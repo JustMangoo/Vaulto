@@ -1,17 +1,22 @@
 <template>
   <nav>
-    <div class="logo-wrapper">
+    <div class="logo-container">
       <router-link :to="{ name: 'Home' }">
         <img src="@/assets/Temp-Logo.svg" alt="Vaulto Logo" />
       </router-link>
     </div>
-    <ul></ul>
-    <div class="action-wrapper">
+    <ul>
+      <router-link :to="{ name: 'Home' }"><li>Home</li></router-link>
+      <router-link :to="{ name: 'About' }"><li>The Vault</li></router-link>
+      <router-link :to="{ name: 'Pricing' }"><li>Pricing</li></router-link>
+      <router-link :to="{ name: 'FAQ' }"><li>FAQ</li></router-link>
+    </ul>
+    <div class="action-container">
       <router-link :to="{ name: 'Login' }">
-        <BaseButton showText>Login</BaseButton>
+        <BaseButton variant="secondary">Log in</BaseButton>
       </router-link>
       <router-link :to="{ name: 'Register' }">
-        <BaseButton showText>get Started</BaseButton>
+        <BaseButton>Get Started</BaseButton>
       </router-link>
     </div>
   </nav>
@@ -29,11 +34,11 @@ nav {
     var(--border-deco-width);
   align-items: center;
   gap: var(--border-deco-width);
-  border-radius: 0 0 calc(var(--radius-lg)+2px) calc(var(--radius-lg)+2px);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   background: var(--color-bg);
 }
 
-.logo-wrapper {
+.logo-container {
   display: flex;
   padding: 0 24px;
   align-items: center;
@@ -41,7 +46,7 @@ nav {
   flex-shrink: 0;
   align-self: stretch;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-  background: var(--color-light, #fffefd);
+  background: var(--color-light);
 }
 ul {
   display: flex;
@@ -51,16 +56,28 @@ ul {
   flex: 1 0 0;
   align-self: stretch;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-  background: var(--color-light, #fffefd);
+  background: var(--color-light);
 }
-.action-wrapper {
+li {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  padding: var(--spacing-md) 0;
+  color: var(--color-dark-1);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+li:hover {
+  color: var(--color-primary);
+}
+.action-container {
   display: flex;
-  padding: 20px 24px;
+  padding: var(--spacing-lg) 24px;
   flex-direction: row;
   align-items: center;
   gap: 14px;
   align-self: stretch;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-  background: var(--color-light, #fffefd);
+  background: var(--color-light);
 }
 </style>

@@ -222,7 +222,7 @@ onMounted(fetchCollections);
 </script>
 
 <style scoped>
-/* ---- Collection Wrapper ---- */
+/* ---- Collection container ---- */
 .collection-view {
   display: flex;
   flex-direction: column;

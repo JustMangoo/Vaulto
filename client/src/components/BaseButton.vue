@@ -1,5 +1,9 @@
 <template>
-  <button class="base-btn" @click="$emit('click', $event)">
+  <button
+    class="base-btn"
+    :class="variantClass"
+    @click="$emit('click', $event)"
+  >
     <!-- Icon from prop or slot -->
     <span v-if="showIcon" class="btn-icon">
       <component v-if="iconName" :is="iconComponent" class="icon" />
@@ -18,11 +22,19 @@ import { computed } from "vue";
 import * as icons from "lucide-vue-next";
 import type { Component } from "vue";
 
-const props = defineProps<{
-  showIcon?: boolean;
-  showText?: boolean;
-  iconName?: keyof typeof icons;
-}>();
+const props = withDefaults(
+  defineProps<{
+    showIcon?: boolean;
+    showText?: boolean;
+    variant?: "primary" | "secondary";
+    iconName?: keyof typeof icons;
+  }>(),
+  {
+    showIcon: false,
+    showText: true,
+    variant: "primary",
+  }
+);
 
 defineEmits<{
   (e: "click", event: MouseEvent): void;
@@ -36,6 +48,10 @@ const iconComponent = computed<Component | null>(() => {
   if (!props.iconName) return null;
   return icons[props.iconName] as Component;
 });
+
+const variantClass = computed(() => {
+  return props.variant === "secondary" ? "btn-secondary" : "btn-primary";
+});
 </script>
 
 <style scoped>
@@ -45,11 +61,19 @@ const iconComponent = computed<Component | null>(() => {
   justify-content: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-md);
-  background: var(--color-primary);
-  color: var(--color-text);
-  border: none;
+  border: 2px solid var(--color-primary);
   border-radius: var(--radius-md);
   cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+}
+.btn-secondary {
+  background-color: none;
+
+  color: var(--color-text);
 }
 
 .btn-icon {
@@ -65,5 +89,6 @@ const iconComponent = computed<Component | null>(() => {
 .btn-text {
   white-space: nowrap;
   text-align: center;
+  font-size: var(--font-size-md);
 }
 </style>
