@@ -1,13 +1,13 @@
 /* Landing page palette */
 :root {
-  --color-light: #FFFFFD;
-  --color-dark-1: #231D17;
-  --color-dark-2: #50463B;
-  --color-primary: #FFA97F;
-  --color-secondary: #FFCF9D;
-  --color-accent: #FFF0E0;
+  --color-light: #fffffd;
+  --color-dark-1: #231d17;
+  --color-dark-2: #50463b;
+  --color-primary: #ffa97f;
+  --color-secondary: #ffcf9d;
+  --color-accent: #fff0e0;
 
-  --color-bg: var(--color-light);
+  --color-bg: var(--color-dark-2);
   --color-text: var(--color-dark-1);
   --color-surface: var(--color-light);
   --color-surface-alt: var(--color-accent);
@@ -35,9 +35,9 @@
   --border-deco-width: 1px;
 
   /* Border radius */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
 
   /* Misc */
   --shadow-sm: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.05);

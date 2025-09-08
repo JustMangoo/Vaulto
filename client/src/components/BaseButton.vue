@@ -45,10 +45,10 @@ const iconComponent = computed<Component | null>(() => {
   justify-content: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-md);
-  background: var(--color-surface-alt);
+  background: var(--color-primary);
   color: var(--color-text);
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   cursor: pointer;
 }
 
