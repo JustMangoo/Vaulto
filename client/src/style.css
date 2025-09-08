@@ -1,12 +1,17 @@
 /* Landing page palette */
 :root {
-  --color-bg: #ffffff;
-  --color-text: #222222;
-  --color-surface: #f5f5f5;
-  --color-surface-alt: #e0e0e0;
-  --color-border: #cccccc;
-  --color-primary: #ffcb9e;
-  --color-secondary: #cccccc;
+  --color-light: #FFFFFD;
+  --color-dark-1: #231D17;
+  --color-dark-2: #50463B;
+  --color-primary: #FFA97F;
+  --color-secondary: #FFCF9D;
+  --color-accent: #FFF0E0;
+
+  --color-bg: var(--color-light);
+  --color-text: var(--color-dark-1);
+  --color-surface: var(--color-light);
+  --color-surface-alt: var(--color-accent);
+  --color-border: var(--color-dark-2);
   --color-overlay: rgba(0, 0, 0, 0.3);
 
   /* Typography */
@@ -42,25 +47,25 @@
 
 /* Application palette */
 .app-layout {
-  --color-bg: #f9fafb;
-  --color-text: #1f2937;
-  --color-surface: #ffffff;
-  --color-surface-alt: #f3f4f6;
-  --color-border: #e5e7eb;
-  --color-primary: #3b82f6;
-  --color-secondary: #6b7280;
+  --color-bg: var(--color-light);
+  --color-text: var(--color-dark-1);
+  --color-surface: var(--color-light);
+  --color-surface-alt: var(--color-accent);
+  --color-border: var(--color-dark-2);
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
   --color-overlay: rgba(0, 0, 0, 0.3);
 }
 
 /* Dark mode overrides for the application */
 [data-theme="dark"] .app-layout {
-  --color-bg: #111827;
-  --color-text: #f9fafb;
-  --color-surface: #1f2937;
-  --color-surface-alt: #374151;
-  --color-border: #4b5563;
-  --color-primary: #60a5fa;
-  --color-secondary: #9ca3af;
+  --color-bg: var(--color-dark-1);
+  --color-text: var(--color-light);
+  --color-surface: var(--color-dark-2);
+  --color-surface-alt: var(--color-dark-1);
+  --color-border: var(--color-dark-2);
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
   --color-overlay: rgba(0, 0, 0, 0.6);
 }
 
