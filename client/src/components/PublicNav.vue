@@ -61,7 +61,7 @@ ul {
   background: var(--color-light);
 }
 li {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-md);
   font-weight: 500;
   padding: var(--spacing-md) 0;
   color: var(--color-dark-1);

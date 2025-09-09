@@ -54,11 +54,15 @@
         </div>
       </div>
     </div>
-    <div class="copyright-container"><p>© 2025 All rights reserved.</p></div>
+    <div class="copyright-container">
+      <p>© {{ currentYear }} All rights reserved.</p>
+    </div>
   </footer>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const currentYear = new Date().getFullYear();
+</script>
 
 <style scoped>
 footer {
@@ -139,7 +143,7 @@ h4 {
 
   li {
     color: var(--color-light);
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-md);
     font-weight: 400;
   }
 }
@@ -147,8 +151,9 @@ h4 {
 .copyright-container {
   p {
     color: var(--color-light);
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-md);
     font-weight: 400;
+    opacity: 0.5;
   }
 }
 </style>

@@ -82,13 +82,13 @@ const variantClass = computed(() => {
 }
 
 .icon {
-  width: var(--font-size-base);
-  height: var(--font-size-base);
+  width: var(--font-size-sm);
+  height: var(--font-size-sm);
 }
 
 .btn-text {
   white-space: nowrap;
   text-align: center;
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-base);
 }
 </style>
