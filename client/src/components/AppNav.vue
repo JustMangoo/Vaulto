@@ -97,12 +97,12 @@ nav {
   width: 257px;
   height: 100vh;
   display: flex;
-  position: sticky;
+  position: fixed;
   flex-direction: row;
   align-items: center;
   left: 0;
   top: 0;
-  z-index: 10;
+  z-index: 50;
   margin-right: var(--border-deco-width);
 }
 

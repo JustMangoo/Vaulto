@@ -10,7 +10,7 @@
             one place.
           </h2>
         </header>
-        <div class="cta-container">
+        <div class="button-container">
           <BaseButton>Save Your First Gem</BaseButton
           ><BaseButton variant="secondary">Explore Features</BaseButton>
         </div>
@@ -52,11 +52,25 @@
         </div>
       </header>
     </section>
+    <section class="cta-section">
+      <div class="side-container"></div>
+      <div class="cta-container">
+        <div class="cta-background"></div>
+        <div class="cta-button-container">
+          <div class="cta-arrow left"><ArrowRight></ArrowRight></div>
+          <div class="cta-button"><p>Get started for free</p></div>
+          <div class="cta-arrow right"><ArrowRight></ArrowRight></div>
+        </div>
+        <div class="cta-background"></div>
+      </div>
+      <div class="side-container"></div>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import BaseButton from "@/components/BaseButton.vue";
+import { ArrowRight } from "lucide-vue-next";
 </script>
 
 <style scoped>
@@ -69,12 +83,13 @@ import BaseButton from "@/components/BaseButton.vue";
 }
 
 h3 {
-  color: var(--color-dark-1, #231d17);
+  color: var(--color-dark-1);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-light);
   letter-spacing: 0.6px;
   text-transform: uppercase;
   opacity: 0.5;
+  z-index: 0;
 }
 
 .hero {
@@ -136,7 +151,7 @@ h3 {
         line-height: 1.5;
       }
     }
-    .cta-container {
+    .button-container {
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -209,7 +224,8 @@ h3 {
   align-items: flex-start;
   gap: var(--border-deco-width);
   align-self: stretch;
-  background: var(--color-light, #fffefd);
+  background: var(--color-light);
+  border-radius: var(--radius-lg);
 
   header {
     display: flex;
@@ -242,6 +258,7 @@ h3 {
         height: auto;
         max-width: 800px;
         border-radius: var(--radius-lg);
+        position: relative;
       }
 
       .icon-container {
@@ -250,6 +267,7 @@ h3 {
         justify-content: center;
         align-items: center;
         gap: 40px;
+        position: absolute;
 
         .icon-wrapper {
           width: 64px;
@@ -258,6 +276,120 @@ h3 {
           background: var(--color-accent);
         }
       }
+    }
+  }
+}
+
+.cta-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--border-deco-width);
+  align-self: stretch;
+
+  .side-container {
+    flex: 1 1 0;
+    align-self: stretch;
+    border-radius: var(--radius-lg);
+    background: var(--color-accent);
+  }
+
+  .cta-container {
+    flex: 2 0 0;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-direction: column;
+    min-width: 610px;
+    gap: var(--border-deco-width);
+
+    .cta-button-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      align-self: stretch;
+      flex: 0 0 auto;
+      gap: var(--border-deco-width);
+      min-width: max-content;
+      white-space: nowrap;
+
+      .cta-button {
+        border-radius: var(--radius-lg);
+        background: var(--color-primary);
+        display: flex;
+        width: 100%;
+        padding: 24px 48px;
+        justify-content: center;
+        align-items: center;
+
+        p {
+          color: var(--color-dark-1);
+          font-size: var(--font-size-lg);
+          font-weight: var(--font-weight-medium);
+          white-space: nowrap;
+        }
+      }
+
+      .cta-arrow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: stretch;
+        background: var(--color-primary);
+        border-radius: var(--radius-lg);
+        transition: all var(--transition-base);
+        overflow: hidden;
+
+        &.left {
+          width: 0;
+          padding: 24px 0;
+          margin-right: -1px;
+        }
+
+        &.right {
+          width: auto;
+          padding: 24px 48px;
+          margin-left: 0;
+        }
+
+        svg {
+          color: var(--color-dark-1);
+          width: auto;
+          height: 100%;
+          stroke-width: 0.1rem;
+        }
+      }
+    }
+
+    .cta-button-container:hover {
+      cursor: pointer;
+
+      .cta-arrow.left {
+        width: auto;
+        padding: 24px 48px;
+        margin-right: 0;
+      }
+
+      .cta-arrow.right {
+        width: 0;
+        padding: 24px 0;
+        margin-left: -1px;
+      }
+    }
+
+    .cta-background {
+      align-self: stretch;
+      border-radius: var(--radius-lg);
+      background: var(--color-accent);
+      flex: 1 1 212px;
+      min-height: 80px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .side-container {
+      display: none;
     }
   }
 }
