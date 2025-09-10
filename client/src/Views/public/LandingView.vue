@@ -44,10 +44,12 @@
         <div class="roadmap-container">
           <img src="../../assets/roadmap.svg" alt="" />
           <div class="icon-container">
-            <div class="icon-wrapper"></div>
-            <div class="icon-wrapper"></div>
-            <div class="icon-wrapper"></div>
-            <div class="icon-wrapper"></div>
+            <div class="roadmap-icon"><Users></Users></div>
+            <div class="roadmap-icon shift-down"><Blocks></Blocks></div>
+            <div class="roadmap-icon">
+              <TabletSmartphone></TabletSmartphone>
+            </div>
+            <div class="roadmap-icon shift-down"><Sparkles></Sparkles></div>
           </div>
         </div>
       </header>
@@ -70,7 +72,13 @@
 
 <script setup lang="ts">
 import BaseButton from "@/components/BaseButton.vue";
-import { ArrowRight } from "lucide-vue-next";
+import {
+  ArrowRight,
+  Users,
+  Blocks,
+  TabletSmartphone,
+  Sparkles,
+} from "lucide-vue-next";
 </script>
 
 <style scoped>
@@ -247,33 +255,49 @@ h3 {
 
     .roadmap-container {
       display: flex;
-      padding: 128px 0;
+      height: 175px;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
-      gap: 24px;
       align-self: stretch;
 
       img {
+        height: 175px;
         width: 100%;
-        height: auto;
-        max-width: 800px;
-        border-radius: var(--radius-lg);
-        position: relative;
+        flex-shrink: 0;
+        align-self: stretch;
+        stroke-width: 2px;
+        stroke: #a6a6a6;
+        object-fit: fill;
       }
 
       .icon-container {
         display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 40px;
+        width: 60vw;
+
+        justify-content: space-between;
+        align-items: flex-start;
         position: absolute;
 
-        .icon-wrapper {
-          width: 64px;
-          height: 64px;
-          border-radius: 50%;
-          background: var(--color-accent);
+        .roadmap-icon {
+          display: flex;
+          width: 100px;
+          height: 100px;
+          padding: 16px;
+          justify-content: center;
+          align-items: center;
+          border-radius: 16px;
+          background: var(--color-primary);
+
+          svg {
+            width: 100%;
+            height: auto;
+            stroke-width: 0.1rem;
+          }
+        }
+
+        .roadmap-icon.shift-down {
+          margin-top: 40px;
         }
       }
     }
