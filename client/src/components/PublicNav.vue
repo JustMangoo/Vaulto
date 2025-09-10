@@ -38,6 +38,7 @@ nav {
   background: var(--color-bg);
   position: sticky;
   top: 0;
+  z-index: 10;
 }
 
 .logo-container {
