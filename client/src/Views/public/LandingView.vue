@@ -260,6 +260,7 @@ h3 {
       justify-content: center;
       align-items: center;
       align-self: stretch;
+      position: relative;
 
       img {
         height: 175px;
@@ -272,14 +273,15 @@ h3 {
       }
 
       .icon-container {
-        display: flex;
-        width: 60vw;
-
-        justify-content: space-between;
-        align-items: flex-start;
         position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
 
         .roadmap-icon {
+          position: absolute;
+          top: 0;
           display: flex;
           width: 100px;
           height: 100px;
@@ -296,8 +298,24 @@ h3 {
           }
         }
 
+        .roadmap-icon:nth-child(1) {
+          left: 5%;
+        }
+
+        .roadmap-icon:nth-child(2) {
+          left: 33%;
+        }
+
+        .roadmap-icon:nth-child(3) {
+          left: 60%;
+        }
+
+        .roadmap-icon:nth-child(4) {
+          left: 85%;
+        }
+
         .roadmap-icon.shift-down {
-          margin-top: 40px;
+          top: 40px;
         }
       }
     }
