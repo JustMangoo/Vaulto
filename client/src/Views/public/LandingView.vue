@@ -49,18 +49,21 @@
           >
             <path
               d="M0 61.6754C79.001 43.3301 173.253 -9.11637 321.402 3.11335C474.754 15.7726 445.817 80.162 587.461 79.0568C729.104 77.9517 715.569 8.85672 849.656 8.85672C992.008 8.85672 979.186 80.7151 1115.16 80.7151C1249.72 80.7151 1377.75 40.9108 1438 29.4173"
+
+              fill="none"
+
               stroke="#A6A6A6"
               stroke-width="2"
               stroke-dasharray="29 29"
             />
           </svg>
           <div class="icon-container">
-            <div class="roadmap-icon"><Users></Users></div>
-            <div class="roadmap-icon shift-down"><Blocks></Blocks></div>
+            <div class="roadmap-icon"><Users /></div>
+            <div class="roadmap-icon"><Blocks /></div>
             <div class="roadmap-icon">
-              <TabletSmartphone></TabletSmartphone>
+              <TabletSmartphone />
             </div>
-            <div class="roadmap-icon shift-down"><Sparkles></Sparkles></div>
+            <div class="roadmap-icon"><Sparkles /></div>
           </div>
         </div>
       </header>
@@ -308,22 +311,29 @@ h3 {
 
         .roadmap-icon:nth-child(1) {
           left: 5%;
+
+          top: 36px;
+
         }
 
         .roadmap-icon:nth-child(2) {
           left: 33%;
+
+          top: 68px;
+
         }
 
         .roadmap-icon:nth-child(3) {
           left: 60%;
+
+          top: -30px;
+
         }
 
         .roadmap-icon:nth-child(4) {
           left: 85%;
-        }
+          top: 106px;
 
-        .roadmap-icon.shift-down {
-          top: 40px;
         }
       }
     }
