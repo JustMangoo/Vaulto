@@ -42,7 +42,18 @@
           creativity can grow without limits.
         </p>
         <div class="roadmap-container">
-          <img src="../../assets/roadmap.svg" alt="" />
+          <svg
+            class="roadline"
+            viewBox="0 0 1438 82"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 61.6754C79.001 43.3301 173.253 -9.11637 321.402 3.11335C474.754 15.7726 445.817 80.162 587.461 79.0568C729.104 77.9517 715.569 8.85672 849.656 8.85672C992.008 8.85672 979.186 80.7151 1115.16 80.7151C1249.72 80.7151 1377.75 40.9108 1438 29.4173"
+              stroke="#A6A6A6"
+              stroke-width="2"
+              stroke-dasharray="29 29"
+            />
+          </svg>
           <div class="icon-container">
             <div class="roadmap-icon"><Users></Users></div>
             <div class="roadmap-icon shift-down"><Blocks></Blocks></div>
@@ -260,26 +271,25 @@ h3 {
       justify-content: center;
       align-items: center;
       align-self: stretch;
+      position: relative;
 
-      img {
+      .roadline {
         height: 175px;
         width: 100%;
         flex-shrink: 0;
         align-self: stretch;
-        stroke-width: 2px;
-        stroke: #a6a6a6;
-        object-fit: fill;
       }
 
       .icon-container {
-        display: flex;
-        width: 60vw;
-
-        justify-content: space-between;
-        align-items: flex-start;
         position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
 
         .roadmap-icon {
+          position: absolute;
+          top: 0;
           display: flex;
           width: 100px;
           height: 100px;
@@ -296,8 +306,24 @@ h3 {
           }
         }
 
+        .roadmap-icon:nth-child(1) {
+          left: 5%;
+        }
+
+        .roadmap-icon:nth-child(2) {
+          left: 33%;
+        }
+
+        .roadmap-icon:nth-child(3) {
+          left: 60%;
+        }
+
+        .roadmap-icon:nth-child(4) {
+          left: 85%;
+        }
+
         .roadmap-icon.shift-down {
-          margin-top: 40px;
+          top: 40px;
         }
       }
     }
