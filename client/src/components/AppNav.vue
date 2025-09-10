@@ -102,7 +102,7 @@ nav {
   align-items: center;
   left: 0;
   top: 0;
-  z-index: 50;
+  z-index: 10;
   margin-right: var(--border-deco-width);
 }
 
