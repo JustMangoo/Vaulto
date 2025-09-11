@@ -41,34 +41,27 @@
           smarter inspiration discovery,<br />we’re building a future where your
           creativity can grow without limits.
         </p>
-        <div class="roadmap__inside">
+        <div class="roadmap-container">
           <svg
-            class="roadmap__graph"
-            viewBox="0 0 1600 300"
-            preserveAspectRatio="none"
+            class="roadline"
+            viewBox="0 0 1438 82"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              id="path"
-              d="M0,150 C150,50 300,250 450,150 S750,250 900,150 1200,250 1350,150 1600,150 1600,150"
-            />
-            <path
-              id="road"
-              d="M0,150 C150,50 300,250 450,150 S750,250 900,150 1200,250 1350,150 1600,150 1600,150"
-              style="stroke-dasharray: 460px 2899px"
+              d="M0 61.6754C79.001 43.3301 173.253 -9.11637 321.402 3.11335C474.754 15.7726 445.817 80.162 587.461 79.0568C729.104 77.9517 715.569 8.85672 849.656 8.85672C992.008 8.85672 979.186 80.7151 1115.16 80.7151C1249.72 80.7151 1377.75 40.9108 1438 29.4173"
+              fill="none"
+              stroke="#A6A6A6"
+              stroke-width="2"
+              stroke-dasharray="29 29"
             />
           </svg>
-          <div class="point current" style="top: 120px; left: 10%">
-            <img src="https://placehold.co/64" alt="" />
-          </div>
-          <div class="point" style="top: 80px; left: 30%">
-            <img src="https://placehold.co/64" alt="" />
-          </div>
-          <div class="point" style="top: 160px; left: 50%">
-            <img src="https://placehold.co/64" alt="" />
-          </div>
-          <div class="point" style="top: 100px; left: 70%">
-            <img src="https://placehold.co/64" alt="" />
+          <div class="icon-container">
+            <div class="roadmap-icon"><Users /></div>
+            <div class="roadmap-icon"><Blocks /></div>
+            <div class="roadmap-icon">
+              <TabletSmartphone />
+            </div>
+            <div class="roadmap-icon"><Sparkles /></div>
           </div>
         </div>
       </header>
@@ -91,7 +84,13 @@
 
 <script setup lang="ts">
 import BaseButton from "@/components/BaseButton.vue";
-import { ArrowRight } from "lucide-vue-next";
+import {
+  ArrowRight,
+  Users,
+  Blocks,
+  TabletSmartphone,
+  Sparkles,
+} from "lucide-vue-next";
 </script>
 
 <style scoped>
@@ -265,70 +264,73 @@ h3 {
       max-width: 550px;
       font-weight: var(--font-weight-normal);
     }
-  }
 
-  .roadmap__inside {
-    position: relative;
-    width: 100%;
-    height: 300px;
-  }
+    .roadmap-container {
+      display: flex;
+      height: 175px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      align-self: stretch;
+      position: relative;
 
-  .roadmap__graph {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
+      .roadline {
+        height: 175px;
+        width: 100%;
+        flex-shrink: 0;
+        align-self: stretch;
+      }
 
-  #path,
-  #road {
-    fill: none;
-    stroke-width: 8;
-    stroke-linecap: round;
-  }
+      .icon-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
 
-  #path {
-    stroke: #b4b3b2;
-  }
+        .roadmap-icon {
+          position: absolute;
+          top: 0;
+          display: flex;
+          width: 100px;
+          height: 100px;
+          padding: 16px;
+          justify-content: center;
+          align-items: center;
+          border-radius: 16px;
+          background: var(--color-primary);
 
-  #road {
-    stroke: #302e2d;
-  }
+          svg {
+            width: 100%;
+            height: auto;
+            stroke-width: 0.1rem;
+          }
+        }
 
-  .point {
-    position: absolute;
-    width: 64px;
-    height: 64px;
-    transform: translate(-50%, -50%);
-  }
+        .roadmap-icon:nth-child(1) {
+          left: 5%;
 
-  .point img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-  }
-}
+          top: 36px;
+        }
 
-@media (max-width: 920px) {
-  .roadmap .point:nth-of-type(1) {
-    left: 15%;
-  }
-  .roadmap .point:nth-of-type(2) {
-    left: 35%;
-  }
-  .roadmap .point:nth-of-type(3) {
-    left: 55%;
-  }
-  .roadmap .point:nth-of-type(4) {
-    left: 75%;
-  }
-}
+        .roadmap-icon:nth-child(2) {
+          left: 33%;
 
-@media (max-width: 600px) {
-  .roadmap .roadmap__inside {
-    height: 220px;
+          top: 68px;
+        }
+
+        .roadmap-icon:nth-child(3) {
+          left: 60%;
+
+          top: -30px;
+        }
+
+        .roadmap-icon:nth-child(4) {
+          left: 85%;
+          top: 106px;
+        }
+      }
+    }
   }
 }
 
