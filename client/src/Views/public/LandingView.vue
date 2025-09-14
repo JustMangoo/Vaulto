@@ -1,14 +1,14 @@
 <template>
-  <div class="home-view">
+  <div id="home-view">
     <section class="hero">
       <div class="hero-container">
         <p class="tagline">For Creators, By Creators</p>
         <header>
-          <h1>Where Inspiration Finds a <span>Home</span></h1>
-          <h2>
+          <h1 class="display">Where Inspiration Finds a <span>Home</span></h1>
+          <p>
             Save, organize, and rediscover your sparks of inspiration — all in
             one place.
-          </h2>
+          </p>
         </header>
         <div class="button-container">
           <BaseButton>Save Your First Gem</BaseButton
@@ -18,7 +18,7 @@
     </section>
     <section class="features">
       <header>
-        <h3>What Vaulto Can Do</h3>
+        <h2>What Vaulto Can Do</h2>
         <p>
           Flexible vaults, customizable fields, and a space built for
           creators.<br />
@@ -35,54 +35,56 @@
     </section>
     <section class="roadmap">
       <header>
-        <h3>The Road Ahead</h3>
+        <h2>The Road Ahead</h2>
         <p>
           Vaulto is just getting started.<br />From collaboration tools to
           smarter inspiration discovery,<br />we’re building a future where your
           creativity can grow without limits.
         </p>
-        <div class="roadmap-container">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1442"
-            height="97"
-            viewBox="0 0 1442 97"
-            fill="none"
-            class="roadline"
-          >
-            <path
-              d="M0.999996 48.1584C0.999996 48.1584 105.528 8.4952 181 2.0823C332.101 -10.7568 388.449 94.8745 541 94.8745C693.551 94.8745 748.449 2.08234 901 2.08234C1053.55 2.08234 1109.96 107.994 1261 94.8745C1336.6 88.3078 1441 48.1585 1441 48.1585"
-              stroke="#A6A6A6"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-dasharray="23 23"
-              fill="none"
-              vector-effect="non-scaling-stroke"
-            />
-          </svg>
-          <div class="icon-container">
-            <div class="roadmap-icon"><Users /></div>
-            <div class="roadmap-icon"><Blocks /></div>
-            <div class="roadmap-icon">
-              <TabletSmartphone />
-            </div>
-            <div class="roadmap-icon"><Sparkles /></div>
-          </div>
-        </div>
       </header>
+      <div class="roadmap-container">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1442"
+          height="97"
+          viewBox="0 0 1442 97"
+          fill="none"
+          class="roadline"
+        >
+          <path
+            d="M0.999996 48.1584C0.999996 48.1584 105.528 8.4952 181 2.0823C332.101 -10.7568 388.449 94.8745 541 94.8745C693.551 94.8745 748.449 2.08234 901 2.08234C1053.55 2.08234 1109.96 107.994 1261 94.8745C1336.6 88.3078 1441 48.1585 1441 48.1585"
+            stroke="#A6A6A6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-dasharray="23 23"
+            fill="none"
+            vector-effect="non-scaling-stroke"
+          />
+        </svg>
+        <div class="icon-container">
+          <div class="roadmap-icon"><Users /></div>
+          <div class="roadmap-icon"><Blocks /></div>
+          <div class="roadmap-icon">
+            <TabletSmartphone />
+          </div>
+          <div class="roadmap-icon"><Sparkles /></div>
+        </div>
+      </div>
     </section>
     <section class="cta-section">
-      <div class="side-container"></div>
-      <div class="cta-container">
-        <div class="cta-background"></div>
-        <div class="cta-button-container">
-          <div class="cta-arrow left"><ArrowRight></ArrowRight></div>
-          <div class="cta-button"><p>Get started for free</p></div>
-          <div class="cta-arrow right"><ArrowRight></ArrowRight></div>
+      <div class="cta-block cta-block--left"></div>
+
+      <div class="cta-block cta-block--top"></div>
+      <div class="cta-button-container">
+        <div class="cta-arrow left"><ArrowRight></ArrowRight></div>
+        <div class="cta-button">
+          <p>Get started for <span>free</span></p>
         </div>
-        <div class="cta-background"></div>
+        <div class="cta-arrow right"><ArrowRight></ArrowRight></div>
       </div>
-      <div class="side-container"></div>
+      <div class="cta-block cta-block--bottom"></div>
+
+      <div class="cta-block cta-block--right"></div>
     </section>
   </div>
 </template>
@@ -99,96 +101,56 @@ import {
 </script>
 
 <style scoped>
-.home-view {
-  padding: 0 var(--border-deco-width);
+#home-view {
+  padding: 0 var(--border-width-deco);
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  gap: var(--border-deco-width);
+  gap: var(--border-width-deco);
 }
 
-h1 {
-  color: var(--color-dark-1);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
+p {
   text-align: center;
-  font-family: var(--font-family-display);
-
-  span {
-    font-family: var(--font-family-accent);
-    font-weight: var(--font-weight-normal);
-  }
-}
-
-h3 {
-  color: var(--color-dark-1);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-light);
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-  opacity: 0.5;
-  z-index: 0;
 }
 
 .hero {
   display: flex;
-  height: 814px;
+  height: 50vw;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2px;
   align-self: stretch;
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   background: var(--color-accent);
 
   .hero-container {
     display: flex;
-    padding-top: 85px;
+    padding-top: var(--spacing-md);
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 40px;
-    flex: 1 0 0;
+    gap: var(--spacing-xl);
     align-self: stretch;
-    border-radius: var(--radius-lg);
     background: radial-gradient(
       50% 50% at 50% 50%,
       rgba(255, 240, 224, 0) 20.67%,
       rgba(255, 240, 224, 0.8) 100%
     );
     .tagline {
-      display: flex;
       padding: var(--spacing-xs) var(--spacing-sm);
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius-md);
       border: 1px solid rgba(35, 29, 23, 0.25);
-      background: var(--color-light, #fffefd);
+      background: var(--color-light);
+      font-size: var(--font-size-sm);
     }
     header {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
-      align-self: stretch;
-
-      h2 {
-        color: var(--color-dark-2);
-        font-size: var(--font-size-md);
-        font-weight: var(--font-weight-normal);
-        text-align: center;
-        line-height: 1.5;
-      }
     }
     .button-container {
       display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
       gap: var(--spacing-md);
-      align-self: stretch;
     }
   }
 }
@@ -197,34 +159,26 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--border-deco-width);
+  gap: var(--border-width-deco);
   align-self: stretch;
 
   header {
     display: flex;
-    padding: 128px 0 64px 0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 32px;
+    padding: var(--spacing-3xl) 0 var(--spacing-2xl) 0;
+    gap: var(--spacing-md);
     align-self: stretch;
-    border-radius: var(--radius-lg);
-    background: var(--color-light, #fffefd);
-
-    p {
-      color: var(--color-dark-1);
-      text-align: center;
-      font-size: var(--font-size-md);
-      max-width: 550px;
-      font-weight: var(--font-weight-normal);
-    }
+    border-radius: var(--radius-md);
+    background: var(--color-light);
   }
 
   .feature-grid {
     display: grid;
-    height: 833px;
-    row-gap: 1px;
-    column-gap: 1px;
+    height: 50vw;
+    row-gap: var(--border-width-deco);
+    column-gap: var(--border-width-deco);
     align-self: stretch;
     grid-template-rows: repeat(5, minmax(0, 1fr));
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -244,7 +198,7 @@ h3 {
 
     .grid-block {
       background: var(--color-accent);
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius-md);
     }
   }
 }
@@ -252,194 +206,181 @@ h3 {
 .roadmap {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: var(--border-deco-width);
   align-self: stretch;
   background: var(--color-light);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
+  padding-bottom: var(--spacing-3xl);
 
   header {
     display: flex;
-    padding: 128px 0 64px 0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 32px;
     align-self: stretch;
-    border-radius: var(--radius-lg);
+    gap: var(--spacing-md);
+    padding: var(--spacing-3xl) 0 var(--spacing-2xl) 0;
+    border-radius: var(--radius-md);
+  }
 
-    p {
-      color: var(--color-dark-1);
-      text-align: center;
-      font-size: var(--font-size-md);
-      max-width: 550px;
-      font-weight: var(--font-weight-normal);
+  .roadmap-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
+    position: relative;
+    height: 15vw;
+
+    .roadline {
+      width: 100%;
+      flex-shrink: 0;
+      align-self: stretch;
+      height: 15vw;
     }
 
-    .roadmap-container {
+    .icon-container {
+      inset: 0;
       display: flex;
-      height: 175px;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      align-self: stretch;
-      position: relative;
+      position: absolute;
 
-      .roadline {
-        height: 175px;
-        width: 100%;
-        flex-shrink: 0;
-        align-self: stretch;
+      .roadmap-icon {
+        top: 0;
+        display: flex;
+        margin: 0 auto;
+        padding: var(--spacing-md);
+        border-radius: var(--radius-md);
+        background: var(--color-primary);
+
+        svg {
+          width: var(--font-size-2xl);
+          height: auto;
+          stroke-width: 1px;
+        }
       }
 
-      .icon-container {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        /* gap: 18.5%; */
-        justify-content: center;
-        align-items: center;
-        pointer-events: none;
-
-        .roadmap-icon {
-          top: 0;
-          display: flex;
-          margin: 0 auto;
-          width: 100px;
-          height: 100px;
-          padding: 16px;
-          justify-content: center;
-          align-items: center;
-          border-radius: 16px;
-          background: var(--color-primary);
-
-          svg {
-            width: 100%;
-            height: auto;
-            stroke-width: 0.1rem;
-          }
-        }
-
-        .roadmap-icon:nth-child(even) {
-          margin-top: 100px;
-        }
-        .roadmap-icon:nth-child(odd) {
-          margin-top: -100px;
-        }
+      .roadmap-icon:nth-child(even) {
+        margin-top: 6.5vw;
+      }
+      .roadmap-icon:nth-child(odd) {
+        margin-top: -6.5vw;
       }
     }
   }
 }
 
 .cta-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--border-deco-width);
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 2fr 1fr 2fr;
+  grid-column-gap: var(--border-width-deco);
+  grid-row-gap: var(--border-width-deco);
   align-self: stretch;
 
-  .side-container {
-    flex: 1 1 0;
+  .cta-block--left {
+    grid-area: 1 / 1 / 4 / 2;
+  }
+  .cta-block--top {
+    grid-area: 1 / 2 / 2 / 3;
+  }
+  .cta-button-container {
+    grid-area: 2 / 2 / 3 / 3;
+  }
+  .cta-block--bottom {
+    grid-area: 3 / 2 / 4 / 3;
+  }
+  .cta-block--right {
+    grid-area: 1 / 3 / 4 / 4;
+  }
+
+  .cta-block {
     align-self: stretch;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     background: var(--color-accent);
   }
 
-  .cta-container {
-    flex: 2 0 0;
-    align-self: stretch;
+  .cta-button-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    flex-direction: column;
-    min-width: 610px;
-    gap: var(--border-deco-width);
+    align-self: stretch;
+    gap: var(--border-width-deco);
+    min-width: max-content;
+    white-space: nowrap;
 
-    .cta-button-container {
+    .cta-button {
+      border-radius: var(--radius-md);
+      background: var(--color-primary);
       display: flex;
-      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: var(--spacing-lg) var(--spacing-xl);
+
+      p {
+        font-family: var(--font-family-display);
+        color: var(--color-dark-1);
+        font-size: var(--font-size-xl);
+        font-weight: var(--font-weight-bold);
+        text-align: center;
+        white-space: nowrap;
+
+        span {
+          font-family: var(--font-family-accent);
+          font-weight: var(--font-weight-normal);
+        }
+      }
+    }
+
+    .cta-arrow {
+      display: flex;
+      justify-content: center;
       align-items: center;
       align-self: stretch;
-      flex: 0 0 auto;
-      gap: var(--border-deco-width);
-      min-width: max-content;
-      white-space: nowrap;
+      background: var(--color-primary);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-base);
+      overflow: hidden;
 
-      .cta-button {
-        border-radius: var(--radius-lg);
-        background: var(--color-primary);
-        display: flex;
-        width: 100%;
-        padding: 24px 48px;
-        justify-content: center;
-        align-items: center;
-
-        p {
-          color: var(--color-dark-1);
-          font-size: var(--font-size-lg);
-          font-weight: var(--font-weight-medium);
-          white-space: nowrap;
-        }
-      }
-
-      .cta-arrow {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        align-self: stretch;
-        background: var(--color-primary);
-        border-radius: var(--radius-lg);
-        transition: all var(--transition-base);
-        overflow: hidden;
-
-        &.left {
-          width: 0;
-          padding: 24px 0;
-          margin-right: -1px;
-        }
-
-        &.right {
-          width: auto;
-          padding: 24px 48px;
-          margin-left: 0;
-        }
-
-        svg {
-          color: var(--color-dark-1);
-          width: auto;
-          height: 100%;
-          stroke-width: 0.1rem;
-        }
-      }
-    }
-
-    .cta-button-container:hover {
-      cursor: pointer;
-
-      .cta-arrow.left {
-        width: auto;
-        padding: 24px 48px;
-        margin-right: 0;
-      }
-
-      .cta-arrow.right {
+      &.left {
         width: 0;
-        padding: 24px 0;
-        margin-left: -1px;
+        padding: var(--spacing-lg) 0;
+        margin-right: -1px;
+      }
+
+      &.right {
+        width: auto;
+        padding: var(--spacing-lg) var(--spacing-xl);
+        margin-left: 0;
+      }
+
+      svg {
+        color: var(--color-dark-1);
+        width: auto;
+        height: 100%;
+        stroke-width: 2px;
       }
     }
+  }
 
-    .cta-background {
-      align-self: stretch;
-      border-radius: var(--radius-lg);
-      background: var(--color-accent);
-      flex: 1 1 212px;
-      min-height: 80px;
+  .cta-button-container:hover {
+    cursor: pointer;
+
+    .cta-arrow.left {
+      width: auto;
+      padding: var(--spacing-lg) var(--spacing-xl);
+      margin-right: 0;
+    }
+
+    .cta-arrow.right {
+      width: 0;
+      padding: var(--spacing-lg) 0;
+      margin-left: -1px;
     }
   }
 
   @media (max-width: 900px) {
-    .side-container {
+    .cta-side {
       display: none;
     }
   }

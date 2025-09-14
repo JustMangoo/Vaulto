@@ -103,7 +103,7 @@ nav {
   left: 0;
   top: 0;
   z-index: 10;
-  margin-right: var(--border-deco-width);
+  margin-right: var(--border-width-deco);
 }
 
 .nav-content {
@@ -112,8 +112,8 @@ nav {
   display: flex;
   flex-direction: column;
   color: var(--color-text);
-  gap: var(--border-deco-width);
-  margin-left: var(--border-deco-width);
+  gap: var(--border-width-deco);
+  margin-left: var(--border-width-deco);
 
   .logo-profile-container {
     display: flex;

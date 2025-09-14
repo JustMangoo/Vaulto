@@ -235,7 +235,7 @@ onMounted(fetchCollections);
     align-items: center;
     background-color: var(--color-bg);
     padding: var(--spacing-xl);
-    margin-bottom: var(--border-deco-width);
+    margin-bottom: var(--border-width-deco);
     border-radius: 0 0 0 var(--radius-md);
     h1 {
       font-size: 2rem;

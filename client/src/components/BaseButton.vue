@@ -1,7 +1,7 @@
 <template>
   <button
     class="base-btn"
-    :class="variantClass"
+    :class="[variantClass, full ? 'btn-full' : '']"
     @click="$emit('click', $event)"
   >
     <!-- Icon from prop or slot -->
@@ -27,12 +27,14 @@ const props = withDefaults(
     showIcon?: boolean;
     showText?: boolean;
     variant?: "primary" | "secondary";
+    full?: boolean;
     iconName?: keyof typeof icons;
   }>(),
   {
     showIcon: false,
     showText: true,
     variant: "primary",
+    full: false,
   }
 );
 
@@ -60,10 +62,11 @@ const variantClass = computed(() => {
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: 2px solid var(--color-primary);
-  border-radius: var(--radius-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: var(--border-width-base) solid var(--color-primary);
+  border-radius: var(--radius-sm);
   cursor: pointer;
+  font-size: var(--font-size-base);
 }
 
 .btn-primary {
@@ -71,9 +74,12 @@ const variantClass = computed(() => {
   color: var(--color-text);
 }
 .btn-secondary {
-  background-color: none;
-
+  background-color: var(--color-light);
   color: var(--color-text);
+}
+
+.btn-full {
+  width: 100%;
 }
 
 .btn-icon {
@@ -89,6 +95,6 @@ const variantClass = computed(() => {
 .btn-text {
   white-space: nowrap;
   text-align: center;
-  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
 }
 </style>

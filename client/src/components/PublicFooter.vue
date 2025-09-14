@@ -14,7 +14,7 @@
       </div>
       <div class="footer-links">
         <div class="link-container">
-          <h4>Sitemap</h4>
+          <h3>Sitemap</h3>
           <ul>
             <router-link :to="{ name: 'Home' }"><li>Home</li></router-link>
 
@@ -28,7 +28,7 @@
           </ul>
         </div>
         <div class="link-container">
-          <h4>Conctact</h4>
+          <h3>Conctact</h3>
           <ul>
             <router-link :to="{ name: 'FAQ' }"><li>FAQ</li></router-link>
             <router-link :to="{ name: 'Support' }"
@@ -37,7 +37,7 @@
           </ul>
         </div>
         <div class="link-container">
-          <h4>Company</h4>
+          <h3>Company</h3>
           <ul>
             <router-link :to="{ name: 'Terms' }"
               ><li>Terms & Conditions</li></router-link
@@ -65,92 +65,88 @@ const currentYear = new Date().getFullYear();
 <style scoped>
 footer {
   display: flex;
-  width: fill;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
   max-width: 1440px;
   margin: auto;
-  padding: 64px 40px;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
-  gap: 100px;
+  padding: var(--spacing-2xl) var(--spacing-xl);
   color: var(--color-light);
+  gap: var(--spacing-2xl);
+  color: var(--color-light);
+}
+
+h3 {
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  text-transform: uppercase;
 }
 
 .action-container {
   display: flex;
-  justify-content: space-between;
-  align-self: stretch;
-}
-
-h4 {
-  color: var(--color-primary);
-  font-size: var(--font-size-base);
-  font-weight: 400;
-  text-transform: uppercase;
+  width: 100%;
+  gap: var(--spacing-3xl);
 }
 
 .footer-socials {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: var(--spacing-md);
 
   .footer-logo {
-    width: 150px;
-    height: auto;
+    width: auto;
+    height: var(--font-size-xl);
   }
-}
 
-.social-icons {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-top: 16px;
-
-  li {
-    list-style: none;
-    cursor: pointer;
-    background-color: var(--color-light);
-    aspect-ratio: 1 / 1;
+  .social-icons {
     display: flex;
-    padding: var(--spacing-md);
-    border-radius: 100%;
-  }
-}
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
 
-.link-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
+    li {
+      list-style: none;
+      cursor: pointer;
+      background-color: var(--color-light);
+      aspect-ratio: 1 / 1;
+      display: flex;
+      padding: var(--spacing-sm);
+      border-radius: var(--radius-sm);
+
+      img {
+        width: var(--font-size-md);
+        height: auto;
+      }
+    }
+  }
 }
 
 .footer-links {
   display: flex;
-  width: 698px;
-  padding-left: 50px;
+  margin-left: var(--spacing-3xl);
+  width: 100%;
   justify-content: space-between;
   align-items: flex-start;
 
-  ul {
+  .link-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
-  }
+    gap: var(--spacing-md);
 
-  li {
-    color: var(--color-light);
-    font-size: var(--font-size-md);
-    font-weight: 400;
+    ul {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--spacing-sm);
+    }
   }
 }
 
 .copyright-container {
   p {
-    color: var(--color-light);
-    font-size: var(--font-size-md);
-    font-weight: 400;
     opacity: 0.5;
   }
 }

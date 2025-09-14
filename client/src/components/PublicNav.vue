@@ -29,41 +29,39 @@ import BaseButton from "./BaseButton.vue";
 nav {
   display: flex;
   width: 100%;
-  padding: 0 var(--border-deco-width) var(--border-deco-width)
-    var(--border-deco-width);
+  padding: 0 var(--border-width-deco) var(--border-width-deco)
+    var(--border-width-deco);
   align-items: center;
-  gap: var(--border-deco-width);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  gap: var(--border-width-deco);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
   background: var(--color-bg);
   position: sticky;
   top: 0;
   z-index: 10;
+  font-size: var(--font-size-base);
 }
 
 .logo-container {
   display: flex;
-  padding: 0 24px;
+  padding: 0 var(--spacing-md);
   align-items: center;
-  gap: 16px;
   flex-shrink: 0;
   align-self: stretch;
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
   background: var(--color-light);
 }
 ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 32px;
+  gap: var(--spacing-lg);
   flex: 1 0 0;
   align-self: stretch;
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
   background: var(--color-light);
 }
 li {
-  font-size: var(--font-size-md);
-  font-weight: 500;
-  padding: var(--spacing-md) 0;
+  font-weight: var(--font-weight-semibold);
   color: var(--color-dark-1);
   cursor: pointer;
   transition: color 0.3s ease;
@@ -74,12 +72,12 @@ li:hover {
 }
 .action-container {
   display: flex;
-  padding: var(--spacing-lg) 24px;
+  padding: var(--spacing-md) var(--spacing-md);
   flex-direction: row;
   align-items: center;
-  gap: 14px;
+  gap: var(--spacing-md);
   align-self: stretch;
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
   background: var(--color-light);
 }
 </style>
