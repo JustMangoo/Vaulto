@@ -4,7 +4,7 @@
       <div class="hero-container">
         <p class="tagline">For Creators, By Creators</p>
         <header>
-          <h1>Where Inspiration Finds a Home</h1>
+          <h1>Where Inspiration Finds a <span>Home</span></h1>
           <h2>
             Save, organize, and rediscover your sparks of inspiration — all in
             one place.
@@ -43,16 +43,21 @@
         </p>
         <div class="roadmap-container">
           <svg
-            class="roadline"
-            viewBox="0 0 1438 82"
             xmlns="http://www.w3.org/2000/svg"
+            width="1442"
+            height="97"
+            viewBox="0 0 1442 97"
+            fill="none"
+            class="roadline"
           >
             <path
-              d="M0 61.6754C79.001 43.3301 173.253 -9.11637 321.402 3.11335C474.754 15.7726 445.817 80.162 587.461 79.0568C729.104 77.9517 715.569 8.85672 849.656 8.85672C992.008 8.85672 979.186 80.7151 1115.16 80.7151C1249.72 80.7151 1377.75 40.9108 1438 29.4173"
-              fill="none"
+              d="M0.999996 48.1584C0.999996 48.1584 105.528 8.4952 181 2.0823C332.101 -10.7568 388.449 94.8745 541 94.8745C693.551 94.8745 748.449 2.08234 901 2.08234C1053.55 2.08234 1109.96 107.994 1261 94.8745C1336.6 88.3078 1441 48.1585 1441 48.1585"
               stroke="#A6A6A6"
               stroke-width="2"
-              stroke-dasharray="29 29"
+              stroke-linecap="round"
+              stroke-dasharray="23 23"
+              fill="none"
+              vector-effect="non-scaling-stroke"
             />
           </svg>
           <div class="icon-container">
@@ -100,6 +105,20 @@ import {
   display: flex;
   flex-direction: column;
   gap: var(--border-deco-width);
+}
+
+h1 {
+  color: var(--color-dark-1);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  text-align: center;
+  font-family: var(--font-family-display);
+
+  span {
+    font-family: var(--font-family-accent);
+    font-weight: var(--font-weight-normal);
+  }
 }
 
 h3 {
@@ -154,14 +173,6 @@ h3 {
       justify-content: center;
       align-items: center;
       align-self: stretch;
-
-      h1 {
-        color: var(--color-dark-1);
-        font-size: var(--font-size-lg);
-        font-weight: var(--font-weight-bold);
-        line-height: 1.2;
-        text-align: center;
-      }
 
       h2 {
         color: var(--color-dark-2);
@@ -283,15 +294,17 @@ h3 {
 
       .icon-container {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        inset: 0;
+        display: flex;
+        /* gap: 18.5%; */
+        justify-content: center;
+        align-items: center;
+        pointer-events: none;
 
         .roadmap-icon {
-          position: absolute;
           top: 0;
           display: flex;
+          margin: 0 auto;
           width: 100px;
           height: 100px;
           padding: 16px;
@@ -307,27 +320,11 @@ h3 {
           }
         }
 
-        .roadmap-icon:nth-child(1) {
-          left: 5%;
-
-          top: 36px;
+        .roadmap-icon:nth-child(even) {
+          margin-top: 100px;
         }
-
-        .roadmap-icon:nth-child(2) {
-          left: 33%;
-
-          top: 68px;
-        }
-
-        .roadmap-icon:nth-child(3) {
-          left: 60%;
-
-          top: -30px;
-        }
-
-        .roadmap-icon:nth-child(4) {
-          left: 85%;
-          top: 106px;
+        .roadmap-icon:nth-child(odd) {
+          margin-top: -100px;
         }
       }
     }

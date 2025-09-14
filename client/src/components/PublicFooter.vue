@@ -17,9 +17,7 @@
           <h4>Sitemap</h4>
           <ul>
             <router-link :to="{ name: 'Home' }"><li>Home</li></router-link>
-            <router-link :to="{ name: 'About' }"
-              ><li>The Vault</li></router-link
-            >
+
             <router-link :to="{ name: 'Pricing' }"
               ><li>Pricing</li></router-link
             >

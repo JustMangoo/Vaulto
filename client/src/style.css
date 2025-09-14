@@ -1,3 +1,18 @@
+@font-face {
+  font-family: BricolageGrotesque;
+  src: url("@/assets/Fonts/BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf");
+}
+
+@font-face {
+  font-family: OpenSans;
+  src: url("@/assets/Fonts/OpenSans-VariableFont_wdth,wght.ttf");
+}
+
+@font-face {
+  font-family: Literata;
+  src: url("@/assets/Fonts/Literata-Italic-VariableFont_opsz,wght.ttf");
+}
+
 /* Landing page palette */
 :root {
   --color-light: #fffffd;
@@ -15,12 +30,14 @@
   --color-overlay: rgba(0, 0, 0, 0.3);
 
   /* Typography */
-  --font-family-base: Arial, sans-serif;
+  --font-family-display: BricolageGrotesque, sans-serif;
+  --font-family-base: OpenSans, sans-serif;
+  --font-family-accent: Literata, sans-serif;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
   --font-size-md: 1.3rem;
-  --font-size-lg: 3rem;
+  --font-size-lg: 4rem;
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-bold: 600;
