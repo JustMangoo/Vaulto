@@ -54,16 +54,6 @@ const error = ref("");
 const { loadTheme } = useTheme();
 
 const login = async () => {
-  const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{12,}$/;
-  if (!email.value.includes("@")) {
-    error.value = "Email must contain @";
-    return;
-  }
-  if (!passwordRegex.test(password.value)) {
-    error.value =
-      "Password must be at least 12 characters, include an uppercase letter and a number";
-    return;
-  }
   try {
     const res = await axios.post("/api/auth/login", {
       email: email.value,
@@ -151,7 +141,7 @@ const login = async () => {
 }
 
 .error {
-  color: var(--color-primary);
+  color: var(--color-error);
   font-size: var(--font-size-base);
 }
 </style>
