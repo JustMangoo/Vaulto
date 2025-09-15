@@ -10,18 +10,23 @@
       </div>
     </header>
     <section class="faq-list">
-      <div class="category" id="getting-started">
-        <h3>Getting Started</h3>
+      <div
+        v-for="category in faqCategories"
+        :key="category.id"
+        class="category"
+        :id="category.id"
+      >
+        <h3>{{ category.title }}</h3>
         <div class="question-list">
           <div
-            v-for="(question, questionIndex) in gettingStartedFaqs"
-            :key="question.question"
+            v-for="(question, questionIndex) in category.questions"
+            :key="`${category.id}-${questionIndex}`"
             class="question-container"
           >
             <div
               class="question-group"
               :class="{
-                open: isQuestionExpanded('getting-started', questionIndex),
+                open: isQuestionExpanded(category.id, questionIndex),
               }"
             >
               <div
@@ -29,39 +34,41 @@
                 role="button"
                 tabindex="0"
                 :aria-expanded="
-                  isQuestionExpanded('getting-started', questionIndex)
+                  isQuestionExpanded(category.id, questionIndex)
                 "
-                :aria-controls="getAnswerId('getting-started', questionIndex)"
-                @click="toggleQuestion('getting-started', questionIndex)"
+                :aria-controls="getAnswerId(category.id, questionIndex)"
+                @click="toggleQuestion(category.id, questionIndex)"
                 @keydown.enter.prevent="
-                  toggleQuestion('getting-started', questionIndex)
+                  toggleQuestion(category.id, questionIndex)
                 "
                 @keydown.space.prevent="
-                  toggleQuestion('getting-started', questionIndex)
+                  toggleQuestion(category.id, questionIndex)
                 "
               >
                 <p>{{ question.question }}</p>
                 <ChevronDown
                   class="chevron"
                   :class="{
-                    open: isQuestionExpanded('getting-started', questionIndex),
+                    open: isQuestionExpanded(category.id, questionIndex),
                   }"
                   aria-hidden="true"
                 />
               </div>
-              <div
-                class="answer"
-                :id="getAnswerId('getting-started', questionIndex)"
-                v-show="isQuestionExpanded('getting-started', questionIndex)"
-                :aria-hidden="
-                  !isQuestionExpanded('getting-started', questionIndex)
-                "
-              >
-                <p>{{ question.answer }}</p>
-              </div>
+              <Transition name="answer">
+                <div
+                  v-show="isQuestionExpanded(category.id, questionIndex)"
+                  class="answer"
+                  :id="getAnswerId(category.id, questionIndex)"
+                  :aria-hidden="
+                    !isQuestionExpanded(category.id, questionIndex)
+                  "
+                >
+                  <p>{{ question.answer }}</p>
+                </div>
+              </Transition>
             </div>
             <svg
-              v-if="questionIndex < gettingStartedFaqs.length - 1"
+              v-if="questionIndex < category.questions.length - 1"
               width="417"
               height="8"
               viewBox="0 0 417 8"
@@ -79,9 +86,6 @@
           </div>
         </div>
       </div>
-      <div class="category" id="plans-n-pricing"></div>
-      <div class="category" id="features-n-usage"></div>
-      <div class="category" id="account-n-security"></div>
     </section>
   </div>
 </template>
@@ -93,6 +97,12 @@ import { ref } from "vue";
 type FaqQuestion = {
   question: string;
   answer: string;
+};
+
+type FaqCategory = {
+  id: string;
+  title: string;
+  questions: FaqQuestion[];
 };
 
 const gettingStartedFaqs: FaqQuestion[] = [
@@ -123,6 +133,65 @@ const plansPricingFaqs: FaqQuestion[] = [
     question: "How does the Team plan work?",
     answer:
       "The Team plan is designed for groups and organizations. It allows multiple users to collaborate within shared vaults, with each user having their own account. The plan includes team management features and is billed per user.",
+  },
+];
+
+const featuresUsageFaqs: FaqQuestion[] = [
+  {
+    question: "What's a vault?",
+    answer:
+      "A vault is a dedicated workspace where you can group related gems together. Use them to separate personal ideas, team projects, or any collection you want to keep organized and easy to browse.",
+  },
+  {
+    question: "What's a gem?",
+    answer:
+      "Gems are the individual pieces of content you save in Vaulto—notes, links, media, or inspiration. Each gem can include rich context so you always remember why it matters.",
+  },
+  {
+    question: "Can I customize how I organize my gems?",
+    answer:
+      "Absolutely! Arrange gems with tags, reorder them with drag-and-drop, and highlight your favorites so every vault reflects the way you think and work best.",
+  },
+];
+
+const accountSecurityFaqs: FaqQuestion[] = [
+  {
+    question: "Can I change my plan later?",
+    answer:
+      "Yes. You can upgrade or downgrade at any time from your billing settings, and the change takes effect immediately with a prorated charge.",
+  },
+  {
+    question: "Is my data private?",
+    answer:
+      "Yes, your vaults are private by default, with sharing options coming soon.",
+  },
+  {
+    question: "Can I export my gems?",
+    answer:
+      "You can export your gems whenever you need to—download them as a tidy bundle from your account settings to back up or repurpose elsewhere.",
+  },
+];
+
+const faqCategories: FaqCategory[] = [
+  {
+    id: "getting-started",
+    title: "Getting Started",
+    questions: gettingStartedFaqs,
+  },
+  {
+    id: "plans-n-pricing",
+    title: "Plans & Pricing",
+    questions: plansPricingFaqs,
+  },
+  {
+    id: "features-n-usage",
+    title: "Features & Usage",
+    questions: featuresUsageFaqs,
+  },
+  {
+    id: "account-n-security",
+    title: "Account & Security",
+    questions: accountSecurityFaqs,
   },
 ];
 
@@ -255,6 +324,8 @@ header {
         }
 
         .answer {
+          overflow: hidden;
+
           p {
             color: var(--color-dark-2);
             line-height: 1.6;
@@ -263,5 +334,25 @@ header {
       }
     }
   }
+}
+
+.answer-enter-active,
+.answer-leave-active {
+  transition: max-height var(--transition-base), opacity var(--transition-base),
+    transform var(--transition-base);
+}
+
+.answer-enter-from,
+.answer-leave-to {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-0.5rem);
+}
+
+.answer-enter-to,
+.answer-leave-from {
+  max-height: 20rem;
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>
