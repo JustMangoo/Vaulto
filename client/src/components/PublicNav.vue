@@ -77,6 +77,7 @@ nav {
 
 .logo-container {
   justify-content: flex-start;
+
   img {
     height: 100%;
     width: auto;
@@ -85,6 +86,7 @@ nav {
 
 .action-container {
   justify-content: flex-end;
+
 }
 
 ul {
