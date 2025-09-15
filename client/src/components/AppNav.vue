@@ -97,7 +97,7 @@ nav {
   width: 257px;
   height: 100vh;
   display: flex;
-  position: fixed;
+
   flex-direction: row;
   align-items: center;
   left: 0;

@@ -201,14 +201,14 @@ button {
   box-shadow: var(--shadow-md);
 }
 
-.policy-page__header {
+.policy-page-header {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
   align-items: flex-start;
 }
 
-.policy-page__eyebrow {
+.policy-page-eyebrow {
   font-size: var(--font-size-sm);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -227,11 +227,13 @@ button {
 }
 
 .policy-page a {
-  color: var(--color-primary);
-  text-decoration: underline;
-  text-decoration-thickness: 0.125rem;
-  text-underline-offset: 0.25em;
   font-weight: var(--font-weight-semibold);
+  text-decoration-line: underline;
+  text-decoration-skip-ink: auto;
+  text-decoration-color: var(--color-primary);
+  text-decoration-thickness: 9%;
+  text-underline-offset: 11%;
+  text-underline-position: from-font;
 }
 
 .policy-section {
@@ -241,7 +243,6 @@ button {
   background: var(--color-accent);
   padding: var(--spacing-xl);
   border-radius: var(--radius-md);
-  border: var(--border-width-deco) solid rgba(35, 29, 23, 0.08);
 }
 
 .policy-section ul,

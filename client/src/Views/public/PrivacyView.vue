@@ -1,32 +1,32 @@
 <template>
   <div id="privacy-view" class="policy-page">
-    <header class="policy-page__header">
-      <p class="policy-page__eyebrow">Last updated: May 5, 2024</p>
+    <header class="policy-page-header">
+      <p class="policy-page-eyebrow">Last updated: May 5, 2024</p>
       <h1>Privacy Policy</h1>
       <p>
-        Your creativity deserves a trusted home. This Privacy Policy explains how
-        Vaulto collects, uses, and protects your information when you interact
-        with our websites, applications, and services (collectively, the
-        “Services”).
+        Your creativity deserves a trusted home. This Privacy Policy explains
+        how Vaulto collects, uses, and protects your information when you
+        interact with our websites, applications, and services (collectively,
+        the “Services”).
       </p>
     </header>
 
     <section class="policy-section">
       <h2>1. Information We Collect</h2>
       <p>
-        We collect information that helps us deliver and improve Vaulto. The type
-        of data we gather depends on how you use the Services.
+        We collect information that helps us deliver and improve Vaulto. The
+        type of data we gather depends on how you use the Services.
       </p>
       <ul>
         <li>
           <strong>Account information:</strong> When you sign up we store your
-          name, email address, password (hashed), and any profile preferences you
-          choose to share.
+          name, email address, password (hashed), and any profile preferences
+          you choose to share.
         </li>
         <li>
-          <strong>Content you choose to save:</strong> Notes, files, images, tags,
-          and other metadata that you upload to your vaults. You control what you
-          add and can delete it at any time.
+          <strong>Content you choose to save:</strong> Notes, files, images,
+          tags, and other metadata that you upload to your vaults. You control
+          what you add and can delete it at any time.
         </li>
         <li>
           <strong>Usage data:</strong> Log and device information such as IP
@@ -34,8 +34,8 @@
           us understand how Vaulto performs.
         </li>
         <li>
-          <strong>Support communications:</strong> Messages you send to our team,
-          including attachments or feedback you voluntarily provide.
+          <strong>Support communications:</strong> Messages you send to our
+          team, including attachments or feedback you voluntarily provide.
         </li>
       </ul>
     </section>
@@ -57,8 +57,8 @@
           Protect Vaulto and its users against fraud, abuse, and security risks.
         </li>
         <li>
-          Communicate with you about product updates, surveys, or promotions when
-          you have opted in to receive them.
+          Communicate with you about product updates, surveys, or promotions
+          when you have opted in to receive them.
         </li>
       </ul>
     </section>
@@ -68,8 +68,8 @@
       <p>Depending on your location, we rely on different legal bases:</p>
       <ul>
         <li>
-          <strong>Contract:</strong> Processing needed to provide the Services and
-          honor our agreements with you.
+          <strong>Contract:</strong> Processing needed to provide the Services
+          and honor our agreements with you.
         </li>
         <li>
           <strong>Legitimate interests:</strong> Improving Vaulto, ensuring
@@ -105,9 +105,9 @@
           those collaborators.
         </li>
         <li>
-          <strong>Legal compliance:</strong> When required by law, subpoena, or if
-          necessary to protect the rights, property, or safety of Vaulto and its
-          users.
+          <strong>Legal compliance:</strong> When required by law, subpoena, or
+          if necessary to protect the rights, property, or safety of Vaulto and
+          its users.
         </li>
         <li>
           <strong>Business transfers:</strong> In connection with a merger,
@@ -126,9 +126,9 @@
       <h2>5. Data Retention</h2>
       <p>
         We keep your content and account information for as long as your account
-        is active or as needed to provide the Services. You can delete individual
-        items or close your account to remove data. We may also retain certain
-        information if required by law or to resolve disputes.
+        is active or as needed to provide the Services. You can delete
+        individual items or close your account to remove data. We may also
+        retain certain information if required by law or to resolve disputes.
       </p>
     </section>
 
@@ -172,8 +172,8 @@
       <p>
         You can manage many of these requests from your account settings. For
         additional help, email us at
-        <a href="mailto:support@vaulto.app">support@vaulto.app</a>. We will respond
-        within 30 days where legally required.
+        <a href="mailto:support@vaulto.app">support@vaulto.app</a>. We will
+        respond within 30 days where legally required.
       </p>
     </section>
 
