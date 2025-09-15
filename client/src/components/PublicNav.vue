@@ -2,7 +2,7 @@
   <nav>
     <div ref="logoContainer" class="logo-container">
       <router-link :to="{ name: 'Home' }">
-        <img src="@/assets/Temp-Logo.svg" alt="Vaulto Logo" />
+        <img src="@/assets/Temp-Logo.svg" alt="Vaulto Logo" class="logo" />
       </router-link>
     </div>
     <ul>
@@ -52,7 +52,7 @@ onUnmounted(() => {
 <style scoped>
 nav {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   width: 100%;
   padding: 0 var(--border-width-deco) var(--border-width-deco)
     var(--border-width-deco);
@@ -77,16 +77,16 @@ nav {
 
 .logo-container {
   justify-content: flex-start;
+}
 
-  img {
-    height: 100%;
-    width: auto;
-  }
+.logo {
+  display: block;
+  height: 100%;
+  width: auto;
 }
 
 .action-container {
   justify-content: flex-end;
-
 }
 
 ul {

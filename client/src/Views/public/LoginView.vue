@@ -2,15 +2,10 @@
   <div class="auth-view">
     <h2>Login</h2>
     <div class="auth-form">
-      <Input v-model="email" type="email" placeholder="Email" label="Email" />
-      <Input
-        v-model="password"
-        type="password"
-        placeholder="Password"
-        label="Password"
-      />
+      <Input v-model="email" type="email" label="Email" />
+      <Input v-model="password" type="password" label="Password" />
       <p v-if="error" class="error">{{ error }}</p>
-      <BaseButton showText @click="login">Login</BaseButton>
+      <BaseButton showText @click="login">Enter Vault</BaseButton>
     </div>
     <p class="auth-switch">
       Don't have an account?
