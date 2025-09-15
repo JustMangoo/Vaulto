@@ -41,21 +41,36 @@ nav {
   font-size: var(--font-size-base);
 }
 
-.logo-container {
+.logo-container,
+.action-container {
   display: flex;
-  padding: 0 var(--spacing-md);
+  flex: 0 0 auto;
+  padding: var(--spacing-md);
+  gap: var(--spacing-md);
   align-items: center;
-  flex-shrink: 0;
   align-self: stretch;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   background: var(--color-light);
+}
+
+.logo-container {
+  img {
+    height: 100%;
+    width: auto;
+  }
+}
+
+.logo-container,
+.action-container {
+  flex: 1;
+  max-width: fit-content;
 }
 ul {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: var(--spacing-lg);
-  flex: 1 0 0;
+  flex: 1;
   align-self: stretch;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   background: var(--color-light);
@@ -69,15 +84,5 @@ li {
 
 li:hover {
   color: var(--color-primary);
-}
-.action-container {
-  display: flex;
-  padding: var(--spacing-md) var(--spacing-md);
-  flex-direction: row;
-  align-items: center;
-  gap: var(--spacing-md);
-  align-self: stretch;
-  border-radius: 0 0 var(--radius-md) var(--radius-md);
-  background: var(--color-light);
 }
 </style>
