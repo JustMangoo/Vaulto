@@ -112,7 +112,7 @@ function close() {
 .popup-btn {
   padding: var(--spacing-sm) var(--spacing-md);
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
   cursor: pointer;
   background: var(--color-surface-alt);
   color: var(--color-text);

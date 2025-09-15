@@ -247,7 +247,7 @@ onMounted(async () => {
 
       select {
         padding: var(--spacing-sm);
-        border-radius: var(--radius-sm);
+        border-radius: var(--radius-xs);
         border: 1px solid var(--color-border);
         background: var(--color-bg);
         color: var(--color-text);

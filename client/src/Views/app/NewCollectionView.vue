@@ -191,7 +191,7 @@ const submitCollection = async () => {
   select {
     padding: var(--spacing-sm);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-xs);
     background: var(--color-bg);
     color: var(--color-text);
   }

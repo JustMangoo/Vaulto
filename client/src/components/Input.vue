@@ -60,21 +60,28 @@ watch(innerValue, (val) => {
 <style scoped>
 .input-container {
   display: flex;
+  align-self: stretch;
   flex-direction: column;
   gap: var(--spacing-xs);
+  font-size: var(--font-size-base);
 }
 
 .base-input {
   padding: var(--spacing-sm) var(--spacing-md);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  background: var(--color-bg);
+  border: var(--border-width-base) solid transparent;
+  border-radius: var(--radius-xs);
+  background: var(--color-light);
   color: var(--color-text);
+  outline: none;
+  font-size: var(--font-size-base);
+  transition: all var(--transition-base);
+
+  &:focus {
+    border: var(--border-width-base) solid var(--color-primary);
+  }
 }
 
 .input-label {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text);
+  font-weight: var(--font-weight-semibold);
 }
 </style>

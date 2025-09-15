@@ -113,7 +113,7 @@ h3 {
       aspect-ratio: 1 / 1;
       display: flex;
       padding: var(--spacing-sm);
-      border-radius: var(--radius-sm);
+      border-radius: var(--radius-xs);
 
       img {
         width: var(--font-size-md);

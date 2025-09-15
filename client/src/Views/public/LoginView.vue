@@ -1,16 +1,41 @@
 <template>
-  <div class="auth-view">
-    <h2>Login</h2>
-    <div class="auth-form">
-      <Input v-model="email" type="email" label="Email" />
-      <Input v-model="password" type="password" label="Password" />
-      <p v-if="error" class="error">{{ error }}</p>
-      <BaseButton showText @click="login">Enter Vault</BaseButton>
+  <div id="login-view">
+    <div class="form">
+      <div class="input-group">
+        <Input v-model="email" type="email" label="Email" />
+        <Input v-model="password" type="password" label="Password" />
+        <p v-if="error" class="error">{{ error }}</p>
+        <BaseButton showText @click="login">Enter Vault</BaseButton>
+      </div>
+      <div class="form-footer">
+        <svg
+          width="417"
+          height="8"
+          viewBox="0 0 417 8"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="divider"
+        >
+          <path
+            d="M11.6779 6.16684C-1.32994 3.36434 -14.3752 0.771402 50.031 1.01603C115.467 1.26458 270.265 2.05273 415.667 2.05273"
+            stroke="inherit"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+        <div class="links">
+          <p>Forgot password?</p>
+          <p>
+            New here?
+            <RouterLink to="/register">Start for free</RouterLink>
+          </p>
+        </div>
+      </div>
     </div>
-    <p class="auth-switch">
-      Don't have an account?
-      <RouterLink to="/register">Register</RouterLink>
-    </p>
+    <div class="info">
+      <h1>Your vault of <span>inspiration</span></h1>
+      <p>Log in and pick up where your creativity left off.</p>
+    </div>
   </div>
 </template>
 
@@ -56,23 +81,73 @@ const login = async () => {
 </script>
 
 <style scoped>
-.auth-view {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: var(--spacing-md);
+#login-view {
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-}
+  flex-direction: row;
+  justify-content: center;
+  align-self: stretch;
+  align-items: center;
+  gap: var(--border-width-deco);
 
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
+  h1 {
+    text-align: left;
+  }
 
-.auth-switch {
-  text-align: center;
+  .form {
+    display: flex;
+    flex: 2;
+    flex-direction: column;
+    background: var(--color-accent);
+    padding: var(--spacing-3xl) var(--spacing-2xl);
+    border-radius: var(--radius-md);
+    gap: var(--spacing-2xl);
+
+    .input-group {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      gap: var(--spacing-lg);
+    }
+
+    .form-footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-lg);
+
+      .links {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+        a {
+          font-weight: var(--font-weight-semibold);
+          text-decoration-line: underline;
+          text-decoration-skip-ink: auto;
+          text-decoration-color: var(--color-secondary, #ffcf9d);
+          text-decoration-thickness: 9%;
+          text-underline-offset: 11%;
+          text-underline-position: from-font;
+        }
+      }
+    }
+
+    svg.divider {
+      width: 100%;
+      height: auto;
+      stroke: var(--color-secondary);
+    }
+  }
+  .info {
+    display: flex;
+    flex: 3;
+    align-self: stretch;
+    justify-content: center;
+    flex-direction: column;
+    background: var(--color-light);
+    padding: var(--spacing-3xl) var(--spacing-2xl);
+    border-radius: var(--radius-md);
+  }
 }
 
 .error {

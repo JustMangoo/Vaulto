@@ -265,7 +265,7 @@ onMounted(fetchCollections);
 
       select {
         padding: var(--spacing-sm);
-        border-radius: var(--radius-sm);
+        border-radius: var(--radius-xs);
         border: 1px solid var(--color-border);
         background: var(--color-bg);
         color: var(--color-text);
@@ -309,7 +309,7 @@ onMounted(fetchCollections);
         position: absolute;
         bottom: var(--spacing-sm);
         right: var(--spacing-sm);
-        border-radius: var(--radius-sm);
+        border-radius: var(--radius-xs);
 
         .action-dropdown {
           a,
@@ -321,7 +321,7 @@ onMounted(fetchCollections);
             background: none;
             border: none;
             cursor: pointer;
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius-xs);
           }
 
           a:hover,
@@ -343,7 +343,7 @@ onMounted(fetchCollections);
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: var(--radius-sm);
+        border-radius: var(--radius-xs);
       }
     }
   }

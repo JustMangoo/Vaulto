@@ -62,9 +62,9 @@ const variantClass = computed(() => {
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: var(--spacing-sm) var(--spacing-md);
   border: var(--border-width-base) solid var(--color-primary);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
   cursor: pointer;
   font-size: var(--font-size-base);
 }

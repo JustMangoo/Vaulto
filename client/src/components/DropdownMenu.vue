@@ -72,6 +72,6 @@ const menuStyle = computed(() => {
   justify-content: left;
   gap: var(--spacing-xs);
   z-index: 11;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
 }
 </style>

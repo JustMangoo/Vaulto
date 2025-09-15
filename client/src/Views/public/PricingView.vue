@@ -141,16 +141,16 @@ header {
     display: flex;
     gap: var(--spacing-sm);
     padding: var(--spacing-xs);
-    border-radius: calc(var(--radius-sm) + 0.25rem);
+    border-radius: calc(var(--radius-xs) + 0.25rem);
     background-color: var(--color-accent);
 
     .option {
-      padding: var(--spacing-md) var(--spacing-lg);
+      padding: var(--spacing-sm) var(--spacing-md);
       font-weight: var(--font-weight-semibold);
       background-color: transparent;
       transition: all var(--transition-base);
       border: var(--border-width-base) solid transparent;
-      border-radius: var(--radius-sm);
+      border-radius: var(--radius-xs);
 
       &.active {
         background-color: var(--color-primary);

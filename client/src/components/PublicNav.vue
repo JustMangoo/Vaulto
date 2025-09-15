@@ -77,11 +77,16 @@ nav {
 
 .logo-container {
   justify-content: flex-start;
-}
 
-.logo {
-  height: var(--font-size-xl);
-  width: auto;
+  a {
+    display: flex;
+    align-items: stretch;
+    align-self: stretch;
+
+    .logo {
+      width: auto;
+    }
+  }
 }
 
 .action-container {

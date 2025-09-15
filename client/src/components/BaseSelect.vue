@@ -58,7 +58,7 @@ watch(innerValue, (val) => {
 .base-select {
   padding: var(--spacing-sm) var(--spacing-md);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
   background: var(--color-bg);
   color: var(--color-text);
 }

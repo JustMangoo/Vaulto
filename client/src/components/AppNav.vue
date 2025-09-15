@@ -150,7 +150,7 @@ nav {
   cursor: pointer;
   color: var(--color-text);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
 
   .avatar {
     width: 40px;
@@ -183,7 +183,7 @@ nav {
       background: none;
       border: none;
       cursor: pointer;
-      border-radius: var(--radius-sm);
+      border-radius: var(--radius-xs);
     }
 
     a:hover,
@@ -205,7 +205,7 @@ nav {
     padding: calc(var(--spacing-sm) + var(--spacing-xs));
     display: flex;
     gap: var(--spacing-sm);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-xs);
     align-items: center;
     cursor: pointer;
 

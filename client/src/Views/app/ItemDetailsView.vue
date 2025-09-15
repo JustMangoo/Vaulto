@@ -1,7 +1,11 @@
 <template>
   <div v-if="item" class="item-details-view">
     <h1>{{ item.title }}</h1>
-    <img v-if="item.cover" :src="`${apiBase}/${item.cover}`" class="item-cover" />
+    <img
+      v-if="item.cover"
+      :src="`${apiBase}/${item.cover}`"
+      class="item-cover"
+    />
     <div v-for="(value, key) in item" :key="key" class="item-field">
       {{ key }}: {{ value }}
     </div>
@@ -44,7 +48,7 @@ onMounted(async () => {
   .item-field {
     background-color: var(--color-surface-alt);
     padding: var(--spacing-sm);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-xs);
     color: var(--color-text);
   }
 }
