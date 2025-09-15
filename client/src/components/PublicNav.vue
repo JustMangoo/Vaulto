@@ -27,7 +27,8 @@ import BaseButton from "./BaseButton.vue";
 
 <style scoped>
 nav {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   width: 100%;
   padding: 0 var(--border-width-deco) var(--border-width-deco)
     var(--border-width-deco);
@@ -44,34 +45,30 @@ nav {
 .logo-container,
 .action-container {
   display: flex;
-  flex: 0 0 auto;
   padding: var(--spacing-md);
   gap: var(--spacing-md);
   align-items: center;
-  align-self: stretch;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   background: var(--color-light);
 }
 
 .logo-container {
+  justify-self: start;
   img {
     height: 100%;
     width: auto;
   }
 }
 
-.logo-container,
 .action-container {
-  flex: 1;
-  max-width: fit-content;
+  justify-self: end;
 }
+
 ul {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: var(--spacing-lg);
-  flex: 1;
-  align-self: stretch;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   background: var(--color-light);
 }
