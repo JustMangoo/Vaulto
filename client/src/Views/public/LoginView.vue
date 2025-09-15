@@ -78,13 +78,26 @@ const login = async () => {
   align-self: stretch;
   align-items: center;
   gap: var(--border-width-deco);
+  min-height: 50vw;
 
   h1 {
     text-align: left;
   }
 
+  a {
+    font-weight: var(--font-weight-semibold);
+    text-decoration-line: underline;
+    text-decoration-skip-ink: auto;
+    text-decoration-color: var(--color-primary);
+    text-decoration-thickness: 9%;
+    text-underline-offset: 11%;
+    text-underline-position: from-font;
+  }
+
   .form {
     display: flex;
+    align-self: stretch;
+    justify-content: center;
     flex: 2;
     flex-direction: column;
     background: var(--color-accent);
@@ -109,16 +122,6 @@ const login = async () => {
         display: flex;
         width: 100%;
         justify-content: space-between;
-
-        a {
-          font-weight: var(--font-weight-semibold);
-          text-decoration-line: underline;
-          text-decoration-skip-ink: auto;
-          text-decoration-color: var(--color-secondary, #ffcf9d);
-          text-decoration-thickness: 9%;
-          text-underline-offset: 11%;
-          text-underline-position: from-font;
-        }
       }
     }
 

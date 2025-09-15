@@ -2,44 +2,49 @@
   <div id="register-view">
     <div class="form">
       <div class="input-group">
-        <Input
-          v-model="name"
-          autocomplete="username"
-          placeholder="Username"
-          label="Username"
-        />
+        <Input v-model="name" autocomplete="none" label="Username" />
         <Input
           v-model="email"
           type="email"
           autocomplete="email"
-          placeholder="Email"
           label="Email"
         />
         <Input
           v-model="password"
           type="password"
           autocomplete="new-password"
-          placeholder="Password"
           label="Password"
         />
         <Input
           v-model="confirmPassword"
           type="password"
           autocomplete="new-password"
-          placeholder="Confirm Password"
           label="Confirm Password"
         />
         <p v-if="error" class="error">{{ error }}</p>
+        <p class="consent-text">
+          By signing up, you consent to Vaulto's
+          <RouterLink to="/Terms">Terms of Use</RouterLink> and
+          <RouterLink to="/Privacy">Privacy Policy</RouterLink>.
+        </p>
         <BaseButton showText @click="register">Create Account</BaseButton>
       </div>
       <div class="form-footer">
-        <label class="opt-in">
-          <input v-model="emailOptIn" type="checkbox" />
-          <span>
-            I agree to receive emails from Vaulto and I understand I can opt out at any
-            time.
-          </span>
-        </label>
+        <svg
+          width="417"
+          height="8"
+          viewBox="0 0 417 8"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="divider"
+        >
+          <path
+            d="M11.6779 6.16684C-1.32994 3.36434 -14.3752 0.771402 50.031 1.01603C115.467 1.26458 270.265 2.05273 415.667 2.05273"
+            stroke="inherit"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
         <p class="auth-switch">
           Already have an account?
           <RouterLink to="/login">Log in</RouterLink>
@@ -48,8 +53,8 @@
     </div>
     <div class="info">
       <div class="info-content">
-        <h1>
-          Start Your <span>Vault</span>
+        <header>
+          <h1>Start Your <span>Vault</span></h1>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="71"
@@ -65,7 +70,7 @@
               stroke-linecap="round"
             />
           </svg>
-        </h1>
+        </header>
         <p>Create your account and begin saving your first gems.</p>
       </div>
     </div>
@@ -88,24 +93,6 @@ const emailOptIn = ref(false);
 const error = ref("");
 
 const register = async () => {
-  const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{12,}$/;
-  if (!email.value.includes("@")) {
-    error.value = "Email must contain @";
-    return;
-  }
-  if (!passwordRegex.test(password.value)) {
-    error.value =
-      "Password must be at least 12 characters, include an uppercase letter and a number";
-    return;
-  }
-  if (password.value !== confirmPassword.value) {
-    error.value = "Passwords do not match";
-    return;
-  }
-  if (!emailOptIn.value) {
-    error.value = "You must agree to receive emails from Vaulto.";
-    return;
-  }
   error.value = "";
   try {
     await axios.post("/api/auth/register", {
@@ -129,9 +116,20 @@ const register = async () => {
   align-self: stretch;
   align-items: center;
   gap: var(--border-width-deco);
+  min-height: 50vw;
 
   h1 {
     text-align: left;
+  }
+
+  a {
+    font-weight: var(--font-weight-semibold);
+    text-decoration-line: underline;
+    text-decoration-skip-ink: auto;
+    text-decoration-color: var(--color-primary);
+    text-decoration-thickness: 9%;
+    text-underline-offset: 11%;
+    text-underline-position: from-font;
   }
 
   .form {
@@ -148,6 +146,10 @@ const register = async () => {
       align-items: flex-start;
       flex-direction: column;
       gap: var(--spacing-lg);
+      .consent-text {
+        font-size: var(--font-size-sm);
+        color: var(--color-text-secondary);
+      }
     }
 
     .form-footer {
@@ -155,33 +157,14 @@ const register = async () => {
       flex-direction: column;
       gap: var(--spacing-lg);
 
-      .opt-in {
-        display: flex;
-        align-items: flex-start;
-        gap: var(--spacing-md);
-        color: var(--color-dark);
-        font-size: var(--font-size-sm);
-        line-height: 1.5;
-
-        input[type="checkbox"] {
-          margin-top: 0.2rem;
-          accent-color: var(--color-secondary);
-        }
-      }
-
       .auth-switch {
         text-align: left;
-
-        a {
-          font-weight: var(--font-weight-semibold);
-          text-decoration-line: underline;
-          text-decoration-skip-ink: auto;
-          text-decoration-color: var(--color-secondary, #ffcf9d);
-          text-decoration-thickness: 9%;
-          text-underline-offset: 11%;
-          text-underline-position: from-font;
-        }
       }
+    }
+    svg.divider {
+      width: 100%;
+      height: auto;
+      stroke: var(--color-secondary);
     }
   }
 
@@ -198,31 +181,17 @@ const register = async () => {
     .info-content {
       display: flex;
       flex-direction: column;
-      gap: var(--spacing-xl);
 
-      h1 {
-        display: inline-flex;
-        flex-direction: column;
-        font-size: clamp(2.5rem, 4vw, 3.5rem);
-        font-weight: var(--font-weight-semibold);
-        color: var(--color-dark);
-        line-height: 1.1;
-
-        span {
-          color: var(--color-secondary);
-        }
-
-        .info-accent {
-          margin-top: var(--spacing-md);
-          color: var(--color-dark);
-          width: min(12rem, 100%);
-        }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: var(--spacing-sm);
       }
 
-      p {
-        font-size: var(--font-size-lg);
-        color: var(--color-dark);
-        max-width: 26ch;
+      .info-accent {
+        height: 30%;
+        width: auto;
       }
     }
   }
