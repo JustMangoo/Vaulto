@@ -1,7 +1,175 @@
 <template>
-  <div>FAQ</div>
+  <div id="faq-view">
+    <header>
+      <h1>Frequently Asked <span>Questions</span></h1>
+      <div class="faq-nav">
+        <a class="option" href="#getting-started">Getting Started</a>
+        <a class="option" href="#plans-n-pricing">Plans & Pricing</a>
+        <a class="option" href="#features-n-usage">Features & Usage</a>
+        <a class="option" href="#account-n-security">Account & Security</a>
+      </div>
+    </header>
+    <section class="faq-list">
+      <div class="category" id="getting-started">
+        <h3>Getting Started</h3>
+        <div class="question-list">
+          <div class="question-group">
+            <div class="question-heading">
+              <p>What is Vaulto?</p>
+              <ChevronDown />
+            </div>
+            <div class="answer">
+              <p>
+                Vaulto is a secure and user-friendly platform designed to help
+                you store, organize, and manage your digital content and ideas
+                efficiently. Whether you're a creator, professional, or
+                enthusiast, Vaulto provides the tools you need to keep your
+                valuable information safe and easily accessible.
+              </p>
+            </div>
+          </div>
+          <svg
+            width="417"
+            height="8"
+            viewBox="0 0 417 8"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="divider"
+          >
+            <path
+              d="M11.6779 6.16684C-1.32994 3.36434 -14.3752 0.771402 50.031 1.01603C115.467 1.26458 270.265 2.05273 415.667 2.05273"
+              stroke="inherit"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+          <div class="question-group">
+            <div class="question-heading">
+              <p>Is there a free plan?</p>
+              <ChevronDown />
+            </div>
+            <div class="answer">
+              <p>
+                Yes! We offer a free plan that allows you to create up to 3
+                vaults, each capable of holding 25 gems. This plan is perfect
+                for individuals looking to explore our platform and manage a
+                modest amount of content without any cost.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="category" id="plans-n-pricing"></div>
+      <div class="category" id="features-n-usage"></div>
+      <div class="category" id="account-n-security"></div>
+    </section>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ChevronDown } from "lucide-vue-next";
+</script>
 
-<style scoped></style>
+<style scoped>
+#faq-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--border-width-deco);
+}
+
+header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-2xl) 0 var(--spacing-xl) 0;
+  background-color: var(--color-light);
+  border-radius: var(--radius-md);
+
+  .faq-nav {
+    display: flex;
+    gap: var(--spacing-md);
+    background-color: var(--color-secondary);
+    padding: var(--spacing-xs);
+    border-radius: calc(var(--radius-xs) + 0.25rem);
+
+    .option {
+      padding: var(--spacing-sm) var(--spacing-md);
+      font-weight: var(--font-weight-semibold);
+      background-color: transparent;
+      transition: all var(--transition-base);
+      border: var(--border-width-base) solid transparent;
+      border-radius: var(--radius-xs);
+
+      &:hover {
+        cursor: pointer;
+        border: var(--border-width-base) solid var(--color-primary);
+      }
+    }
+  }
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--border-width-deco);
+
+  .category {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-2xl);
+    padding: var(--spacing-2xl);
+    background: var(--color-light);
+    border-radius: var(--radius-md);
+
+    h3 {
+      flex: 2;
+    }
+
+    .question-list {
+      display: flex;
+      flex: 3;
+      flex-direction: column;
+      gap: var(--spacing-xl);
+
+      .divider {
+        stroke: var(--color-accent);
+        width: 100%;
+        height: auto;
+      }
+
+      .question-group {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+        border-radius: var(--radius-sm);
+
+        .question-heading {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          cursor: pointer;
+
+          p {
+            font-weight: var(--font-weight-semibold);
+          }
+
+          svg {
+            width: var(--font-size-lg);
+            height: auto;
+            color: var(--color-dark-2);
+          }
+        }
+
+        .answer {
+          p {
+            color: var(--color-dark-2);
+            line-height: 1.6;
+          }
+        }
+      }
+    }
+  }
+}
+</style>
