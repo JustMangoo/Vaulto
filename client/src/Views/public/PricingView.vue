@@ -142,7 +142,7 @@ header {
     gap: var(--spacing-sm);
     padding: var(--spacing-xs);
     border-radius: calc(var(--radius-xs) + 0.25rem);
-    background-color: var(--color-accent);
+    background-color: var(--color-secondary);
 
     .option {
       padding: var(--spacing-sm) var(--spacing-md);
@@ -185,7 +185,7 @@ header {
       background-color: var(--color-light);
 
       .divider {
-        stroke: var(--color-secondary);
+        stroke: var(--color-accent);
       }
     }
     &:nth-child(2) {
@@ -196,10 +196,10 @@ header {
       }
     }
     &:nth-child(3) {
-      background-color: var(--color-accent);
+      background-color: var(--color-secondary);
 
       .divider {
-        stroke: var(--color-secondary);
+        stroke: var(--color-accent);
       }
     }
 

@@ -136,7 +136,7 @@ const register = async () => {
     display: flex;
     flex: 2;
     flex-direction: column;
-    background: var(--color-accent);
+    background: var(--color-secondary);
     padding: var(--spacing-3xl) var(--spacing-2xl);
     border-radius: var(--radius-md);
     gap: var(--spacing-2xl);
@@ -164,7 +164,7 @@ const register = async () => {
     svg.divider {
       width: 100%;
       height: auto;
-      stroke: var(--color-secondary);
+      stroke: var(--color-accent);
     }
   }
 

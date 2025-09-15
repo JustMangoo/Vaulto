@@ -124,6 +124,6 @@ function close() {
 }
 
 .popup-btn.secondary {
-  background-color: var(--color-secondary);
+  background-color: var(--color-accent);
 }
 </style>

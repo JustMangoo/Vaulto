@@ -121,7 +121,7 @@ p {
   align-items: center;
   align-self: stretch;
   border-radius: var(--radius-md);
-  background: var(--color-accent);
+  background: var(--color-secondary);
 
   .hero-container {
     display: flex;
@@ -197,7 +197,7 @@ p {
     }
 
     .grid-block {
-      background: var(--color-accent);
+      background: var(--color-secondary);
       border-radius: var(--radius-md);
     }
   }
@@ -296,7 +296,7 @@ p {
   .cta-block {
     align-self: stretch;
     border-radius: var(--radius-md);
-    background: var(--color-accent);
+    background: var(--color-secondary);
   }
 
   .cta-button-container {

@@ -32,8 +32,8 @@
   --color-dark-1: #231d17;
   --color-dark-2: #50463b;
   --color-primary: #ffa97f;
-  --color-secondary: #ffcf9d;
-  --color-accent: #fff0e0;
+  --color-secondary: #fff0e0;
+  --color-accent: #ffcf9d;
   --color-success: #2f9d62;
   --color-warning: #f3a712;
   --color-error: #d64b50;
@@ -240,7 +240,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
-  background: var(--color-accent);
+  background: var(--color-secondary);
   padding: var(--spacing-xl);
   border-radius: var(--radius-md);
 }

@@ -155,7 +155,7 @@ nav {
   .avatar {
     width: 40px;
     aspect-ratio: 1/1;
-    background-color: var(--color-secondary);
+    background-color: var(--color-accent);
     border-radius: 50%;
   }
   .user-info {
