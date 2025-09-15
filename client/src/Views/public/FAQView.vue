@@ -16,26 +16,36 @@
           <div
             v-for="(question, questionIndex) in gettingStartedFaqs"
             :key="question.question"
-            class="question-wrapper"
+            class="question-container"
           >
             <div
               class="question-group"
-              :class="{ open: isQuestionExpanded('getting-started', questionIndex) }"
+              :class="{
+                open: isQuestionExpanded('getting-started', questionIndex),
+              }"
             >
               <div
                 class="question-heading"
                 role="button"
                 tabindex="0"
-                :aria-expanded="isQuestionExpanded('getting-started', questionIndex)"
+                :aria-expanded="
+                  isQuestionExpanded('getting-started', questionIndex)
+                "
                 :aria-controls="getAnswerId('getting-started', questionIndex)"
                 @click="toggleQuestion('getting-started', questionIndex)"
-                @keydown.enter.prevent="toggleQuestion('getting-started', questionIndex)"
-                @keydown.space.prevent="toggleQuestion('getting-started', questionIndex)"
+                @keydown.enter.prevent="
+                  toggleQuestion('getting-started', questionIndex)
+                "
+                @keydown.space.prevent="
+                  toggleQuestion('getting-started', questionIndex)
+                "
               >
                 <p>{{ question.question }}</p>
                 <ChevronDown
                   class="chevron"
-                  :class="{ open: isQuestionExpanded('getting-started', questionIndex) }"
+                  :class="{
+                    open: isQuestionExpanded('getting-started', questionIndex),
+                  }"
                   aria-hidden="true"
                 />
               </div>
@@ -43,7 +53,9 @@
                 class="answer"
                 :id="getAnswerId('getting-started', questionIndex)"
                 v-show="isQuestionExpanded('getting-started', questionIndex)"
-                :aria-hidden="!isQuestionExpanded('getting-started', questionIndex)"
+                :aria-hidden="
+                  !isQuestionExpanded('getting-started', questionIndex)
+                "
               >
                 <p>{{ question.answer }}</p>
               </div>
@@ -93,6 +105,24 @@ const gettingStartedFaqs: FaqQuestion[] = [
     question: "Is there a free plan?",
     answer:
       "Yes! We offer a free plan that allows you to create up to 3 vaults, each capable of holding 25 gems. This plan is perfect for individuals looking to explore our platform and manage a modest amount of content without any cost.",
+  },
+];
+
+const plansPricingFaqs: FaqQuestion[] = [
+  {
+    question: "What’s included in the Free vs Pro plan?",
+    answer:
+      "The Free plan includes up to 3 vaults with 25 gems each, basic customization options, and standard support. The Pro plan offers unlimited vaults and gems, advanced personalization features, priority access to new features, and premium support.",
+  },
+  {
+    question: "Do you offer student discounts?",
+    answer:
+      "Yes, we offer a special discount for students. Students can get full access to the Pro plan at a reduced price with a valid student email address.",
+  },
+  {
+    question: "How does the Team plan work?",
+    answer:
+      "The Team plan is designed for groups and organizations. It allows multiple users to collaborate within shared vaults, with each user having their own account. The plan includes team management features and is billed per user.",
   },
 ];
 
@@ -182,12 +212,12 @@ header {
       display: flex;
       flex: 3;
       flex-direction: column;
-      gap: var(--spacing-xl);
+      gap: var(--spacing-md);
 
-      .question-wrapper {
+      .question-container {
         display: flex;
         flex-direction: column;
-        gap: var(--spacing-xl);
+        gap: var(--spacing-md);
       }
 
       .divider {
