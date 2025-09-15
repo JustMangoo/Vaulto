@@ -13,49 +13,57 @@
       <div class="category" id="getting-started">
         <h3>Getting Started</h3>
         <div class="question-list">
-          <div class="question-group">
-            <div class="question-heading">
-              <p>What is Vaulto?</p>
-              <ChevronDown />
-            </div>
-            <div class="answer">
-              <p>
-                Vaulto is a secure and user-friendly platform designed to help
-                you store, organize, and manage your digital content and ideas
-                efficiently. Whether you're a creator, professional, or
-                enthusiast, Vaulto provides the tools you need to keep your
-                valuable information safe and easily accessible.
-              </p>
-            </div>
-          </div>
-          <svg
-            width="417"
-            height="8"
-            viewBox="0 0 417 8"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="divider"
+          <div
+            v-for="(question, questionIndex) in gettingStartedFaqs"
+            :key="question.question"
+            class="question-wrapper"
           >
-            <path
-              d="M11.6779 6.16684C-1.32994 3.36434 -14.3752 0.771402 50.031 1.01603C115.467 1.26458 270.265 2.05273 415.667 2.05273"
-              stroke="inherit"
-              stroke-width="2"
-              stroke-linecap="round"
-            />
-          </svg>
-          <div class="question-group">
-            <div class="question-heading">
-              <p>Is there a free plan?</p>
-              <ChevronDown />
+            <div
+              class="question-group"
+              :class="{ open: isQuestionExpanded('getting-started', questionIndex) }"
+            >
+              <div
+                class="question-heading"
+                role="button"
+                tabindex="0"
+                :aria-expanded="isQuestionExpanded('getting-started', questionIndex)"
+                :aria-controls="getAnswerId('getting-started', questionIndex)"
+                @click="toggleQuestion('getting-started', questionIndex)"
+                @keydown.enter.prevent="toggleQuestion('getting-started', questionIndex)"
+                @keydown.space.prevent="toggleQuestion('getting-started', questionIndex)"
+              >
+                <p>{{ question.question }}</p>
+                <ChevronDown
+                  class="chevron"
+                  :class="{ open: isQuestionExpanded('getting-started', questionIndex) }"
+                  aria-hidden="true"
+                />
+              </div>
+              <div
+                class="answer"
+                :id="getAnswerId('getting-started', questionIndex)"
+                v-show="isQuestionExpanded('getting-started', questionIndex)"
+                :aria-hidden="!isQuestionExpanded('getting-started', questionIndex)"
+              >
+                <p>{{ question.answer }}</p>
+              </div>
             </div>
-            <div class="answer">
-              <p>
-                Yes! We offer a free plan that allows you to create up to 3
-                vaults, each capable of holding 25 gems. This plan is perfect
-                for individuals looking to explore our platform and manage a
-                modest amount of content without any cost.
-              </p>
-            </div>
+            <svg
+              v-if="questionIndex < gettingStartedFaqs.length - 1"
+              width="417"
+              height="8"
+              viewBox="0 0 417 8"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="divider"
+            >
+              <path
+                d="M11.6779 6.16684C-1.32994 3.36434 -14.3752 0.771402 50.031 1.01603C115.467 1.26458 270.265 2.05273 415.667 2.05273"
+                stroke="inherit"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
           </div>
         </div>
       </div>
@@ -68,6 +76,49 @@
 
 <script setup lang="ts">
 import { ChevronDown } from "lucide-vue-next";
+import { ref } from "vue";
+
+type FaqQuestion = {
+  question: string;
+  answer: string;
+};
+
+const gettingStartedFaqs: FaqQuestion[] = [
+  {
+    question: "What is Vaulto?",
+    answer:
+      "Vaulto is a secure and user-friendly platform designed to help you store, organize, and manage your digital content and ideas efficiently. Whether you're a creator, professional, or enthusiast, Vaulto provides the tools you need to keep your valuable information safe and easily accessible.",
+  },
+  {
+    question: "Is there a free plan?",
+    answer:
+      "Yes! We offer a free plan that allows you to create up to 3 vaults, each capable of holding 25 gems. This plan is perfect for individuals looking to explore our platform and manage a modest amount of content without any cost.",
+  },
+];
+
+const expandedQuestions = ref<Set<string>>(new Set());
+
+const getQuestionKey = (categoryId: string, questionIndex: number) =>
+  `${categoryId}-${questionIndex}`;
+
+const getAnswerId = (categoryId: string, questionIndex: number) =>
+  `answer-${categoryId}-${questionIndex}`;
+
+const isQuestionExpanded = (categoryId: string, questionIndex: number) =>
+  expandedQuestions.value.has(getQuestionKey(categoryId, questionIndex));
+
+const toggleQuestion = (categoryId: string, questionIndex: number) => {
+  const key = getQuestionKey(categoryId, questionIndex);
+  const updatedExpandedQuestions = new Set(expandedQuestions.value);
+
+  if (updatedExpandedQuestions.has(key)) {
+    updatedExpandedQuestions.delete(key);
+  } else {
+    updatedExpandedQuestions.add(key);
+  }
+
+  expandedQuestions.value = updatedExpandedQuestions;
+};
 </script>
 
 <style scoped>
@@ -133,6 +184,12 @@ header {
       flex-direction: column;
       gap: var(--spacing-xl);
 
+      .question-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-xl);
+      }
+
       .divider {
         stroke: var(--color-accent);
         width: 100%;
@@ -155,10 +212,15 @@ header {
             font-weight: var(--font-weight-semibold);
           }
 
-          svg {
+          .chevron {
             width: var(--font-size-lg);
             height: auto;
             color: var(--color-dark-2);
+            transition: transform var(--transition-base);
+          }
+
+          .chevron.open {
+            transform: rotate(180deg);
           }
         }
 
