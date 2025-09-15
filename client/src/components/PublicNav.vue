@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <div class="logo-container">
+    <div ref="logoContainer" class="logo-container">
       <router-link :to="{ name: 'Home' }">
         <img src="@/assets/Temp-Logo.svg" alt="Vaulto Logo" />
       </router-link>
@@ -10,7 +10,7 @@
       <router-link :to="{ name: 'Pricing' }"><li>Pricing</li></router-link>
       <router-link :to="{ name: 'FAQ' }"><li>FAQ</li></router-link>
     </ul>
-    <div class="action-container">
+    <div ref="actionContainer" class="action-container">
       <router-link :to="{ name: 'Login' }">
         <BaseButton variant="secondary">Log in</BaseButton>
       </router-link>
@@ -22,16 +22,40 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from "vue";
 import BaseButton from "./BaseButton.vue";
+
+const logoContainer = ref<HTMLElement | null>(null);
+const actionContainer = ref<HTMLElement | null>(null);
+
+let resizeObserver: ResizeObserver;
+
+const updateLogoWidth = () => {
+  if (logoContainer.value && actionContainer.value) {
+    logoContainer.value.style.width = `${actionContainer.value.offsetWidth}px`;
+  }
+};
+
+onMounted(() => {
+  if (actionContainer.value) {
+    resizeObserver = new ResizeObserver(updateLogoWidth);
+    resizeObserver.observe(actionContainer.value);
+    updateLogoWidth();
+  }
+});
+
+onUnmounted(() => {
+  resizeObserver?.disconnect();
+});
 </script>
 
 <style scoped>
 nav {
   display: flex;
+  align-items: center;
   width: 100%;
   padding: 0 var(--border-width-deco) var(--border-width-deco)
     var(--border-width-deco);
-  align-items: center;
   gap: var(--border-width-deco);
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   background: var(--color-bg);
@@ -44,34 +68,31 @@ nav {
 .logo-container,
 .action-container {
   display: flex;
-  flex: 0 0 auto;
   padding: var(--spacing-md);
   gap: var(--spacing-md);
   align-items: center;
-  align-self: stretch;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   background: var(--color-light);
 }
 
 .logo-container {
+  justify-content: flex-start;
   img {
     height: 100%;
     width: auto;
   }
 }
 
-.logo-container,
 .action-container {
-  flex: 1;
-  max-width: fit-content;
+  justify-content: flex-end;
 }
+
 ul {
   display: flex;
+  flex: 1;
   justify-content: center;
   align-items: center;
   gap: var(--spacing-lg);
-  flex: 1;
-  align-self: stretch;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   background: var(--color-light);
 }
