@@ -80,8 +80,7 @@ nav {
 }
 
 .logo {
-  display: block;
-  height: 100%;
+  height: var(--font-size-xl);
   width: auto;
 }
 
