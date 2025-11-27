@@ -1,7 +1,6 @@
 <template>
   <div>
     <router-view />
-
     <UnderDevelopmentPopup v-model="showWarning" />
   </div>
 </template>

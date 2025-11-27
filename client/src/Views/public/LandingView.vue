@@ -132,11 +132,6 @@ p {
     align-items: center;
     gap: var(--spacing-xl);
     align-self: stretch;
-    background: radial-gradient(
-      50% 50% at 50% 50%,
-      rgba(255, 240, 224, 0) 20.67%,
-      rgba(255, 240, 224, 0.8) 100%
-    );
     .tagline {
       padding: var(--spacing-xs) var(--spacing-sm);
       border-radius: var(--radius-md);
@@ -260,11 +255,21 @@ p {
         }
       }
 
-      .roadmap-icon:nth-child(even) {
+      .roadmap-icon:nth-child(1) {
+        background: var(--color-accent-yellow);
+        margin-top: -6.5vw;
+      }
+      .roadmap-icon:nth-child(2) {
+        background: var(--color-accent-red);
         margin-top: 6.5vw;
       }
-      .roadmap-icon:nth-child(odd) {
+      .roadmap-icon:nth-child(3) {
+        background: var(--color-accent-purple);
         margin-top: -6.5vw;
+      }
+      .roadmap-icon:nth-child(4) {
+        background: var(--color-accent-green);
+        margin-top: 6.5vw;
       }
     }
   }
@@ -320,7 +325,7 @@ p {
 
       p {
         font-family: var(--font-family-display);
-        color: var(--color-dark-1);
+        color: var(--color-light);
         font-size: var(--font-size-xl);
         font-weight: var(--font-weight-bold);
         text-align: center;

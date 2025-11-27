@@ -71,7 +71,33 @@ const variantClass = computed(() => {
 
 .btn-primary {
   background-color: var(--color-primary);
-  color: var(--color-text);
+  color: var(--color-light);
+  transition: var(--transition-base);
+  background-size: 300% 300%;
+}
+
+.btn-primary:hover {
+  background-image: linear-gradient(
+    45deg,
+    var(--color-accent-yellow),
+    var(--color-accent-red),
+    var(--color-accent-purple),
+    var(--color-accent-green)
+  );
+  animation: gradient-animation 3s ease infinite;
+  border-color: transparent;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 .btn-secondary {
   background-color: var(--color-light);

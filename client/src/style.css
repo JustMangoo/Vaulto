@@ -28,15 +28,24 @@
     var(--size-container) / (var(--size-container-ideal) / var(--size-unit))
   );
   /* Colors */
-  --color-light: #fffffd;
-  --color-dark-1: #231d17;
-  --color-dark-2: #50463b;
-  --color-primary: #ffa97f;
-  --color-secondary: #fff0e0;
-  --color-accent: #ffcf9d;
-  --color-success: #2f9d62;
-  --color-warning: #f3a712;
-  --color-error: #d64b50;
+  --color-accent-yellow: #FFCB5C;
+  --color-accent-red: #FF6E61;
+  --color-accent-purple: #B399B5;
+  --color-accent-green: #88D8B0;
+
+  --color-light: #ffffff;
+  --color-dark-1: #000000;
+  --color-dark-2: #1a1a1a;
+  
+  --color-primary: var(--color-dark-1);
+  --color-secondary: var(--color-light);
+  --color-accent: var(--color-accent-red);
+  
+  --color-success: var(--color-accent-green);
+  --color-warning: var(--color-accent-yellow);
+  --color-error: var(--color-accent-red);
+
+  --gradient-brand: linear-gradient(135deg, #FFCB5C, #FF6E61, #B399B5, #88D8B0);
 
   --color-bg: var(--color-dark-2);
   --color-text: var(--color-dark-1);
@@ -148,6 +157,10 @@ h1.display {
   span {
     font-family: var(--font-family-accent);
     font-weight: var(--font-weight-normal);
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 
