@@ -1,34 +1,100 @@
 <script setup lang="ts">
-import type { TooltipContentEmits, TooltipContentProps } from "reka-ui"
-import type { HTMLAttributes } from "vue"
-import { reactiveOmit } from "@vueuse/core"
-import { TooltipArrow, TooltipContent, TooltipPortal, useForwardPropsEmits } from "reka-ui"
-import { cn } from "@/lib/utils"
+import type { HTMLAttributes } from 'vue'
+import { computed, inject, ref } from 'vue'
+import { useFloatingPosition, type FloatingAlign, type FloatingSide } from '@/composables/useFloatingPosition'
+import { cn } from '@/lib/utils'
+import { TOOLTIP_INJECTION_KEY } from './context'
 
-defineOptions({
-  inheritAttrs: false,
+const props = withDefaults(defineProps<{
+    class?: HTMLAttributes['class']
+    side?: FloatingSide
+    align?: FloatingAlign
+    sideOffset?: number
+    alignOffset?: number
+    hidden?: boolean
+}>(), {
+    side: 'top',
+    align: 'center',
+    sideOffset: 4,
+    alignOffset: 0,
+    hidden: false,
 })
 
-const props = withDefaults(defineProps<TooltipContentProps & { class?: HTMLAttributes["class"] }>(), {
-  sideOffset: 4,
-})
+const ctx = inject(TOOLTIP_INJECTION_KEY)
+if (!ctx) throw new Error('TooltipContent must be used within a Tooltip')
 
-const emits = defineEmits<TooltipContentEmits>()
+const contentEl = ref<HTMLElement | null>(null)
 
-const delegatedProps = reactiveOmit(props, "class")
-const forwarded = useForwardPropsEmits(delegatedProps, emits)
+const { style, placedSide } = useFloatingPosition(ctx.triggerEl, contentEl, () => ({
+    side: props.side,
+    align: props.align,
+    sideOffset: props.sideOffset,
+    alignOffset: props.alignOffset,
+}))
+
+const shouldRender = computed(() => ctx!.open.value && !props.hidden)
 </script>
 
 <template>
-  <TooltipPortal>
-    <TooltipContent
-      data-slot="tooltip-content"
-      v-bind="{ ...forwarded, ...$attrs }"
-      :class="cn('bg-foreground text-background animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-fit rounded-md px-3 py-1.5 text-xs text-balance', props.class)"
-    >
-      <slot />
-
-      <TooltipArrow class="bg-foreground fill-foreground z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px]" />
-    </TooltipContent>
-  </TooltipPortal>
+    <Teleport to="body">
+        <div
+            v-if="shouldRender"
+            ref="contentEl"
+            data-slot="tooltip-content"
+            role="tooltip"
+            :data-side="placedSide"
+            class="tooltip-content"
+            :class="cn(props.class)"
+            :style="style"
+        >
+            <slot />
+            <div class="tooltip-content__arrow" :data-side="placedSide" />
+        </div>
+    </Teleport>
 </template>
+
+<style lang="scss" scoped>
+.tooltip-content {
+    z-index: 50;
+    width: fit-content;
+    border-radius: var(--radius-md);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    text-wrap: balance;
+    background: var(--foreground);
+    color: var(--background);
+
+    &__arrow {
+        position: absolute;
+        z-index: 50;
+        width: 0.625rem;
+        height: 0.625rem;
+        border-radius: 2px;
+        background: var(--foreground);
+
+        &[data-side='top'] {
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        &[data-side='bottom'] {
+            top: -3px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        &[data-side='left'] {
+            right: -3px;
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        &[data-side='right'] {
+            left: -3px;
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+        }
+    }
+}
+</style>

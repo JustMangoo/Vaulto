@@ -15,8 +15,16 @@ const forwarded = useForwardProps(delegatedProps)
   <div
     data-slot="input-otp-group"
     v-bind="forwarded"
-    :class="cn('flex items-center', props.class)"
+    class="input-otp-group"
+    :class="cn(props.class)"
   >
     <slot />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.input-otp-group {
+    display: flex;
+    align-items: center;
+}
+</style>

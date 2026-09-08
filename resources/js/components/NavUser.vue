@@ -28,15 +28,15 @@ const { isMobile, state } = useSidebar();
                 <DropdownMenuTrigger as-child>
                     <SidebarMenuButton
                         size="lg"
-                        class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                        class="nav-user-trigger"
                         data-test="sidebar-menu-button"
                     >
                         <UserInfo :user="user" />
-                        <ChevronsUpDown class="ml-auto size-4" />
+                        <ChevronsUpDown class="nav-user-trigger__chevron" />
                     </SidebarMenuButton>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
-                    class="w-(--reka-dropdown-menu-trigger-width) min-w-56 rounded-lg"
+                    class="nav-user-menu"
                     :side="
                         isMobile
                             ? 'bottom'
@@ -53,3 +53,23 @@ const { isMobile, state } = useSidebar();
         </SidebarMenuItem>
     </SidebarMenu>
 </template>
+
+<style lang="scss" scoped>
+.nav-user-trigger {
+    &[data-state='open'] {
+        background: var(--sidebar-accent);
+        color: var(--sidebar-accent-foreground);
+    }
+
+    &__chevron {
+        margin-left: auto;
+        width: 1rem;
+        height: 1rem;
+    }
+}
+
+.nav-user-menu {
+    min-width: 14rem;
+    border-radius: var(--radius-lg);
+}
+</style>

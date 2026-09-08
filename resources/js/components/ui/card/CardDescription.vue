@@ -10,8 +10,17 @@ const props = defineProps<{
 <template>
   <p
     data-slot="card-description"
-    :class="cn('text-muted-foreground text-sm', props.class)"
+    class="card-description"
+    :class="cn(props.class)"
   >
     <slot />
   </p>
 </template>
+
+<style lang="scss" scoped>
+.card-description {
+    grid-column: 1;
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+}
+</style>

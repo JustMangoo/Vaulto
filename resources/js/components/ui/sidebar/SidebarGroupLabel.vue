@@ -15,11 +15,30 @@ const props = defineProps<PrimitiveProps & {
     data-sidebar="group-label"
     :as="as"
     :as-child="asChild"
-    :class="cn(
-      'text-sidebar-foreground/70 ring-sidebar-ring flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0',
-      'group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0',
-      props.class)"
+    class="sidebar-group-label"
+    :class="cn(props.class)"
   >
     <slot />
   </Primitive>
 </template>
+
+<style lang="scss" scoped>
+.sidebar-group-label {
+    display: flex;
+    height: 2rem;
+    flex-shrink: 0;
+    align-items: center;
+    border-radius: var(--radius-md);
+    padding: 0 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--sidebar-foreground);
+    opacity: 0.7;
+
+    :deep(svg) {
+        width: 1rem;
+        height: 1rem;
+        flex-shrink: 0;
+    }
+}
+</style>

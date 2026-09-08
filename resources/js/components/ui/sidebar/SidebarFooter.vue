@@ -11,8 +11,18 @@ const props = defineProps<{
   <div
     data-slot="sidebar-footer"
     data-sidebar="footer"
-    :class="cn('flex flex-col gap-2 p-2', props.class)"
+    class="sidebar-footer"
+    :class="cn(props.class)"
   >
     <slot />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
+</style>

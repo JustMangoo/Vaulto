@@ -22,15 +22,60 @@ const props = withDefaults(defineProps<PrimitiveProps & {
     :as-child="asChild"
     :data-size="size"
     :data-active="isActive"
-    :class="cn(
-      'text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground active:bg-sidebar-accent active:text-sidebar-accent-foreground [&>svg]:text-sidebar-accent-foreground flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 outline-hidden focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0',
-      'data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground',
-      size === 'sm' && 'text-xs',
-      size === 'md' && 'text-sm',
-      'group-data-[collapsible=icon]:hidden',
-      props.class,
-    )"
+    class="sidebar-menu-sub-button"
+    :class="cn(props.class)"
   >
     <slot />
   </Primitive>
 </template>
+
+<style lang="scss" scoped>
+.sidebar-menu-sub-button {
+    display: flex;
+    height: 1.75rem;
+    min-width: 0;
+    align-items: center;
+    gap: 0.5rem;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    padding: 0 0.5rem;
+    color: var(--sidebar-foreground);
+    text-decoration: none;
+
+    &:hover {
+        background: var(--sidebar-accent);
+        color: var(--sidebar-accent-foreground);
+    }
+
+    &[data-active='true'] {
+        background: var(--sidebar-accent);
+        color: var(--sidebar-accent-foreground);
+    }
+
+    &[data-size='sm'] {
+        font-size: 0.75rem;
+    }
+
+    &[data-size='md'] {
+        font-size: 0.875rem;
+    }
+
+    &[aria-disabled='true'] {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    :deep(svg) {
+        width: 1rem;
+        height: 1rem;
+        flex-shrink: 0;
+        color: var(--sidebar-accent-foreground);
+    }
+
+    :deep(span:last-child) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+</style>

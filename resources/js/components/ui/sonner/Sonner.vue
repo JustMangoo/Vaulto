@@ -11,7 +11,8 @@ const props = defineProps<ToasterProps>()
 
 <template>
   <Sonner
-    :class="cn('toaster group', props.class)"
+    class="toaster"
+    :class="cn(props.class)"
     :style="{
       '--normal-bg': 'var(--popover)',
       '--normal-text': 'var(--popover-foreground)',
@@ -21,24 +22,43 @@ const props = defineProps<ToasterProps>()
     v-bind="props"
   >
     <template #success-icon>
-      <CircleCheckIcon class="size-4" />
+      <CircleCheckIcon class="toaster__icon" />
     </template>
     <template #info-icon>
-      <InfoIcon class="size-4" />
+      <InfoIcon class="toaster__icon" />
     </template>
     <template #warning-icon>
-      <TriangleAlertIcon class="size-4" />
+      <TriangleAlertIcon class="toaster__icon" />
     </template>
     <template #error-icon>
-      <OctagonXIcon class="size-4" />
+      <OctagonXIcon class="toaster__icon" />
     </template>
     <template #loading-icon>
       <div>
-        <Loader2Icon class="size-4 animate-spin" />
+        <Loader2Icon class="toaster__icon toaster__icon--spin" />
       </div>
     </template>
     <template #close-icon>
-      <XIcon class="size-4" />
+      <XIcon class="toaster__icon" />
     </template>
   </Sonner>
 </template>
+
+<style lang="scss" scoped>
+.toaster {
+    &__icon {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    &__icon--spin {
+        animation: toaster-spin 1s linear infinite;
+    }
+}
+
+@keyframes toaster-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+</style>

@@ -6,14 +6,47 @@ const name = usePage().props.name;
 </script>
 
 <template>
-    <div
-        class="flex aspect-square size-8 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground"
-    >
-        <AppLogoIcon class="size-5 fill-current text-white dark:text-black" />
+    <div class="app-logo-icon">
+        <AppLogoIcon class="app-logo-icon__glyph" />
     </div>
-    <div class="ml-1 grid flex-1 text-left text-sm">
-        <span class="mb-0.5 truncate leading-tight font-semibold">{{
-            name
-        }}</span>
+    <div class="app-logo-text">
+        <span class="app-logo-text__name">{{ name }}</span>
     </div>
 </template>
+
+<style lang="scss" scoped>
+.app-logo-icon {
+    display: flex;
+    aspect-ratio: 1 / 1;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    background: var(--sidebar-primary);
+    color: var(--sidebar-primary-foreground);
+
+    &__glyph {
+        width: 1.25rem;
+        height: 1.25rem;
+        fill: currentColor;
+    }
+}
+
+.app-logo-text {
+    margin-left: 0.25rem;
+    display: grid;
+    flex: 1;
+    text-align: left;
+    font-size: 0.875rem;
+
+    &__name {
+        margin-bottom: 0.125rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 1.25;
+        font-weight: 600;
+    }
+}
+</style>

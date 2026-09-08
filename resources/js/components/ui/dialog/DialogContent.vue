@@ -32,18 +32,15 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     <DialogContent
       data-slot="dialog-content"
       v-bind="{ ...$attrs, ...forwarded }"
-      :class="
-        cn(
-          'bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg',
-          props.class,
-        )"
+      class="dialog-content"
+      :class="cn(props.class)"
     >
       <slot />
 
       <DialogClose
         v-if="showCloseButton"
         data-slot="dialog-close"
-        class="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+        class="dialog-content__close"
       >
         <X />
         <span class="sr-only">Close</span>
@@ -51,3 +48,62 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     </DialogContent>
   </DialogPortal>
 </template>
+
+<style lang="scss" scoped>
+.dialog-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 50;
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+    max-width: calc(100% - 2rem);
+    transform: translate(-50%, -50%);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    background: var(--background);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 10%);
+
+    @media (min-width: 640px) {
+        max-width: 32rem;
+    }
+
+    &__close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 2px;
+        background: transparent;
+        padding: 0;
+        opacity: 0.7;
+        cursor: pointer;
+        transition: opacity 150ms;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &:focus-visible {
+            box-shadow: 0 0 0 2px var(--ring);
+        }
+
+        &[data-state='open'] {
+            background: var(--accent);
+            color: var(--muted-foreground);
+        }
+
+        :deep(svg) {
+            width: 1rem;
+            height: 1rem;
+            flex-shrink: 0;
+            pointer-events: none;
+        }
+    }
+}
+</style>

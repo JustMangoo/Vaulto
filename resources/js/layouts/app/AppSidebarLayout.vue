@@ -18,10 +18,17 @@ withDefaults(defineProps<Props>(), {
 <template>
     <AppShell variant="sidebar">
         <AppSidebar />
-        <AppContent variant="sidebar" class="min-w-0 overflow-x-clip">
+        <AppContent variant="sidebar" class="app-sidebar-layout__content">
             <AppSidebarHeader :breadcrumbs="breadcrumbs" />
             <slot />
         </AppContent>
         <Toaster />
     </AppShell>
 </template>
+
+<style lang="scss" scoped>
+.app-sidebar-layout__content {
+    min-width: 0;
+    overflow-x: clip;
+}
+</style>

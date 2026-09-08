@@ -10,8 +10,15 @@ const props = defineProps<{
 <template>
   <div
     data-slot="card-content"
-    :class="cn('px-6', props.class)"
+    class="card-content"
+    :class="cn(props.class)"
   >
     <slot />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.card-content {
+    padding: 0 1.5rem;
+}
+</style>

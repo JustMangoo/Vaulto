@@ -14,8 +14,18 @@ const delegatedProps = reactiveOmit(props, "class")
   <DialogOverlay
     data-slot="dialog-overlay"
     v-bind="delegatedProps"
-    :class="cn('data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80', props.class)"
+    class="dialog-overlay"
+    :class="cn(props.class)"
   >
     <slot />
   </DialogOverlay>
 </template>
+
+<style lang="scss" scoped>
+.dialog-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: rgb(0 0 0 / 80%);
+}
+</style>

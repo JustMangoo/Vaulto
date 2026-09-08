@@ -19,17 +19,61 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     v-slot="slotProps"
     data-slot="checkbox"
     v-bind="forwarded"
-    :class="
-      cn('peer border-input data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',
-         props.class)"
+    class="checkbox"
+    :class="cn(props.class)"
   >
     <CheckboxIndicator
       data-slot="checkbox-indicator"
-      class="grid place-content-center text-current transition-none"
+      class="checkbox__indicator"
     >
       <slot v-bind="slotProps">
-        <Check class="size-3.5" />
+        <Check class="checkbox__icon" />
       </slot>
     </CheckboxIndicator>
   </CheckboxRoot>
 </template>
+
+<style lang="scss" scoped>
+.checkbox {
+    display: inline-flex;
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    border: 1px solid var(--input);
+    background: transparent;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
+    cursor: pointer;
+    transition: box-shadow 150ms;
+
+    &:focus-visible {
+        outline: none;
+        border-color: var(--ring);
+        box-shadow: 0 0 0 3px var(--ring);
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    &[data-state='checked'] {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: var(--primary-foreground);
+    }
+
+    &__indicator {
+        display: grid;
+        place-content: center;
+        color: currentColor;
+    }
+
+    &__icon {
+        width: 0.875rem;
+        height: 0.875rem;
+    }
+}
+</style>

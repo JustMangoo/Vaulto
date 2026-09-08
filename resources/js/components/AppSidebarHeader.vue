@@ -14,14 +14,41 @@ withDefaults(
 </script>
 
 <template>
-    <header
-        class="flex h-16 shrink-0 items-center gap-2 border-b border-sidebar-border/70 px-6 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 md:px-4"
-    >
-        <div class="flex items-center gap-2">
-            <SidebarTrigger class="-ml-1" />
+    <header class="app-sidebar-header">
+        <div class="app-sidebar-header__left">
+            <SidebarTrigger class="app-sidebar-header__trigger" />
             <template v-if="breadcrumbs && breadcrumbs.length > 0">
                 <Breadcrumbs :breadcrumbs="breadcrumbs" />
             </template>
         </div>
     </header>
 </template>
+
+<style lang="scss" scoped>
+.app-sidebar-header {
+    display: flex;
+    height: 4rem;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--sidebar-border);
+    padding: 0 1.5rem;
+    transition:
+        width 150ms linear,
+        height 150ms linear;
+
+    @media (min-width: 768px) {
+        padding: 0 1rem;
+    }
+
+    &__left {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    &__trigger {
+        margin-left: -0.25rem;
+    }
+}
+</style>

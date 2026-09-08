@@ -9,8 +9,17 @@ const props = defineProps<AvatarImageProps>()
   <AvatarImage
     data-slot="avatar-image"
     v-bind="props"
-    class="aspect-square size-full"
+    class="avatar-image"
   >
     <slot />
   </AvatarImage>
 </template>
+
+<style lang="scss" scoped>
+.avatar-image {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+</style>

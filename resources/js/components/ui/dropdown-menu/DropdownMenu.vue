@@ -1,19 +1,21 @@
 <script setup lang="ts">
-import type { DropdownMenuRootEmits, DropdownMenuRootProps } from "reka-ui"
-import { DropdownMenuRoot, useForwardPropsEmits } from "reka-ui"
+// Root: holds open state and the trigger element reference. Renders no DOM
+// element of its own (matches the original reka-ui behaviour), so it never
+// interferes with layouts that expect Trigger's child to be their only child
+// (e.g. SidebarMenuItem in NavUser.vue).
+import { provide, ref } from 'vue'
+import { DROPDOWN_MENU_INJECTION_KEY } from './context'
 
-const props = defineProps<DropdownMenuRootProps>()
-const emits = defineEmits<DropdownMenuRootEmits>()
+const open = ref(false)
+const triggerEl = ref<HTMLElement | null>(null)
 
-const forwarded = useForwardPropsEmits(props, emits)
+function setOpen(value: boolean) {
+    open.value = value
+}
+
+provide(DROPDOWN_MENU_INJECTION_KEY, { open, setOpen, triggerEl })
 </script>
 
 <template>
-  <DropdownMenuRoot
-    v-slot="slotProps"
-    data-slot="dropdown-menu"
-    v-bind="forwarded"
-  >
-    <slot v-bind="slotProps" />
-  </DropdownMenuRoot>
+    <slot />
 </template>

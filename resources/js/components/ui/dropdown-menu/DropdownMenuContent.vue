@@ -1,39 +1,76 @@
 <script setup lang="ts">
-import type { DropdownMenuContentEmits, DropdownMenuContentProps } from "reka-ui"
-import type { HTMLAttributes } from "vue"
-import { reactiveOmit } from "@vueuse/core"
-import {
-  DropdownMenuContent,
-  DropdownMenuPortal,
-  useForwardPropsEmits,
-} from "reka-ui"
-import { cn } from "@/lib/utils"
+import type { HTMLAttributes } from 'vue'
+import { inject, nextTick, ref, watch } from 'vue'
+import { useDismissable } from '@/composables/useDismissable'
+import { useFloatingPosition, type FloatingAlign, type FloatingSide } from '@/composables/useFloatingPosition'
+import { cn } from '@/lib/utils'
+import { DROPDOWN_MENU_INJECTION_KEY } from './context'
 
-defineOptions({
-  inheritAttrs: false,
+const props = withDefaults(defineProps<{
+    class?: HTMLAttributes['class']
+    side?: FloatingSide
+    align?: FloatingAlign
+    sideOffset?: number
+    alignOffset?: number
+}>(), {
+    side: 'bottom',
+    align: 'center',
+    sideOffset: 4,
+    alignOffset: 0,
 })
 
-const props = withDefaults(
-  defineProps<DropdownMenuContentProps & { class?: HTMLAttributes["class"] }>(),
-  {
-    sideOffset: 4,
-  },
-)
-const emits = defineEmits<DropdownMenuContentEmits>()
+const ctx = inject(DROPDOWN_MENU_INJECTION_KEY)
+if (!ctx) throw new Error('DropdownMenuContent must be used within a DropdownMenu')
 
-const delegatedProps = reactiveOmit(props, "class")
+const contentEl = ref<HTMLElement | null>(null)
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits)
+const { style, placedSide } = useFloatingPosition(ctx.triggerEl, contentEl, () => ({
+    side: props.side,
+    align: props.align,
+    sideOffset: props.sideOffset,
+    alignOffset: props.alignOffset,
+}))
+
+useDismissable(contentEl, [ctx.triggerEl], () => ctx!.setOpen(false))
+
+watch(() => ctx!.open.value, async (isOpen) => {
+    if (!isOpen) return
+    await nextTick()
+    contentEl.value?.focus()
+})
 </script>
 
 <template>
-  <DropdownMenuPortal>
-    <DropdownMenuContent
-      data-slot="dropdown-menu-content"
-      v-bind="{ ...$attrs, ...forwarded }"
-      :class="cn('bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 max-h-(--reka-dropdown-menu-content-available-height) min-w-[8rem] origin-(--reka-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border p-1 shadow-md', props.class)"
-    >
-      <slot />
-    </DropdownMenuContent>
-  </DropdownMenuPortal>
+    <Teleport to="body">
+        <div
+            v-if="ctx.open.value"
+            ref="contentEl"
+            data-slot="dropdown-menu-content"
+            data-state="open"
+            :data-side="placedSide"
+            role="menu"
+            tabindex="-1"
+            class="dropdown-menu-content"
+            :class="cn(props.class)"
+            :style="style"
+        >
+            <slot />
+        </div>
+    </Teleport>
 </template>
+
+<style lang="scss" scoped>
+.dropdown-menu-content {
+    z-index: 50;
+    min-width: 8rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    padding: 0.25rem;
+    background: var(--popover);
+    color: var(--popover-foreground);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%);
+    outline: none;
+}
+</style>

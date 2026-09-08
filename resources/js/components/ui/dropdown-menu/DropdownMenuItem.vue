@@ -1,31 +1,92 @@
 <script setup lang="ts">
-import type { DropdownMenuItemProps } from "reka-ui"
-import type { HTMLAttributes } from "vue"
-import { reactiveOmit } from "@vueuse/core"
-import { DropdownMenuItem, useForwardProps } from "reka-ui"
-import { cn } from "@/lib/utils"
+import type { HTMLAttributes } from 'vue'
+import { inject } from 'vue'
+import Slot from '@/components/ui/_shared/Slot.vue'
+import { cn } from '@/lib/utils'
+import { DROPDOWN_MENU_INJECTION_KEY } from './context'
 
-const props = withDefaults(defineProps<DropdownMenuItemProps & {
-  class?: HTMLAttributes["class"]
-  inset?: boolean
-  variant?: "default" | "destructive"
+const props = withDefaults(defineProps<{
+    class?: HTMLAttributes['class']
+    asChild?: boolean
+    inset?: boolean
+    variant?: 'default' | 'destructive'
+    disabled?: boolean
 }>(), {
-  variant: "default",
+    asChild: false,
+    variant: 'default',
 })
 
-const delegatedProps = reactiveOmit(props, "inset", "variant", "class")
+const ctx = inject(DROPDOWN_MENU_INJECTION_KEY)
+if (!ctx) throw new Error('DropdownMenuItem must be used within a DropdownMenu')
 
-const forwardedProps = useForwardProps(delegatedProps)
+function handleClick() {
+    if (props.disabled) return
+    // Let the click (e.g. an inertia <Link>) fire first, then close the menu.
+    ctx!.setOpen(false)
+}
 </script>
 
 <template>
-  <DropdownMenuItem
-    data-slot="dropdown-menu-item"
-    :data-inset="inset ? '' : undefined"
-    :data-variant="variant"
-    v-bind="forwardedProps"
-    :class="cn('focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*=\'text-\'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4', props.class)"
-  >
-    <slot />
-  </DropdownMenuItem>
+    <component
+        :is="asChild ? Slot : 'div'"
+        data-slot="dropdown-menu-item"
+        role="menuitem"
+        :tabindex="disabled ? undefined : -1"
+        :data-disabled="disabled ? '' : undefined"
+        :data-inset="inset ? '' : undefined"
+        :data-variant="variant"
+        class="dropdown-menu-item"
+        :class="cn(props.class)"
+        @click="handleClick"
+    >
+        <slot />
+    </component>
 </template>
+
+<style lang="scss" scoped>
+.dropdown-menu-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 2px;
+    padding: 0.375rem 0.5rem;
+    font-size: 0.875rem;
+    outline: none;
+    cursor: default;
+    user-select: none;
+
+    &:focus,
+    &:hover {
+        background: var(--accent);
+        color: var(--accent-foreground);
+    }
+
+    &[data-disabled] {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    &[data-inset] {
+        padding-left: 2rem;
+    }
+
+    &[data-variant='destructive'] {
+        color: var(--destructive);
+
+        &:focus,
+        &:hover {
+            background: var(--destructive);
+            color: white;
+        }
+    }
+
+    :deep(svg) {
+        width: 1rem;
+        height: 1rem;
+        flex-shrink: 0;
+        pointer-events: none;
+        color: var(--muted-foreground);
+    }
+}
+</style>

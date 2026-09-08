@@ -11,8 +11,20 @@ const props = defineProps<{
   <div
     data-slot="sidebar-group"
     data-sidebar="group"
-    :class="cn('relative flex w-full min-w-0 flex-col p-2', props.class)"
+    class="sidebar-group"
+    :class="cn(props.class)"
   >
     <slot />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.sidebar-group {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    flex-direction: column;
+    padding: 0.5rem;
+}
+</style>

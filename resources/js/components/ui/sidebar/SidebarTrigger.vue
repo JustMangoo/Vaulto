@@ -18,7 +18,8 @@ const { isMobile, state, toggleSidebar } = useSidebar()
     data-slot="sidebar-trigger"
     variant="ghost"
     size="icon"
-    :class="cn('h-7 w-7', props.class)"
+    class="sidebar-trigger"
+    :class="cn(props.class)"
     @click="toggleSidebar"
   >
     <PanelLeftOpen v-if="isMobile || state === 'collapsed'" />
@@ -26,3 +27,10 @@ const { isMobile, state, toggleSidebar } = useSidebar()
     <span class="sr-only">Toggle sidebar</span>
   </Button>
 </template>
+
+<style lang="scss" scoped>
+.sidebar-trigger {
+    height: 1.75rem;
+    width: 1.75rem;
+}
+</style>

@@ -15,10 +15,19 @@ const isOpen = usePage().props.sidebarOpen;
 </script>
 
 <template>
-    <div v-if="variant === 'header'" class="flex min-h-screen w-full flex-col">
+    <div v-if="variant === 'header'" class="app-shell-header">
         <slot />
     </div>
     <SidebarProvider v-else :default-open="isOpen">
         <slot />
     </SidebarProvider>
 </template>
+
+<style lang="scss" scoped>
+.app-shell-header {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    flex-direction: column;
+}
+</style>

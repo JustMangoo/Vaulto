@@ -12,11 +12,18 @@ const props = defineProps<{
   <Input
     data-slot="sidebar-input"
     data-sidebar="input"
-    :class="cn(
-      'bg-background h-8 w-full shadow-none',
-      props.class,
-    )"
+    class="sidebar-input"
+    :class="cn(props.class)"
   >
     <slot />
   </Input>
 </template>
+
+<style lang="scss" scoped>
+.sidebar-input {
+    height: 2rem;
+    width: 100%;
+    background: var(--background);
+    box-shadow: none;
+}
+</style>

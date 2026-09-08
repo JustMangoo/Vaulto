@@ -15,7 +15,8 @@ const props = withDefaults(defineProps<{
 <template>
   <div
     data-slot="dialog-footer"
-    :class="cn('flex flex-col-reverse gap-2 sm:flex-row sm:justify-end', props.class)"
+    class="dialog-footer"
+    :class="cn(props.class)"
   >
     <slot />
     <DialogClose v-if="showCloseButton" as-child>
@@ -25,3 +26,16 @@ const props = withDefaults(defineProps<{
     </DialogClose>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.dialog-footer {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+
+    @media (min-width: 640px) {
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+}
+</style>

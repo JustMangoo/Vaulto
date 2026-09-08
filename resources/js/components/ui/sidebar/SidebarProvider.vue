@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { HTMLAttributes, Ref } from "vue"
 import { defaultDocument, useEventListener, useMediaQuery, useVModel } from "@vueuse/core"
-import { TooltipProvider } from "reka-ui"
 import { computed, ref } from "vue"
+import TooltipProvider from "@/components/ui/tooltip/TooltipProvider.vue"
 import { cn } from "@/lib/utils"
 import { provideSidebarContext, SIDEBAR_COOKIE_MAX_AGE, SIDEBAR_COOKIE_NAME, SIDEBAR_KEYBOARD_SHORTCUT, SIDEBAR_WIDTH, SIDEBAR_WIDTH_ICON } from "./utils"
 
@@ -51,7 +51,7 @@ useEventListener("keydown", (event: KeyboardEvent) => {
 })
 
 // We add a state so that we can do data-state="expanded" or "collapsed".
-// This makes it easier to style the sidebar with Tailwind classes.
+// This makes it easier to style the sidebar.
 const state = computed(() => open.value ? "expanded" : "collapsed")
 
 provideSidebarContext({
@@ -73,10 +73,23 @@ provideSidebarContext({
         '--sidebar-width': SIDEBAR_WIDTH,
         '--sidebar-width-icon': SIDEBAR_WIDTH_ICON,
       }"
-      :class="cn('group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full', props.class)"
+      class="sidebar-wrapper"
+      :class="cn(props.class)"
       v-bind="$attrs"
     >
       <slot />
     </div>
   </TooltipProvider>
 </template>
+
+<style lang="scss" scoped>
+.sidebar-wrapper {
+    display: flex;
+    min-height: 100svh;
+    width: 100%;
+
+    &:has([data-variant='inset']) {
+        background: var(--sidebar);
+    }
+}
+</style>

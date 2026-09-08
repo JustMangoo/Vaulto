@@ -1,35 +1,32 @@
 <script setup lang="ts">
-import type { NavigationMenuRootEmits, NavigationMenuRootProps } from "reka-ui"
-import type { HTMLAttributes } from "vue"
-import { reactiveOmit } from "@vueuse/core"
-import {
-  NavigationMenuRoot,
-  useForwardPropsEmits,
-} from "reka-ui"
-import { cn } from "@/lib/utils"
-import NavigationMenuViewport from "./NavigationMenuViewport.vue"
+import type { HTMLAttributes } from 'vue'
+import { cn } from '@/lib/utils'
 
-const props = withDefaults(defineProps<NavigationMenuRootProps & {
-  class?: HTMLAttributes["class"]
-  viewport?: boolean
-}>(), {
-  viewport: true,
-})
-const emits = defineEmits<NavigationMenuRootEmits>()
-
-const delegatedProps = reactiveOmit(props, "class", "viewport")
-const forwarded = useForwardPropsEmits(delegatedProps, emits)
+// Real usage (AppHeader.vue) only ever renders NavigationMenu > List > Item
+// wrapping a plain Link, no popover Trigger/Content/Viewport behaviour, so
+// this is now a plain structural wrapper with no reka-ui and no floating-ui.
+const props = defineProps<{
+    class?: HTMLAttributes['class']
+}>()
 </script>
 
 <template>
-  <NavigationMenuRoot
-    v-slot="slotProps"
-    data-slot="navigation-menu"
-    :data-viewport="viewport"
-    v-bind="forwarded"
-    :class="cn('group/navigation-menu relative flex max-w-max flex-1 items-center justify-center', props.class)"
-  >
-    <slot v-bind="slotProps" />
-    <NavigationMenuViewport v-if="viewport" />
-  </NavigationMenuRoot>
+    <nav
+        data-slot="navigation-menu"
+        class="navigation-menu"
+        :class="cn(props.class)"
+    >
+        <slot />
+    </nav>
 </template>
+
+<style lang="scss" scoped>
+.navigation-menu {
+    position: relative;
+    display: flex;
+    max-width: max-content;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+</style>

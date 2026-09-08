@@ -10,13 +10,23 @@ const props = defineProps<{
 <template>
   <ul
     data-slot="sidebar-menu-sub"
-    data-sidebar="menu-badge"
-    :class="cn(
-      'border-sidebar-border mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l px-2.5 py-0.5',
-      'group-data-[collapsible=icon]:hidden',
-      props.class,
-    )"
+    data-sidebar="menu-sub"
+    class="sidebar-menu-sub"
+    :class="cn(props.class)"
   >
     <slot />
   </ul>
 </template>
+
+<style lang="scss" scoped>
+.sidebar-menu-sub {
+    margin: 0 0.875rem;
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 0.25rem;
+    list-style: none;
+    border-left: 1px solid var(--sidebar-border);
+    padding: 0.125rem 0.625rem;
+}
+</style>

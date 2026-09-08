@@ -10,8 +10,17 @@ const props = defineProps<{
 <template>
   <div
     data-slot="card-footer"
-    :class="cn('flex items-center px-6 [.border-t]:pt-6', props.class)"
+    class="card-footer"
+    :class="cn(props.class)"
   >
     <slot />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.card-footer {
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+}
+</style>

@@ -1,51 +1,69 @@
 <script setup lang="ts">
-import type { SelectContentEmits, SelectContentProps } from "reka-ui"
-import type { HTMLAttributes } from "vue"
-import { reactiveOmit } from "@vueuse/core"
-import {
-  SelectContent,
-  SelectPortal,
-  SelectViewport,
-  useForwardPropsEmits,
-} from "reka-ui"
-import { cn } from "@/lib/utils"
-import { SelectScrollDownButton, SelectScrollUpButton } from "."
+import type { HTMLAttributes } from 'vue'
+import { computed, inject, ref } from 'vue'
+import { useDismissable } from '@/composables/useDismissable'
+import { useFloatingPosition, type FloatingAlign, type FloatingSide } from '@/composables/useFloatingPosition'
+import { cn } from '@/lib/utils'
+import { SELECT_INJECTION_KEY } from './context'
 
-defineOptions({
-  inheritAttrs: false,
+const props = withDefaults(defineProps<{
+    class?: HTMLAttributes['class']
+    side?: FloatingSide
+    align?: FloatingAlign
+    sideOffset?: number
+}>(), {
+    side: 'bottom',
+    align: 'start',
+    sideOffset: 4,
 })
 
-const props = withDefaults(
-  defineProps<SelectContentProps & { class?: HTMLAttributes["class"] }>(),
-  {
-    position: "popper",
-  },
-)
-const emits = defineEmits<SelectContentEmits>()
+const ctx = inject(SELECT_INJECTION_KEY)
+if (!ctx) throw new Error('SelectContent must be used within a Select')
 
-const delegatedProps = reactiveOmit(props, "class")
+const contentEl = ref<HTMLElement | null>(null)
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits)
+const { style } = useFloatingPosition(ctx.triggerEl, contentEl, () => ({
+    side: props.side,
+    align: props.align,
+    sideOffset: props.sideOffset,
+}))
+
+useDismissable(contentEl, [ctx.triggerEl], () => ctx!.setOpen(false))
+
+const contentStyle = computed(() => ({
+    ...style.value,
+    minWidth: `${ctx!.triggerWidth.value}px`,
+}))
 </script>
 
 <template>
-  <SelectPortal>
-    <SelectContent
-      data-slot="select-content"
-      v-bind="{ ...$attrs, ...forwarded }"
-      :class="cn(
-        'bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-(--reka-select-content-available-height) min-w-[8rem] overflow-x-hidden overflow-y-auto rounded-md border shadow-md',
-        position === 'popper'
-          && 'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
-        props.class,
-      )
-      "
-    >
-      <SelectScrollUpButton />
-      <SelectViewport :class="cn('p-1', position === 'popper' && 'h-[var(--reka-select-trigger-height)] w-full min-w-[var(--reka-select-trigger-width)] scroll-my-1')">
-        <slot />
-      </SelectViewport>
-      <SelectScrollDownButton />
-    </SelectContent>
-  </SelectPortal>
+    <Teleport to="body">
+        <div
+            v-if="ctx.open.value"
+            ref="contentEl"
+            data-slot="select-content"
+            role="listbox"
+            class="select-content"
+            :class="cn(props.class)"
+            :style="contentStyle"
+        >
+            <slot />
+        </div>
+    </Teleport>
 </template>
+
+<style lang="scss" scoped>
+.select-content {
+    position: relative;
+    z-index: 50;
+    min-width: 8rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--popover);
+    color: var(--popover-foreground);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%);
+    padding: 0.25rem;
+}
+</style>

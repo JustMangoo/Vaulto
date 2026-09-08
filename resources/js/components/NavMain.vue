@@ -18,7 +18,7 @@ const { isCurrentUrl } = useCurrentUrl();
 </script>
 
 <template>
-    <SidebarGroup class="px-2 py-0">
+    <SidebarGroup class="nav-main">
         <SidebarGroupLabel>Platform</SidebarGroupLabel>
         <SidebarMenu>
             <SidebarMenuItem v-for="item in items" :key="item.title">
@@ -36,3 +36,9 @@ const { isCurrentUrl } = useCurrentUrl();
         </SidebarMenu>
     </SidebarGroup>
 </template>
+
+<style lang="scss" scoped>
+.nav-main {
+    padding: 0 0.5rem;
+}
+</style>

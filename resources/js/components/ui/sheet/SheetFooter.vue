@@ -8,9 +8,19 @@ const props = defineProps<{ class?: HTMLAttributes["class"] }>()
 <template>
   <div
     data-slot="sheet-footer"
-    :class="cn('mt-auto flex flex-col gap-2 p-4', props.class)
-    "
+    class="sheet-footer"
+    :class="cn(props.class)"
   >
     <slot />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.sheet-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+}
+</style>

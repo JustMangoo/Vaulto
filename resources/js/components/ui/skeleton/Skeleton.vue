@@ -12,6 +12,26 @@ const props = defineProps<SkeletonProps>()
 <template>
   <div
     data-slot="skeleton"
-    :class="cn('animate-pulse rounded-md bg-primary/10', props.class)"
+    class="skeleton"
+    :class="cn(props.class)"
   />
 </template>
+
+<style lang="scss" scoped>
+.skeleton {
+    border-radius: var(--radius-md);
+    background: var(--primary);
+    opacity: 0.1;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+    0%,
+    100% {
+        opacity: 0.1;
+    }
+    50% {
+        opacity: 0.2;
+    }
+}
+</style>

@@ -11,8 +11,16 @@ const props = defineProps<{
   <div
     data-slot="sidebar-group-content"
     data-sidebar="group-content"
-    :class="cn('w-full text-sm', props.class)"
+    class="sidebar-group-content"
+    :class="cn(props.class)"
   >
     <slot />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.sidebar-group-content {
+    width: 100%;
+    font-size: 0.875rem;
+}
+</style>

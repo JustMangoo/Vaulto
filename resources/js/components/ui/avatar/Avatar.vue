@@ -11,8 +11,21 @@ const props = defineProps<{
 <template>
   <AvatarRoot
     data-slot="avatar"
-    :class="cn('relative flex size-8 shrink-0 overflow-hidden rounded-full', props.class)"
+    class="avatar"
+    :class="cn(props.class)"
   >
     <slot />
   </AvatarRoot>
 </template>
+
+<style lang="scss" scoped>
+.avatar {
+    position: relative;
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 9999px;
+}
+</style>

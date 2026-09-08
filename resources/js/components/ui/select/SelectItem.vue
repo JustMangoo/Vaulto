@@ -1,44 +1,81 @@
 <script setup lang="ts">
-import type { SelectItemProps } from "reka-ui"
-import type { HTMLAttributes } from "vue"
-import { Check } from "@lucide/vue"
-import { reactiveOmit } from "@vueuse/core"
-import {
-  SelectItem,
-  SelectItemIndicator,
-  SelectItemText,
-  useForwardProps,
-} from "reka-ui"
-import { cn } from "@/lib/utils"
+import type { HTMLAttributes } from 'vue'
+import { Check } from '@lucide/vue'
+import { computed, inject } from 'vue'
+import { cn } from '@/lib/utils'
+import { SELECT_INJECTION_KEY } from './context'
 
-const props = defineProps<SelectItemProps & { class?: HTMLAttributes["class"] }>()
+const props = defineProps<{
+    value: string
+    class?: HTMLAttributes['class']
+    disabled?: boolean
+}>()
 
-const delegatedProps = reactiveOmit(props, "class")
+const ctx = inject(SELECT_INJECTION_KEY)
+if (!ctx) throw new Error('SelectItem must be used within a Select')
 
-const forwardedProps = useForwardProps(delegatedProps)
+const isSelected = computed(() => ctx!.value.value === props.value)
+
+function handleClick() {
+    if (props.disabled) return
+    ctx!.setValue(props.value)
+}
 </script>
 
 <template>
-  <SelectItem
-    data-slot="select-item"
-    v-bind="forwardedProps"
-    :class="
-      cn(
-        'focus:bg-accent focus:text-accent-foreground [&_svg:not([class*=\'text-\'])]:text-muted-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2',
-        props.class,
-      )
-    "
-  >
-    <span class="absolute right-2 flex size-3.5 items-center justify-center">
-      <SelectItemIndicator>
-        <slot name="indicator-icon">
-          <Check class="size-4" />
-        </slot>
-      </SelectItemIndicator>
-    </span>
-
-    <SelectItemText>
-      <slot />
-    </SelectItemText>
-  </SelectItem>
+    <div
+        data-slot="select-item"
+        role="option"
+        :aria-selected="isSelected"
+        :data-disabled="disabled ? '' : undefined"
+        class="select-item"
+        :class="cn(props.class)"
+        @click="handleClick"
+    >
+        <span class="select-item__indicator">
+            <Check v-if="isSelected" class="select-item__icon" />
+        </span>
+        <span><slot /></span>
+    </div>
 </template>
+
+<style lang="scss" scoped>
+.select-item {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 2px;
+    padding: 0.375rem 2rem 0.375rem 0.5rem;
+    font-size: 0.875rem;
+    outline: none;
+    cursor: default;
+    user-select: none;
+
+    &:hover {
+        background: var(--accent);
+        color: var(--accent-foreground);
+    }
+
+    &[data-disabled] {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    &__indicator {
+        position: absolute;
+        right: 0.5rem;
+        display: flex;
+        width: 0.875rem;
+        height: 0.875rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__icon {
+        width: 1rem;
+        height: 1rem;
+    }
+}
+</style>

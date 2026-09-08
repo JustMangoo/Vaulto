@@ -13,8 +13,16 @@ const props = defineProps<{
     role="link"
     aria-disabled="true"
     aria-current="page"
-    :class="cn('text-foreground font-normal', props.class)"
+    class="breadcrumb-page"
+    :class="cn(props.class)"
   >
     <slot />
   </span>
 </template>
+
+<style lang="scss" scoped>
+.breadcrumb-page {
+    color: var(--foreground);
+    font-weight: 400;
+}
+</style>

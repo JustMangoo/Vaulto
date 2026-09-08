@@ -8,8 +8,18 @@ const props = defineProps<{ class?: HTMLAttributes["class"] }>()
 <template>
   <div
     data-slot="sheet-header"
-    :class="cn('flex flex-col gap-1.5 p-4', props.class)"
+    class="sheet-header"
+    :class="cn(props.class)"
   >
     <slot />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.sheet-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    padding: 1rem;
+}
+</style>

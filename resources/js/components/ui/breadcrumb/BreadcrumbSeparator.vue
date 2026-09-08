@@ -13,10 +13,23 @@ const props = defineProps<{
     data-slot="breadcrumb-separator"
     role="presentation"
     aria-hidden="true"
-    :class="cn('[&>svg]:size-3.5', props.class)"
+    class="breadcrumb-separator"
+    :class="cn(props.class)"
   >
     <slot>
       <ChevronRight />
     </slot>
   </li>
 </template>
+
+<style lang="scss" scoped>
+.breadcrumb-separator {
+    display: flex;
+    align-items: center;
+
+    :deep(svg) {
+        width: 0.875rem;
+        height: 0.875rem;
+    }
+}
+</style>

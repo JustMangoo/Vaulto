@@ -13,11 +13,27 @@ const props = defineProps<{
     data-slot="breadcrumb-ellipsis"
     role="presentation"
     aria-hidden="true"
-    :class="cn('flex size-9 items-center justify-center', props.class)"
+    class="breadcrumb-ellipsis"
+    :class="cn(props.class)"
   >
     <slot>
-      <MoreHorizontal class="size-4" />
+      <MoreHorizontal class="breadcrumb-ellipsis__icon" />
     </slot>
     <span class="sr-only">More</span>
   </span>
 </template>
+
+<style lang="scss" scoped>
+.breadcrumb-ellipsis {
+    display: flex;
+    width: 2.25rem;
+    height: 2.25rem;
+    align-items: center;
+    justify-content: center;
+
+    &__icon {
+        width: 1rem;
+        height: 1rem;
+    }
+}
+</style>

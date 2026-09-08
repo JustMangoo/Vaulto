@@ -10,8 +10,17 @@ const props = defineProps<{
 <template>
   <li
     data-slot="breadcrumb-item"
-    :class="cn('inline-flex items-center gap-1.5', props.class)"
+    class="breadcrumb-item"
+    :class="cn(props.class)"
   >
     <slot />
   </li>
 </template>
+
+<style lang="scss" scoped>
+.breadcrumb-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+</style>

@@ -11,8 +11,15 @@ const props = defineProps<{
   <li
     data-slot="sidebar-menu-item"
     data-sidebar="menu-item"
-    :class="cn('group/menu-item relative', props.class)"
+    class="sidebar-menu-item"
+    :class="cn(props.class)"
   >
     <slot />
   </li>
 </template>
+
+<style lang="scss" scoped>
+.sidebar-menu-item {
+    position: relative;
+}
+</style>

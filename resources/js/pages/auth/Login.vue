@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Form, Head } from '@inertiajs/vue3';
-import InputError from '@/components/InputError.vue';
+import InputError from '@/components/ui/input/InputError.vue';
 import PasskeyVerify from '@/components/PasskeyVerify.vue';
-import PasswordInput from '@/components/PasswordInput.vue';
+import PasswordInput from '@/components/ui/input/PasswordInput.vue';
 import TextLink from '@/components/TextLink.vue';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -42,10 +42,9 @@ defineProps<{
         v-bind="store.form()"
         :reset-on-success="['password']"
         v-slot="{ errors, processing }"
-        class="flex flex-col gap-6"
     >
-        <div class="grid gap-6">
-            <div class="grid gap-2">
+        <div>
+            <div class="input-group">
                 <Label for="email">Email address</Label>
                 <Input
                     id="email"
@@ -60,7 +59,7 @@ defineProps<{
                 <InputError :message="errors.email" />
             </div>
 
-            <div class="grid gap-2">
+            <div class="input-group">
                 <div class="flex items-center justify-between">
                     <Label for="password">Password</Label>
                     <TextLink
@@ -83,7 +82,7 @@ defineProps<{
                 <InputError :message="errors.password" />
             </div>
 
-            <div class="flex items-center justify-between">
+            <div class="">
                 <Label for="remember" class="flex items-center space-x-3">
                     <Checkbox id="remember" name="remember" :tabindex="3" />
                     <span>Remember me</span>
@@ -92,7 +91,7 @@ defineProps<{
 
             <Button
                 type="submit"
-                class="mt-4 w-full"
+                class=""
                 :tabindex="4"
                 :disabled="processing"
                 data-test="login-button"
@@ -102,9 +101,19 @@ defineProps<{
             </Button>
         </div>
 
-        <div class="text-center text-sm text-muted-foreground">
+        <div class="">
             Don't have an account?
             <TextLink :href="register()" :tabindex="5">Sign up</TextLink>
         </div>
     </Form>
 </template>
+
+<style lang="scss" scoped>
+Form {
+    background: red;
+}
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+</style>

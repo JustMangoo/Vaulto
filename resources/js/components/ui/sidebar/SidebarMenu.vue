@@ -11,8 +11,22 @@ const props = defineProps<{
   <ul
     data-slot="sidebar-menu"
     data-sidebar="menu"
-    :class="cn('flex w-full min-w-0 flex-col gap-1', props.class)"
+    class="sidebar-menu"
+    :class="cn(props.class)"
   >
     <slot />
   </ul>
 </template>
+
+<style lang="scss" scoped>
+.sidebar-menu {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    flex-direction: column;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+</style>
