@@ -1,6 +1,21 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { Form, Head } from '@inertiajs/vue3';
+import Heading from '@/components/Heading.vue';
 import PlaceholderPattern from '@/components/PlaceholderPattern.vue';
+import { Button } from '@/components/ui/button';
+import {
+    Card,
+    CardAction,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select } from '@/components/ui/select';
+import InputError from '@/components/ui/input/InputError.vue';
 import { dashboard } from '@/routes';
 
 defineOptions({
@@ -18,30 +33,61 @@ defineOptions({
 <template>
     <Head title="Dashboard" />
 
-    <div
-        class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"
-    >
-        <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div
-                class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
-            >
-                <PlaceholderPattern />
-            </div>
-            <div
-                class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
-            >
-                <PlaceholderPattern />
-            </div>
-            <div
-                class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
-            >
-                <PlaceholderPattern />
-            </div>
+    <div class="panel">
+        <div>
+            <Heading title="Quick gem"></Heading>
+            <Form v-slot="{ errors, processing }">
+                <div class="input-group">
+                    <Label for="gem-title">Gem title</Label>
+                    <Input
+                        id="gem-title"
+                        type="text"
+                        name="gem-title"
+                        required
+                        autofocus
+                        :tabindex="1"
+                        autocomplete="email"
+                        placeholder="e.g. My gem"
+                    />
+                    <InputError :message="errors.email" />
+                </div>
+                <Select> </Select>
+            </Form>
         </div>
-        <div
-            class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
-        >
-            <PlaceholderPattern />
+        <div>
+            <Heading title="Explore" />
+            <Card>
+                <CardHeader>
+                    <CardTitle>Example Card</CardTitle>
+                    <CardDescription>
+                        This is an example description demonstrating card components.
+                    </CardDescription>
+                    <CardAction>
+                        <Button variant="outline" size="sm">Action</Button>
+                    </CardAction>
+                </CardHeader>
+                <CardContent>
+                    <p>This is the main content area of the card.</p>
+                </CardContent>
+                <CardFooter>
+                    <Button size="sm">Save changes</Button>
+                </CardFooter>
+            </Card>
         </div>
     </div>
 </template>
+
+<style>
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+</style>
