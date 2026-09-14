@@ -5,6 +5,6 @@ export { default as SelectTrigger } from "./SelectTrigger.vue"
 export { default as SelectValue } from "./SelectValue.vue"
 
 // Group/Label/ScrollUpButton/ScrollDownButton/ItemText/Separator existed
-// only as unused shadcn-vue scaffold (Dashboard.vue's only usage is an empty
+// only as unused shadcn-vue scaffold (Overview.vue's only usage is an empty
 // <Select> placeholder) and were dropped when this family was rebuilt
 // without reka-ui.
