@@ -24,6 +24,8 @@ class VaultController extends Controller
         return inertia('vaults/Edit', compact('vault'));
     }
 
+    // TODO: add update() and destroy() actions and register their routes
+
     public function store(Request $request)
     {
         $data = $request->validate([

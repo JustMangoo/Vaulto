@@ -15,12 +15,15 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ref } from 'vue';
 
+// TODO: accept the `vault` prop and prefill the form with its values
+// TODO: tag default 'website' doesn't match any select option ('websites')
 const form = useForm({
     title: '',
     description: '',
     tag: 'website',
 });
 
+// TODO: submit to an update route (PUT/PATCH) instead of store — currently creates a new vault
 const handleSubmit = () => {
     form.post(store.url());
 };

@@ -75,6 +75,7 @@ defineOptions({
                 <Link :href="edit(vault.id)"
                     ><Button size="sm">edit</Button></Link
                 >
+                <!-- TODO: wire delete to a vaults.destroy route -->
                 <Button size="sm">delete</Button>
             </CardFooter>
         </Card>

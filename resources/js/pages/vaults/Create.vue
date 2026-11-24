@@ -18,7 +18,7 @@ import { ref } from 'vue';
 const form = useForm({
     title: '',
     description: '',
-    tag: 'website',
+    tag: 'website', // TODO: doesn't match any select option ('websites')
 });
 
 const handleSubmit = () => {
