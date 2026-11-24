@@ -13,7 +13,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/vaults', [VaultController::class, 'index'])->name('vaults.index');
     Route::get('/vaults/create', [VaultController::class, 'create'])->name('vaults.create');
     Route::post('/vaults', [VaultController::class, 'store'])->name('vaults.store');
-
+    Route::get('/vaults/{vault}/edit', [VaultController::class, 'edit'])->name('vaults.edit');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

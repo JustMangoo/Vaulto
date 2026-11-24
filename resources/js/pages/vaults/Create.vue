@@ -92,7 +92,7 @@ defineOptions({
             </Select>
             <InputError v-if="form.errors.tag" :message="form.errors.tag" />
         </div>
-        <Button type="submit">Add a product</Button>
+        <Button type="submit" :disabled="form.processing">Add a product</Button>
     </Form>
 </template>
 
